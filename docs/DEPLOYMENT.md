@@ -31,6 +31,7 @@ The chemistry game is a separate codebase at `/home/p31/andromeda/software/bondi
 | Service | URL | Status |
 |---------|-----|--------|
 | Meatspace Onboarding | https://bonding-meatspace.pages.dev | ✅ Live |
+| Meatspace (custom domain) | https://meatspace.bonding.p31ca.org | 🟡 Provisioning |
 | Chemistry Game | https://bonding.p31ca.org | ✅ Live (separate repo) |
 | GitHub | https://github.com/trimtab-signal/bonding | ✅ Live |
 | API Server | http://localhost:3001 | Local only |
@@ -104,27 +105,16 @@ DATABASE_URL=postgresql://... pnpm db:migrate
 # Or after server deploy, migrations run automatically on startup
 ```
 
-## CI/CD (Future)
+## CI/CD
 
-Add `.github/workflows/deploy.yml` for auto-deploy:
+Auto-deploy on push to `master` via GitHub Actions at `.github/workflows/deploy.yml`.
 
-```yaml
-name: Deploy
-on:
-  push:
-    branches: [master]
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-      - run: pnpm install && pnpm build:onboarding
-      - uses: cloudflare/wrangler-action@v3
-        with:
-          command: pages deploy apps/onboarding/dist --project-name bonding-meatspace --branch master
-          apiToken: ${{ secrets.CF_API_TOKEN }}
-```
+**Required GitHub Secret:**
+| Secret | Value |
+|--------|-------|
+| `CF_API_TOKEN` | Cloudflare API token with `pages:write` permission |
+
+The workflow triggers only when `apps/onboarding/`, `packages/shared-types/`, `pnpm-lock.yaml`, or the workflow file itself changes.
 
 ## Troubleshooting
 

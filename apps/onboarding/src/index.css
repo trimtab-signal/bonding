@@ -285,12 +285,324 @@ footer p { font-size: 13px; color: var(--text-dim); }
 footer .links { display: flex; justify-content: center; gap: 20px; margin-bottom: 16px; flex-wrap: wrap; }
 footer .links a { font-size: 12px; }
 
+/* ─── Molecular Metaphor ─────────────── */
+#metaphor { background: var(--bg); }
+
+.metaphor-diagram {
+  display: flex; justify-content: center;
+  margin: 48px 0; position: relative;
+}
+
+.metaphor-molecule {
+  position: relative; width: 200px; height: 200px;
+}
+
+.metaphor-electron {
+  position: absolute; top: 50%; left: 50%; width: 2px; height: 2px;
+  border-radius: 50%; background: var(--accent);
+  animation: orbit-electron 4s linear infinite;
+  box-shadow: 0 0 6px var(--accent);
+}
+
+@keyframes orbit-electron {
+  0% { transform: translate(-50%, -50%) rotate(var(--orbit-angle, 0deg)) translateX(80px); }
+  100% { transform: translate(-50%, -50%) rotate(calc(var(--orbit-angle, 0deg) + 360deg)) translateX(80px); }
+}
+
+.metaphor-nucleus {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80px; height: 80px; border-radius: 50%;
+  background: var(--gradient);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 800; letter-spacing: 1px;
+  color: white; box-shadow: 0 0 30px var(--accent-glow);
+  animation: pulse-nucleus 3s ease-in-out infinite;
+}
+
+@keyframes pulse-nucleus {
+  0%, 100% { box-shadow: 0 0 20px var(--accent-glow); }
+  50% { box-shadow: 0 0 40px var(--accent-glow), 0 0 60px rgba(155,107,176,0.1); }
+}
+
+.metaphor-grid {
+  border: 1px solid var(--border); border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.metaphor-header {
+  display: grid; grid-template-columns: 120px 40px 1fr;
+  gap: 12px; padding: 16px 20px;
+  background: var(--surface2); border-bottom: 1px solid var(--border);
+  font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+  color: var(--text-dim);
+}
+
+.metaphor-arrow { text-align: center; color: var(--accent); font-size: 18px; }
+
+.metaphor-row {
+  display: grid; grid-template-columns: 120px 40px 1fr;
+  gap: 12px; padding: 14px 20px;
+  border-bottom: 1px solid var(--border); align-items: center;
+  transition: background 0.2s;
+}
+.metaphor-row:last-child { border-bottom: none; }
+.metaphor-row:hover { background: var(--surface2); }
+
+.metaphor-cell {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 14px; font-weight: 500; color: var(--text);
+}
+.metaphor-cell strong { color: var(--accent); }
+
+.metaphor-icon { font-size: 18px; }
+
+.metaphor-desc {
+  grid-column: 1 / -1; font-size: 13px;
+  color: var(--text-dim); line-height: 1.5;
+  padding: 4px 0 8px;
+}
+
+.energy-bar-track {
+  background: var(--surface); border-radius: var(--radius);
+  border: 1px solid var(--border); padding: 4px;
+}
+
+.energy-bar {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 4px;
+}
+
+.energy-segment {
+  border-radius: var(--radius-sm); padding: 16px;
+  text-align: center; border: 1px solid transparent;
+  transition: all 0.3s;
+}
+.energy-segment:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+}
+
+.energy-range {
+  display: block; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 1px;
+  color: var(--text-dim); margin-bottom: 4px;
+}
+
+.energy-label {
+  display: block; font-size: 16px; font-weight: 700;
+}
+
+/* ─── Live Demo ──────────────────────── */
+#demo {
+  background: var(--surface);
+  position: relative; overflow: hidden;
+}
+
+.demo-container {
+  margin-top: 48px;
+  display: flex; flex-direction: column; align-items: center;
+  gap: 24px;
+}
+
+.demo-molecule {
+  position: relative; width: 300px; height: 300px;
+}
+
+.demo-nucleus {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 56px; height: 56px; border-radius: 50%;
+  background: var(--gradient);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 800; letter-spacing: 2px;
+  color: white; box-shadow: 0 0 40px var(--accent-glow);
+  z-index: 2;
+  animation: pulse-nucleus 3s ease-in-out infinite;
+}
+
+.demo-particle {
+  position: absolute; top: 50%; left: 50%;
+  width: 0; height: 0;
+  animation: orbit-particle calc(var(--speed) * 1s) linear infinite;
+  animation-delay: var(--delay, 0s);
+}
+
+@keyframes orbit-particle {
+  0% { transform: translate(-50%, -50%) rotate(0deg) translateX(calc(var(--orbit) * 55px)); }
+  100% { transform: translate(-50%, -50%) rotate(360deg) translateX(calc(var(--orbit) * 55px)); }
+}
+
+.demo-atom {
+  position: absolute; width: 40px; height: 40px;
+  border-radius: 50%; display: flex; align-items: center;
+  justify-content: center; font-size: 9px; font-weight: 700;
+  color: white; letter-spacing: -0.5px;
+  box-shadow: 0 0 16px currentColor;
+  animation: float-atom 2s ease-in-out infinite;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes float-atom {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); }
+  50% { transform: translate(-50%, -50%) scale(1.08); }
+}
+
+.demo-labels {
+  display: flex; gap: 20px; justify-content: center;
+  flex-wrap: wrap;
+}
+
+.demo-legend {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 12px; color: var(--text-dim);
+}
+
+.demo-legend-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+}
+
+/* ─── Community ──────────────────────── */
+#community { background: var(--bg); }
+
+.community-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px; margin-top: 40px;
+}
+
+.community-card {
+  padding: 32px 24px; border-radius: var(--radius);
+  border: 1px solid var(--border); background: var(--surface);
+  text-decoration: none; color: inherit;
+  transition: all 0.3s; display: block;
+  position: relative; overflow: hidden;
+}
+.community-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+}
+
+.community-card--soon {
+  cursor: default; opacity: 0.85;
+}
+.community-card--soon:hover {
+  border-color: var(--lab);
+  box-shadow: 0 8px 30px rgba(155,107,176,0.1);
+}
+
+.community-card--spotlight {
+  background: linear-gradient(135deg, var(--surface2), var(--surface));
+  border-color: var(--accent);
+}
+.community-card--spotlight:hover {
+  box-shadow: 0 8px 30px var(--accent-glow);
+}
+
+.community-icon {
+  margin-bottom: 16px; color: var(--text);
+}
+
+.community-card h3 {
+  font-size: 18px; font-weight: 700; margin-bottom: 8px;
+}
+
+.community-card p {
+  font-size: 13px; color: var(--text-dim); line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.community-link {
+  font-size: 12px; font-weight: 600; color: var(--accent);
+  display: inline-flex; align-items: center; gap: 4px;
+  transition: gap 0.2s;
+}
+.community-card:hover .community-link { gap: 8px; }
+
+.community-link-ghost {
+  font-size: 12px; font-weight: 600;
+  color: var(--text-dim); opacity: 0.6;
+  cursor: default;
+}
+
+/* ─── Gradient Borders & Enhanced Effects ──── */
+.step, .zone-card, .bond-type, .principle, .community-card {
+  position: relative;
+}
+
+.step::after, .zone-card::after, .bond-type::after {
+  content: ''; position: absolute; inset: -1px;
+  border-radius: var(--radius);
+  background: var(--gradient-subtle);
+  opacity: 0; transition: opacity 0.4s;
+  z-index: -1;
+}
+
+.step:hover::after, .zone-card:hover::after, .bond-type:hover::after {
+  opacity: 1;
+}
+
+/* ─── Subtle Hover Animations ────────── */
+.principle {
+  transition: all 0.3s;
+}
+.principle:hover {
+  border-color: var(--accent);
+  box-shadow: 0 4px 20px var(--accent-glow);
+}
+
+.bond-type {
+  transition: all 0.3s;
+}
+.bond-type:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+}
+
+.zone-card {
+  transition: all 0.3s;
+}
+.zone-card:hover {
+  box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+}
+
+/* ─── Fade-in on scroll (CSS-only) ───── */
+section {
+  animation: fade-in 0.6s ease-out both;
+  animation-timeline: view();
+  animation-range: entry 0% entry 30%;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── Footer Icon Links ──────────────── */
+footer .links a svg {
+  vertical-align: middle; margin-right: 4px;
+}
+
 /* ─── Responsive ─────────────────────── */
 @media (max-width: 640px) {
   section { padding: 60px 16px; }
   h2 { font-size: 28px; }
-  nav .links { gap: 14px; }
-  nav .links a { font-size: 12px; }
-  .steps { grid-template-columns: 1fr 1fr; }
-  .zone-grid { grid-template-columns: 1fr 1fr; }
+  nav .links { gap: 10px; }
+  nav .links a { font-size: 11px; }
+  .steps { grid-template-columns: 1fr; }
+  .zone-grid { grid-template-columns: 1fr; }
+  .metaphor-header, .metaphor-row {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+  .metaphor-arrow, .metaphor-arrow-cell { display: none; }
+  .metaphor-desc { grid-column: 1; }
+  .energy-bar { grid-template-columns: 1fr 1fr; }
+  .demo-molecule { width: 220px; height: 220px; }
+  .demo-atom { width: 32px; height: 32px; font-size: 7px; }
+  @keyframes orbit-particle {
+    0% { transform: translate(-50%, -50%) rotate(0deg) translateX(calc(var(--orbit) * 40px)); }
+    100% { transform: translate(-50%, -50%) rotate(360deg) translateX(calc(var(--orbit) * 40px)); }
+  }
 }

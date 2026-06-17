@@ -2,7 +2,10 @@ import { Hero } from './components/Hero';
 import { HowItWorks } from './components/HowItWorks';
 import { Zones } from './components/Zones';
 import { BondingMechanics } from './components/BondingMechanics';
+import { MolecularMetaphor } from './components/MolecularMetaphor';
+import { LiveDemo } from './components/LiveDemo';
 import { PrivacyEthics } from './components/PrivacyEthics';
+import { Community } from './components/Community';
 import { GetStarted } from './components/GetStarted';
 
 export function App() {
@@ -14,8 +17,11 @@ export function App() {
           <div className="links">
             <a href="#how">How It Works</a>
             <a href="#zones">Zones</a>
+            <a href="#metaphor">Metaphor</a>
+            <a href="#demo">Demo</a>
             <a href="#mechanics">Bonds</a>
             <a href="#privacy">Privacy</a>
+            <a href="#community">Community</a>
             <a href="#start">Start</a>
           </div>
         </div>
@@ -24,8 +30,11 @@ export function App() {
       <Hero />
       <HowItWorks />
       <Zones />
+      <MolecularMetaphor />
+      <LiveDemo />
       <BondingMechanics />
       <PrivacyEthics />
+      <Community />
       <GetStarted />
 
       <footer>
