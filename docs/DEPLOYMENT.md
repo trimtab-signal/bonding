@@ -1,54 +1,72 @@
 # BONDING Deployment Guide
 
-## Architecture
+## Two Projects, Two Domains
+
+There are **two separate BONDING projects** deployed to Cloudflare Pages:
+
+| Project | URL | What It Is |
+|---------|-----|------------|
+| **Chemistry Game** | https://bonding.p31ca.org | Molecule-building chemistry game (React Three Fiber, VSEPR) |
+| **Meatspace Game** | https://bonding-meatspace.pages.dev | Real-world social game onboarding site (this repo) |
+
+The chemistry game is a separate codebase at `/home/p31/andromeda/software/bonding/` and is NOT part of this repo.
+
+## Architecture (This Repo — Meatspace Game)
 
 ```
-┌─────────────────┐     ┌──────────────────┐     ┌──────────────┐
-│  bonding.p31ca.org │     │  api.bonding.     │     │  PostgreSQL   │
-│  (Cloudflare Pages) │     │  p31ca.org         │     │  (Render/     │
-│  Onboarding Site    │     │  Express + Socket.io│     │  Railway)     │
-└─────────────────┘     └──────────────────┘     └──────────────┘
-         │                        │                       │
-         │                        │                       │
-         ▼                        ▼                       ▼
-   Cloudflare Pages          Docker Container         Managed DB
-   (static, global CDN)      (Node 22, auto-scaled)
+┌──────────────────────────┐     ┌──────────────────┐     ┌──────────────┐
+│  bonding-meatspace.      │     │  api.bonding.     │     │  PostgreSQL   │
+│  pages.dev               │     │  p31ca.org         │     │  (Render/     │
+│  (Cloudflare Pages)      │     │  Express + Socket.io│     │  Railway)     │
+│  Onboarding Site         │     │  (Docker)          │     │               │
+└──────────────────────────┘     └──────────────────┘     └──────────────┘
+         │                              │                       │
+         ▼                              ▼                       ▼
+   Cloudflare Pages                Docker Container          Managed DB
+   (static, global CDN)            (Node 22, auto-scaled)
 ```
 
 ## Deployed URLs
 
 | Service | URL | Status |
 |---------|-----|--------|
-| Onboarding Site | https://bonding.p31ca.org | ✅ Live |
-| Onboarding Site (preview) | https://bonding.pages.dev | ✅ Live |
-| GitHub | https://github.com/anomalyco/bonding | — |
+| Meatspace Onboarding | https://bonding-meatspace.pages.dev | ✅ Live |
+| Chemistry Game | https://bonding.p31ca.org | ✅ Live (separate repo) |
+| GitHub | https://github.com/trimtab-signal/bonding | ✅ Live |
 | API Server | http://localhost:3001 | Local only |
 
 ## Quick Deploy
 
-### Onboarding Site (Cloudflare Pages)
+### Onboarding Site (Cloudflare Pages — Meatspace)
 
 ```bash
-# One command — builds + deploys to Cloudflare Pages
+# One command — builds + deploys to https://bonding-meatspace.pages.dev
 pnpm deploy:onboarding
 
 # Or manually:
 pnpm build:onboarding
-wrangler pages deploy apps/onboarding/dist --project-name bonding --branch main
+wrangler pages deploy apps/onboarding/dist --project-name bonding-meatspace --branch master
 ```
 
-The site is served from Cloudflare's global CDN at `bonding.p31ca.org` (custom domain) and `bonding.pages.dev`.
+### Chemistry Game (Separate Project)
+
+The chemistry game is at `/home/p31/andromeda/software/bonding/` and deploys to the `bonding` Pages project:
+
+```bash
+cd /home/p31/andromeda/software/bonding
+npx wrangler pages deploy dist --project-name=bonding
+```
 
 ### API Server (Docker + Render/Railway)
 
-The server needs PostgreSQL and WebSocket support. Two options:
+The server needs PostgreSQL and WebSocket support. Options:
 
 #### Option A: Render.com (recommended for MVP)
 
-1. Push the repo to GitHub
+1. Push to GitHub
 2. Create a new Web Service on Render, connect repo
 3. Select **Docker** environment
-4. Render will use the `Dockerfile` at repo root
+4. Render uses the `Dockerfile` at repo root
 5. Add a PostgreSQL database via Render Dashboard
 6. Set env vars:
    - `DATABASE_URL` — auto-populated from Render DB
@@ -64,14 +82,8 @@ The server needs PostgreSQL and WebSocket support. Two options:
 #### Option C: Manual VPS (DigitalOcean, Hetzner, etc.)
 
 ```bash
-# Build the Docker image
 docker build -t bonding-server .
-
-# Run with PostgreSQL connection
-docker run -d \
-  -p 3001:3001 \
-  -e DATABASE_URL=postgresql://user:pass@host:5432/bonding \
-  bonding-server
+docker run -d -p 3001:3001 -e DATABASE_URL=postgresql://user:pass@host:5432/bonding bonding-server
 ```
 
 ## Environment Variables
@@ -85,55 +97,34 @@ docker run -d \
 
 ## Run Migrations
 
-Once the server is deployed, run:
-
 ```bash
-# If using Render shell:
-curl -X POST https://api.bonding.p31ca.org/api/register \
-  -H "Content-Type: application/json" \
-  -d '{"publicKeyJwk": {}}'
-
-# Or run locally pointing to production DB:
+# Locally pointing to production DB:
 DATABASE_URL=postgresql://... pnpm db:migrate
+
+# Or after server deploy, migrations run automatically on startup
 ```
 
-The migration runs automatically on first start (the `pool.ts#migrate()` function is called at startup).
+## CI/CD (Future)
 
-## Monitoring
-
-- **Cloudflare Pages**: Dashboard at https://dash.cloudflare.com → Pages → bonding
-- **Server logs**: Render Dashboard → Web Service → Logs
-- **Database**: Render Dashboard → PostgreSQL → Metrics
-
-## CI/CD Pipeline (Future)
-
-For automated deployments, add a `.github/workflows/deploy.yml`:
+Add `.github/workflows/deploy.yml` for auto-deploy:
 
 ```yaml
 name: Deploy
 on:
   push:
-    branches: [main]
+    branches: [master]
 jobs:
-  deploy-onboarding:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
-      - run: pnpm install
-      - run: pnpm build:onboarding
+      - run: pnpm install && pnpm build:onboarding
       - uses: cloudflare/wrangler-action@v3
         with:
-          command: pages deploy apps/onboarding/dist --project-name bonding --branch main
+          command: pages deploy apps/onboarding/dist --project-name bonding-meatspace --branch master
           apiToken: ${{ secrets.CF_API_TOKEN }}
 ```
-
-## Domain Setup
-
-`bonding.p31ca.org` is configured as a custom domain in Cloudflare Pages:
-- DNS managed by Cloudflare
-- SSL/TLS automatic (Full strict)
-- Cache rules apply to static assets (JS/CSS cached 1 year, HTML revalidated)
 
 ## Troubleshooting
 
@@ -143,3 +134,4 @@ jobs:
 | 502 Bad Gateway | Server process crashed — check Render logs |
 | WebSocket disconnects | Ensure Socket.io transport includes `websocket` |
 | Database connection fails | Verify `DATABASE_URL` and IP whitelist |
+| Chemistry game missing | Deploy from `/home/p31/andromeda/software/bonding/` |

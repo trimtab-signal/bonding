@@ -24,9 +24,9 @@
     "db:seed": "pnpm --filter @bonding/server db:seed",
     "docker:up": "docker compose up -d",
     "docker:down": "docker compose down",
-    "deploy:onboarding": "pnpm build:onboarding && wrangler pages deploy apps/onboarding/dist --project-name bonding --branch main",
+    "deploy:onboarding": "pnpm build:onboarding && wrangler pages deploy apps/onboarding/dist --project-name bonding-meatspace --branch master",
     "deploy:server": "git push origin master  # triggers auto-deploy on Render/Railway",
-    "deploy:all": "pnpm deploy:onboarding && echo '✓ Onboarding deployed. Push git to deploy server.'",
+    "deploy:all": "pnpm deploy:onboarding && echo '✓ Meatspace onboarding deployed to bonding-meatspace.pages.dev'",
     "setup": "pnpm install && docker compose up -d && pnpm --filter @bonding/server db:migrate && pnpm --filter @bonding/server db:seed"
   },
   "engines": {
