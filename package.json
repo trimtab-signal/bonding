@@ -1,0 +1,36 @@
+{
+  "name": "bonding",
+  "version": "0.1.0",
+  "private": true,
+  "description": "BONDING — real-world social game. Humans are atoms, relationships are chemical bonds.",
+  "scripts": {
+    "dev:server": "pnpm --filter @bonding/server dev",
+    "dev:mobile": "pnpm --filter @bonding/mobile dev",
+    "dev:onboarding": "pnpm --filter @bonding/onboarding dev",
+    "build:server": "pnpm --filter @bonding/server build",
+    "build:mobile": "pnpm --filter @bonding/mobile build",
+    "build:shared": "pnpm --filter @bonding/shared-types build",
+    "build:onboarding": "pnpm --filter @bonding/onboarding build",
+    "build": "pnpm --filter @bonding/shared-types build && pnpm build:onboarding && pnpm --filter @bonding/server build && pnpm --filter @bonding/mobile build",
+    "typecheck": "pnpm -r exec tsc --noEmit",
+    "lint": "pnpm -r exec eslint src/",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "test:shared": "vitest run packages/shared-types",
+    "test:server": "vitest run apps/server",
+    "test:mobile": "vitest run apps/mobile",
+    "db:migrate": "pnpm --filter @bonding/server db:migrate",
+    "db:seed": "pnpm --filter @bonding/server db:seed",
+    "docker:up": "docker compose up -d",
+    "docker:down": "docker compose down",
+    "setup": "pnpm install && docker compose up -d && pnpm --filter @bonding/server db:migrate && pnpm --filter @bonding/server db:seed"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "@vitest/coverage-v8": "^4.1.9",
+    "vitest": "^4.1.9"
+  }
+}
