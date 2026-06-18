@@ -1,7 +1,8 @@
 import { Router } from 'express';
+import type { Router as RouterType } from 'express';
 import { getCommunityState } from '../services/era.js';
 
-const router = Router();
+const router: RouterType = Router();
 
 router.get('/community', async (_req, res) => {
   try {

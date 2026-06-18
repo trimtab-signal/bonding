@@ -161,7 +161,7 @@ export type ClientMessage =
   | { type: 'reject_ping'; pingId: string }
   | { type: 'check_in'; zoneId: ZoneId; locationProof: LocationProof; energyLevel?: number }
   | { type: 'update_profile'; displayName?: string; bio?: string; skills?: string[]; interests?: string[] }
-  | { type: 'request_witness'; targetUserId: string; locationProofHash: string }
+  | { type: 'request_witness'; targetUserId: string; locationProofHash: string; requestId: string }
   | { type: 'provide_witness'; claimerId: string; geohashPrefix: string; timestamp: number; nonce: string; signature: string }
   | { type: 'submit_reaction'; bondId: string; reactionType: ReactionType; description: string }
   | { type: 'set_zone'; zoneId: ZoneId | null };

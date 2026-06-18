@@ -1,13 +1,13 @@
 # ─── Server ────────────────────────────────────────────────────────
 FROM node:22-alpine AS builder
 WORKDIR /app
-COPY package.json pnpm-workspace.yaml pnpm-lock.yaml ./
+COPY package.json pnpm-workspace.yaml pnpm-lock.yaml tsconfig.base.json ./
 COPY packages/shared-types ./packages/shared-types
 COPY apps/server ./apps/server
 RUN corepack enable && pnpm install --frozen-lockfile
 RUN pnpm --filter @bonding/shared-types build
 RUN pnpm --filter @bonding/server build
-RUN pnpm --filter @bonding/server prune --prod
+RUN CI=true pnpm prune --prod
 
 FROM node:22-alpine
 WORKDIR /app
