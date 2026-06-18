@@ -2,7 +2,7 @@ services:
   - type: web
     name: bonding-server
     env: docker
-    repo: https://github.com/anomalyco/bonding
+    repo: https://github.com/trimtab-signal/bonding
     dockerfilePath: ./Dockerfile
     envVars:
       - key: DATABASE_URL
