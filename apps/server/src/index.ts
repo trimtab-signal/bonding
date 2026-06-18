@@ -4,6 +4,7 @@ import cors from 'cors';
 import { createServer } from 'http';
 import { Server } from 'socket.io';
 import authRoutes from './routes/auth.js';
+import stateRoutes from './routes/state.js';
 import { registerGameHandlers } from './services/game-handler.js';
 import { migrate } from './db/pool.js';
 import { ZONES } from '@bonding/shared-types';
@@ -28,6 +29,7 @@ app.get('/health', (_req, res) => {
 
 // API routes
 app.use('/api', authRoutes);
+app.use('/api', stateRoutes);
 
 // Zone definitions endpoint
 app.get('/api/zones', (_req, res) => {

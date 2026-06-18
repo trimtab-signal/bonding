@@ -1,7 +1,8 @@
 import { useRef, useCallback } from 'react';
 import { io, Socket } from 'socket.io-client';
 import { useGameStore } from '../store/game-store.js';
-import { generateKeyPair, exportPublicKeyJwk, exportPrivateKeyJwk, generateUserId } from './crypto.js';
+import { generateKeyPair, exportPublicKeyJwk, exportPrivateKeyJwk, importPrivateKey, signData, generateUserId } from './crypto.js';
+import { geohashEncode } from '@bonding/shared-types';
 import type { ClientMessage, ServerMessage } from '@bonding/shared-types';
 
 interface UseWebSocketReturn {
@@ -41,8 +42,13 @@ export function useWebSocket(): UseWebSocketReturn {
 
     setIdentity(userId, publicKeyJwk, privateKeyJwk);
 
+    // Sign auth payload: signature(userId:timestamp)
+    const authTimestamp = Date.now();
+    const privateKey = await importPrivateKey(privateKeyJwk);
+    const authSignature = await signData(privateKey, `${userId}:${authTimestamp}`);
+
     const socket = io(serverUrl, {
-      auth: { userId },
+      auth: { userId, timestamp: authTimestamp, signature: authSignature },
       transports: ['websocket', 'polling'],
     });
 
@@ -86,18 +92,33 @@ export function useWebSocket(): UseWebSocketReturn {
     send({ type: 'ping', targetUserId, zoneId: zoneId as any });
   }, [send]);
 
-  const checkIn = useCallback((zoneId: string) => {
-    const geohash = 'local';
+  const checkIn = useCallback(async (zoneId: string) => {
     const state = useGameStore.getState();
+    const coords = (window as any).__bonding_last_coords__ as { latitude: number; longitude: number } | null;
+    if (!coords) {
+      addMessage('error', 'No GPS location available');
+      return;
+    }
+    const { latitude, longitude } = coords;
+    const precision = zoneId === 'deep' ? 6 : 5;
+    const geohash = geohashEncode(latitude, longitude, precision);
+    const timestamp = Date.now();
+    const privateKey = await importPrivateKey(state.privateKeyJwk!);
+    const payload = `${geohash}:${latitude}:${longitude}:${timestamp}`;
+    const signature = await signData(privateKey, payload);
+
     const msg: ClientMessage = {
       type: 'check_in',
       zoneId: zoneId as any,
       locationProof: {
         geohashPrefix: geohash,
-        geohashPrecision: 5,
+        geohashPrecision: precision,
+        lat: latitude,
+        lng: longitude,
         witnessedBy: [],
         witnessSignatures: [],
-        timestamp: Date.now(),
+        timestamp,
+        signature,
       },
     };
     if (state.healthOptIn && state.energyLevel !== null) {
@@ -142,7 +163,7 @@ export function useWebSocket(): UseWebSocketReturn {
         setNearbyAtoms(msg.atoms);
         break;
       case 'witness_request':
-        addMessage('info', `Witness request from ${msg.fromUserId}`);
+        addMessage('info', `Witness request from ${msg.fromUserId} (nonce: ${msg.nonce.slice(0, 8)}…)`);
         break;
       case 'error':
         addMessage('error', msg.message);

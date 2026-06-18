@@ -15,11 +15,14 @@ export interface SignedPayload<T = unknown> {
 // ─── Location & Check-in ─────────────────────────────────────────
 
 export interface LocationProof {
-  geohashPrefix: string;       // e.g. "9q8yy" — client-derived, server never sees raw GPS
-  geohashPrecision: number;    // 5 (~4.9km) for MVP
+  geohashPrefix: string;       // e.g. "9q8yy" — client-derived geohash
+  geohashPrecision: number;    // 5 (~4.9km) for standard, 6 (~100m) for Deep
+  lat: number;                 // raw GPS latitude — signed as part of payload
+  lng: number;                 // raw GPS longitude — signed as part of payload
   witnessedBy: string[];       // public key fingerprints of witnesses
   witnessSignatures: string[];
   timestamp: number;
+  signature: string;           // client ECDSA signature over `${geohashPrefix}:${lat}:${lng}:${timestamp}`
 }
 
 export interface CheckIn {
@@ -45,13 +48,17 @@ export interface ZoneDefinition {
   emoji: string;
 }
 
+// P1.1: MVP Zone Topology — KNG/STM centroid (Kingsland, GA / St. Marys, GA)
+// JAX site (30.43053, -81.69309) reserved for future multi-site expansion.
+const KNG_STM_CENTROID = { lat: 30.7824, lng: -81.6335 };
+
 export const ZONES: Record<ZoneId, ZoneDefinition> = {
   calm: {
     id: 'calm',
     name: 'Calm',
     description: 'Rest, reflection, low-stimulus presence',
     color: '#6b9e6b',
-    lat: 0, lng: 0, radiusMeters: 200,
+    lat: KNG_STM_CENTROID.lat, lng: KNG_STM_CENTROID.lng, radiusMeters: 300,
     emoji: '🌿',
   },
   lab: {
@@ -59,7 +66,7 @@ export const ZONES: Record<ZoneId, ZoneDefinition> = {
     name: 'Lab',
     description: 'Build, create, experiment together',
     color: '#9b6bb0',
-    lat: 0, lng: 0, radiusMeters: 200,
+    lat: KNG_STM_CENTROID.lat, lng: KNG_STM_CENTROID.lng, radiusMeters: 300,
     emoji: '🔬',
   },
   kitchen: {
@@ -67,7 +74,7 @@ export const ZONES: Record<ZoneId, ZoneDefinition> = {
     name: 'Kitchen',
     description: 'Share food, conversation, warmth',
     color: '#d4a84b',
-    lat: 0, lng: 0, radiusMeters: 200,
+    lat: KNG_STM_CENTROID.lat, lng: KNG_STM_CENTROID.lng, radiusMeters: 300,
     emoji: '🍳',
   },
   deep: {
@@ -75,7 +82,7 @@ export const ZONES: Record<ZoneId, ZoneDefinition> = {
     name: 'Deep',
     description: 'Vulnerable conversation, emotional support',
     color: '#4a7c9b',
-    lat: 0, lng: 0, radiusMeters: 100,
+    lat: KNG_STM_CENTROID.lat, lng: KNG_STM_CENTROID.lng, radiusMeters: 100,
     emoji: '🌊',
   },
   wild: {
@@ -83,7 +90,7 @@ export const ZONES: Record<ZoneId, ZoneDefinition> = {
     name: 'Wild',
     description: 'Adventure, exploration, serendipity',
     color: '#d46b4b',
-    lat: 0, lng: 0, radiusMeters: 500,
+    lat: KNG_STM_CENTROID.lat, lng: KNG_STM_CENTROID.lng, radiusMeters: 1000,
     emoji: '🌀',
   },
 };
@@ -155,7 +162,7 @@ export type ClientMessage =
   | { type: 'check_in'; zoneId: ZoneId; locationProof: LocationProof; energyLevel?: number }
   | { type: 'update_profile'; displayName?: string; bio?: string; skills?: string[]; interests?: string[] }
   | { type: 'request_witness'; targetUserId: string; locationProofHash: string }
-  | { type: 'provide_witness'; requestId: string; signature: string }
+  | { type: 'provide_witness'; claimerId: string; geohashPrefix: string; timestamp: number; nonce: string; signature: string }
   | { type: 'submit_reaction'; bondId: string; reactionType: ReactionType; description: string }
   | { type: 'set_zone'; zoneId: ZoneId | null };
 
@@ -167,7 +174,7 @@ export type ServerMessage =
   | { type: 'bond_formed'; bond: Bond }
   | { type: 'bond_decayed'; bondId: string }
   | { type: 'check_in_confirmed'; checkIn: CheckIn }
-  | { type: 'witness_request'; requestId: string; fromUserId: string; locationProofHash: string }
+  | { type: 'witness_request'; requestId: string; fromUserId: string; locationProofHash: string; nonce: string }
   | { type: 'witness_confirmed'; checkInId: string }
   | { type: 'reaction_recorded'; reaction: Reaction }
   | { type: 'nearby_atoms'; atoms: AtomPublic[] }

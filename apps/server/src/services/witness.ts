@@ -13,6 +13,23 @@ export function hashStatement(stmt: WitnessStatement): string {
     .digest('hex');
 }
 
+// ─── Nonce cache for replay protection ──────────────────────────────
+
+const nonceCache = new Map<string, number>();
+
+export function isNonceValid(nonce: string, ttlMs: number = 600000): boolean {
+  const now = Date.now();
+  // Evict expired entries
+  for (const [key, ts] of nonceCache.entries()) {
+    if (now - ts > ttlMs) nonceCache.delete(key);
+  }
+  if (nonceCache.has(nonce)) return false;
+  nonceCache.set(nonce, now);
+  return true;
+}
+
+// ─── Witness recording ──────────────────────────────────────────────
+
 export async function recordWitness(claimerId: string, geohashPrefix: string, witnessId: string): Promise<void> {
   await query(
     `UPDATE check_ins

@@ -62,12 +62,12 @@ export async function respondToPing(pingId: string, accept: boolean): Promise<{ 
   });
 }
 
-export async function recordCheckIn(atomId: string, zoneId: string, geohashPrefix: string, witnessedBy: string[], energyLevel?: number): Promise<string> {
+export async function recordCheckIn(atomId: string, zoneId: string, geohashPrefix: string, lat: number, lng: number, witnessedBy: string[], energyLevel?: number): Promise<string> {
   const id = uuid();
   await query(
-    `INSERT INTO check_ins (id, atom_id, zone_id, geohash_prefix, witnessed_by, witness_count, energy_level)
-     VALUES ($1, $2, $3, $4, $5, $6, $7)`,
-    [id, atomId, zoneId, geohashPrefix, witnessedBy, witnessedBy.length, energyLevel ?? null]
+    `INSERT INTO check_ins (id, atom_id, zone_id, geohash_prefix, location, witnessed_by, witness_count, energy_level)
+     VALUES ($1, $2, $3, $4, ST_SetSRID(ST_MakePoint($5, $6), 4326), $7, $8, $9)`,
+    [id, atomId, zoneId, geohashPrefix, lng, lat, witnessedBy, witnessedBy.length, energyLevel ?? null]
   );
   await query(`UPDATE atoms SET total_check_ins = total_check_ins + 1, last_seen = NOW(), current_zone = $2 WHERE id = $1`,
     [atomId, zoneId]);
@@ -91,12 +91,37 @@ export async function decayOldBonds(): Promise<void> {
   );
 }
 
-export async function getNearbyAtoms(zoneId: string, excludeUserId: string): Promise<any[]> {
+// ─── Rate limiting ─────────────────────────────────────────────────
+
+const rateLimitCache = new Map<string, number>();
+
+export function isRateLimited(userId: string, cooldownMs: number = 120000): boolean {
+  const lastCheckin = rateLimitCache.get(userId);
+  if (lastCheckin && Date.now() - lastCheckin < cooldownMs) return true;
+  return false;
+}
+
+export function updateRateLimit(userId: string): void {
+  rateLimitCache.set(userId, Date.now());
+}
+
+// ─── Spatial queries ────────────────────────────────────────────────
+
+export async function getNearbyAtoms(lng: number, lat: number, radiusMeters: number, excludeUserId: string): Promise<any[]> {
   const result = await query(
-    `SELECT id, display_name, bio, skills, interests, atom_type, current_zone, last_seen, total_bonds
-     FROM atoms
-     WHERE current_zone = $1 AND id != $2 AND last_seen > NOW() - INTERVAL '1 hour'`,
-    [zoneId, excludeUserId]
+    `SELECT a.id, a.display_name, a.bio, a.skills, a.interests, a.atom_type, a.current_zone, a.last_seen, a.total_bonds
+     FROM atoms a
+     JOIN check_ins ci ON ci.atom_id = a.id
+     WHERE ST_DWithin(
+       ci.location,
+       ST_SetSRID(ST_MakePoint($1, $2), 4326)::geography,
+       $3
+     )
+     AND ci.timestamp > NOW() - INTERVAL '1 hour'
+     AND a.id != $4
+     ORDER BY ci.timestamp DESC
+     LIMIT 20`,
+    [lng, lat, radiusMeters, excludeUserId]
   );
   return result.rows;
 }

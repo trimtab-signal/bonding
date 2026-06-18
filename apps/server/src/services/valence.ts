@@ -3,9 +3,7 @@ import { query } from '../db/pool.js';
 const VALENCE_MIN = 0.1;
 const VALENCE_MAX = 2.0;
 const VALENCE_DEFAULT = 1.0;
-
-// Decay per day without interaction
-const DECAY_PER_DAY = 0.01;
+const DECAY_FACTOR = 0.99; // 1% decay per inactive day
 
 // Boost per successful check-in with a bonded atom
 const BOOST_PER_CHECKIN = 0.05;
@@ -14,8 +12,19 @@ const BOOST_PER_CHECKIN = 0.05;
 const PENALTY_REJECTED_PING = 0.02;
 
 export async function getValence(atomId: string): Promise<number> {
-  const result = await query(`SELECT valence FROM atoms WHERE id = $1`, [atomId]);
-  return result.rows[0]?.valence ?? VALENCE_DEFAULT;
+  const result = await query(
+    `SELECT valence, last_seen FROM atoms WHERE id = $1`,
+    [atomId]
+  );
+  if (result.rows.length === 0) return VALENCE_DEFAULT;
+  const { valence, last_seen } = result.rows[0]!;
+  if (!last_seen) return valence;
+  const daysSinceLastCheckIn = Math.floor(
+    (Date.now() - new Date(last_seen).getTime()) / (1000 * 60 * 60 * 24)
+  );
+  if (daysSinceLastCheckIn <= 0) return valence;
+  const decayed = valence * Math.pow(DECAY_FACTOR, daysSinceLastCheckIn);
+  return Math.max(0, decayed);
 }
 
 export async function adjustValence(atomId: string, delta: number): Promise<number> {
@@ -27,7 +36,6 @@ export async function adjustValence(atomId: string, delta: number): Promise<numb
 }
 
 export async function boostCheckIn(atomId: string, bondId: string): Promise<number> {
-  // Verify bond is active
   const bond = await query(
     `SELECT id FROM bonds WHERE id = $1 AND status = 'active'`,
     [bondId]
@@ -42,11 +50,12 @@ export async function penalizeRejection(atomId: string): Promise<number> {
   return adjustValence(atomId, -PENALTY_REJECTED_PING);
 }
 
-export async function applyDailyDecay(): Promise<void> {
-  await query(
-    `UPDATE atoms SET valence = GREATEST($1, valence - $2) WHERE last_seen < NOW() - INTERVAL '1 day'`,
-    [VALENCE_MIN, DECAY_PER_DAY]
-  );
+export async function distributeDividends(bondId: string): Promise<void> {
+  const bond = await query(`SELECT atom_a, atom_b FROM bonds WHERE id = $1`, [bondId]);
+  if (bond.rows.length === 0) return;
+  const { atom_a, atom_b } = bond.rows[0]!;
+  await adjustValence(atom_a, 0.02);
+  await adjustValence(atom_b, 0.02);
 }
 
 // Compute matching score between two atoms for the algorithm

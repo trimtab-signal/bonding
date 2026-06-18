@@ -20,6 +20,10 @@ export async function importPublicKey(jwk: JsonWebKey): Promise<CryptoKey> {
   return crypto.subtle.importKey('jwk', jwk, { name: 'ECDSA', namedCurve: 'P-256' }, true, ['verify']);
 }
 
+export async function importPrivateKey(jwk: JsonWebKey): Promise<CryptoKey> {
+  return crypto.subtle.importKey('jwk', jwk, { name: 'ECDSA', namedCurve: 'P-256' }, true, ['sign']);
+}
+
 export async function signData(privateKey: CryptoKey, data: string): Promise<string> {
   const encoded = new TextEncoder().encode(data);
   const sig = await crypto.subtle.sign(
