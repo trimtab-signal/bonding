@@ -51,7 +51,7 @@ interface GameState {
 
 export const useGameStore = create<GameState>((set) => ({
   connected: false,
-  serverUrl: 'http://localhost:3001',
+  serverUrl: 'https://bonding-server.onrender.com',
 
   userId: null,
   publicKeyJwk: null,
