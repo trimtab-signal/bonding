@@ -41,6 +41,7 @@
     "deploy:storybook": "pnpm build:storybook && wrangler pages deploy storybook-static --project-name=storybook --branch=master",
     "deploy:architecture-map": "pnpm --filter @meatspace/architecture-map build && wrangler pages deploy apps/architecture-map/dist --project-name=architecture-map --branch=master",
     "setup": "pnpm install && docker compose up -d && pnpm --filter @meatspace/server db:migrate && pnpm --filter @meatspace/server db:seed",
+    "domains": "CF_API_TOKEN=$CF_API_TOKEN CLOUDFLARE_ACCOUNT_ID=$CLOUDFLARE_ACCOUNT_ID node scripts/provision-domains.js",
     "graph": "node scripts/generate-graph.js",
     "storybook": "storybook dev -p 6006",
     "build:storybook": "storybook build"
