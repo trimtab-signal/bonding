@@ -3,7 +3,7 @@
 **Repo:** `p31-meatspace-bonding`  
 **Entity:** P31 Labs, Inc. (EIN 42-1888158)  
 **Status:** Sovereign — all planes live, test suite green, lint clean  
-**Last Audit:** 2026-06-23 (commit `4c5cf91`)
+**Last Audit:** 2026-06-23 (commit `0cd480b`)
 
 ---
 
@@ -50,17 +50,17 @@
 
 ### 3.1 Deployable Apps
 
-| App               | Dir                      | Entry          | Stack                  | Bundle Size                                                  | Deploy Target  | Live URL                    |
-| ----------------- | ------------------------ | -------------- | ---------------------- | ------------------------------------------------------------ | -------------- | --------------------------- |
-| bonding-meatspace | `apps/onboarding`        | `src/main.tsx` | React 19, Vite 6       | 280 KB dist                                                  | CF Pages       | bonding.p31ca.org           |
-| delta-ignition    | `apps/delta-ignition`    | `src/main.tsx` | React 19, Vite 6       | 312 KB js + 4 KB css                                         | CF Pages       | delta-ignition.p31ca.org    |
-| trim-sequence     | `apps/trim-sequence``    | `src/main.tsx` | React 19, Vite 6       | 199 KB js + 4 KB css                                         | CF Pages       | trim-sequence.p31ca.org     |
-| fleet-status      | `apps/fleet-status`      | `src/main.tsx` | React 19, Vite 6       | 204 KB dist                                                  | CF Pages       | fleet-status.p31ca.org      |
-| onboarding-module | `apps/onboarding-module` | `src/main.tsx` | React 19, Vite 6 IIFE  | 174 KB iife + 12 KB css CF Pages onboarding-module.pages.dev |
-| server            | `apps/server`            | `src/index.ts` | Express, Socket.IO, pg | 224 KB dist                                                  | Render/Railway | bonding-server.onrender.com |
-| mobile            | `apps/mobile`            | `src/main.tsx` | React 18, Capacitor    | 3.4 MB dist                                                  | Capacitor      | —                           |
-| architecture-map  | `apps/architecture-map`  | `src/main.tsx` | React 19, React Flow   | ~500 KB (est.)                                              | CF Pages       | (pending deploy)            |
-| storybook         | `.storybook` (root)      | `main.ts`      | Storybook 10 + Vite 6  | ~2 MB static                                               | CF Pages/GH Pages | (pending deploy)      |
+| App | Dir | Entry | Stack | Bundle Size | Deploy Target | Live URL |
+| --- | --- | --- | --- | --- | --- | --- |
+| bonding-meatspace | `apps/onboarding` | `src/main.tsx` | React 19, Vite 6 | 280 KB dist | CF Pages | bonding.p31ca.org |
+| delta-ignition | `apps/delta-ignition` | `src/main.tsx` | React 19, Vite 6 | 312 KB js + 4 KB css | CF Pages | delta-ignition.p31ca.org |
+| trim-sequence | `apps/trim-sequence` | `src/main.tsx` | React 19, Vite 6 | 199 KB js + 4 KB css | CF Pages | trim-sequence.p31ca.org |
+| fleet-status | `apps/fleet-status` | `src/main.tsx` | React 19, Vite 6 | 204 KB dist | CF Pages | fleet-status.p31ca.org |
+| onboarding-module | `apps/onboarding-module` | `src/main.tsx` | React 19, Vite 6 IIFE | 685 KB iife + 12 KB css | CF Pages | onboarding-module.p31ca.org |
+| server | `apps/server` | `src/index.ts` | Express, Socket.IO, pg | 224 KB dist | Render/Railway | bonding-server.onrender.com |
+| mobile | `apps/mobile` | `src/main.tsx` | React 18, Capacitor | 3.4 MB dist | Capacitor | — |
+| architecture-map | `apps/architecture-map` | `src/main.tsx` | React 19, React Flow | ~500 KB (est.) | CF Pages | architecture-map.p31ca.org |
+| storybook | `.storybook` (root) | `main.ts` | Storybook 8 + Vite 6 | ~2 MB static | CF Pages | storybook.p31ca.org |
 
 ### 3.2 Internal Packages
 
@@ -160,12 +160,12 @@ None found. No console-based secrets, no eval(), no dynamic require from untrust
 | fleet-status      | `apps/fleet-status/dist`      | 204 KB | —          |
 | trim-sequence     | `apps/trim-sequence/dist`     | 316 KB | —          |
 | onboarding        | `apps/onboarding/dist`        | 280 KB | —          |
-| onboarding-module | `apps/onboarding-module/dist` | 184 KB | —          |
+| onboarding-module | `apps/onboarding-module/dist` | 685 KB | —          |
 | mobile            | `apps/mobile/dist`            | 3.4 MB | —          |
 | server            | `apps/server/dist`            | 224 KB | —          |
 | shared-types      | `packages/shared-types/dist`  | 20 KB  | —          |
 
-**IIFE Bundle:** `onboarding-module/dist/delta-ignition.iife.js` = 174 KB (56.85 KB gzip)
+**IIFE Bundle:** `onboarding-module/dist/delta-ignition.iife.js` = 685 KB (212 KB gzip)
 
 ---
 
@@ -175,8 +175,8 @@ None found. No console-based secrets, no eval(), no dynamic require from untrust
 
 | Workflow     | Trigger                             | Jobs                                                               |
 | ------------ | ----------------------------------- | ------------------------------------------------------------------ |
-| `ci.yml`     | push/PR to master                   | typecheck → lint → test → build → bundle check → deploy onboarding |
-| `deploy.yml` | push to master (docs-only excluded) | CF Pages deploy                                                    |
+| `ci.yml`     | push/PR to master                   | typecheck → lint → test → build → bundle check → deploy all 7 planes + storybook + architecture-map |
+| `deploy.yml` | push to master (docs-only excluded) | CF Pages deploy all 7 planes + storybook + architecture-map |
 
 ### 7.2 Manual Deploy Scripts
 
@@ -186,8 +186,10 @@ None found. No console-based secrets, no eval(), no dynamic require from untrust
 | `deploy:trim-sequence`     | Wrangler | CF Pages                   |
 | `deploy:fleet-status`      | Wrangler | CF Pages                   |
 | `deploy:onboarding`        | Wrangler | CF Pages                   |
-| `deploy:onboarding-module` | Wrangler | CF Pages                   |
-| `deploy:server`            | git push | Render/Railway auto-deploy |
+| `deploy:onboarding-module` | Wrangler | CF Pages |
+| `deploy:storybook` | Wrangler | CF Pages |
+| `deploy:architecture-map` | Wrangler | CF Pages |
+| `deploy:server` | git push | Render/Railway auto-deploy |
 
 ---
 
@@ -349,6 +351,10 @@ Kits are fully functional, multi-component assemblies combining UI, backend logi
 
 | Commit  | Date       | Description                                                      |
 | ------- | ---------- | ---------------------------------------------------------------- |
+| 0cd480b | 2026-06-23 | fix: onboarding-module serves index.html for custom domain       |
+| c6a74c3 | 2026-06-23 | feat: add custom domain provisioning automation                  |
+| 97ba98c | 2026-06-23 | feat: update CI/CD pipelines — deploy all 7 planes               |
+| 861998d | 2026-06-23 | fix: update domains script to use separate Pages + DNS tokens    |
 | 4c5cf91 | 2026-06-23 | chore: audit cleanup — bump uuid, ignore generated artifacts, add master inventory |
 | 19188f3 | 2026-06-23 | fix lint warnings (prettier + eslint) and add error logging      |
 | 68e8490 | 2026-06-23 | docs: cut Sensata to $20K, add DEPIN_SETUP, AUTOMATION_ROADMAP   |
