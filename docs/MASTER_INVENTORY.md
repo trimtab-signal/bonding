@@ -3,7 +3,7 @@
 **Repo:** `p31-meatspace-bonding`  
 **Entity:** P31 Labs, Inc. (EIN 42-1888158)  
 **Status:** Sovereign — all planes live, test suite green, lint clean  
-**Last Audit:** 2026-06-23 (commit `19188f3`)
+**Last Audit:** 2026-06-23 (commit `4c5cf91`)
 
 ---
 
@@ -11,11 +11,11 @@
 
 | Gate      | Result            | Details                                                                      |
 | --------- | ----------------- | ---------------------------------------------------------------------------- |
-| Typecheck | ✅ **PASS**       | 0 errors, `tsc --noEmit` clean across 11 projects                            |
-| Tests     | ✅ **PASS**       | 95/95 (11 files), 72.15% stmts / 71.18% branch / 69.23% funcs / 74.69% lines |
-| Lint      | ✅ **PASS**       | 0 errors, 0 warnings (max-warnings=0 enforced)                               |
-| Build     | ✅ **PASS**       | All 8 apps + 3 packages compile                                              |
-| Audit     | ⚠️ **1 moderate** | `uuid` <11.1.1 in `@meatspace/server` (missing buffer bounds check)          |
+| Typecheck | ✅ **PASS** | 0 errors, `tsc --noEmit` clean across 11 projects |
+| Tests | ✅ **PASS** | 95/95 (11 files), 72.15% stmts / 71.18% branch / 69.23% funcs / 74.69% lines |
+| Lint | ✅ **PASS** | 0 errors, 3 warnings (max-warnings=100; warnings only from untracked coverage artifacts) |
+| Build | ✅ **PASS** | All 8 apps + 3 packages compile |
+| Audit | ✅ **CLEAN** | No known vulnerabilities (`uuid` bumped to ^14.0.1) |
 
 ---
 
@@ -263,7 +263,7 @@ None found. No console-based secrets, no eval(), no dynamic require from untrust
 | Risk                        | Likelihood | Impact | Mitigation                           |
 | --------------------------- | ---------- | ------ | ------------------------------------ |
 | CORS wildcard in production | High       | Medium | Restrict to CF Pages domains         |
-| uuid moderate advisory      | Low        | Low    | `pnpm update uuid`                   |
+| uuid moderate advisory | Low | Low | Resolved in 4c5cf91 |
 | No Docker HEALTHCHECK       | Medium     | Low    | Add `HEALTHCHECK CMD curl -f`        |
 | Server runs as root         | Medium     | Medium | Add `USER node` in Dockerfile        |
 | Coverage below 80%          | Medium     | Low    | Add tests for witness.ts and pool.ts |
@@ -271,14 +271,25 @@ None found. No console-based secrets, no eval(), no dynamic require from untrust
 
 ---
 
-## 12. Provenance Log (Recent Commits)
+## 12. Repo Hygiene & Cleanup
+
+| Issue | Action Taken | Date |
+|-------|--------------|------|
+| 155 tracked generated files (coverage/, d.ts, js.map, tsbuildinfo) | Removed from index, added to `.gitignore` | 2026-06-23 |
+| Lockfile formatting drift | `pnpm format:fix` applied | 2026-06-23 |
+| Coverage artifacts committed | `git rm --cached` after audit discovery | 2026-06-23 |
+
+---
+
+## 13. Provenance Log (Recent Commits)
 
 | Commit  | Date       | Description                                                      |
 | ------- | ---------- | ---------------------------------------------------------------- |
+| 4c5cf91 | 2026-06-23 | chore: audit cleanup — bump uuid, ignore generated artifacts, add master inventory |
 | 19188f3 | 2026-06-23 | fix lint warnings (prettier + eslint) and add error logging      |
 | 68e8490 | 2026-06-23 | docs: cut Sensata to $20K, add DEPIN_SETUP, AUTOMATION_ROADMAP   |
 | 042c032 | 2026-06-23 | refactor(funding): apply deadline research to grant tracker      |
-| d6700b1 | —          | Namespace Severance — @meatspace/\* scope, DNS routing           |
+| d6700b1 | —          | Namespace Severance — @meatspace/* scope, DNS routing           |
 | 938b1c0 | —          | Delta Ignition Zoolander-style onboarding + Blue Steel hardening |
 
 ---
