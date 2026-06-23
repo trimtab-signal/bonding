@@ -24,22 +24,33 @@
 
 | # | Grant / Program | Funder | Amount | Deadline | Status | Notes |
 |---|-----------------|--------|--------|----------|--------|-------|
-| 1 | **Sensata Foundation** — program/project grants | Sensata Foundation | Varies (project-based) | **June 30, 2026** | 🔴 | 501(c)(3) required. Program/project funding (not general ops). |
-| 2 | **Art Berg Fund Grant** | Art Berg Fund | $5,000 | Rolling / annual | 🔴 | Technology projects enhancing communication. Perfect fit for assistive tech. |
-| 3 | **Akamai Foundation — 2026 Early Learner STEM Grant** | Akamai Foundation | Varies | **Open now** | 🔴 | 501(c)(3) required. STEM education for underserved populations. |
-| 4 | **Mortgage Forbearance** | Loan servicer | Cash-flow relief | **June 30, 2026** | 📝 Script ready | Not a grant, but immediate financial relief. Execute before due date. |
+| 1 | **Georgia Annual Registration** | GA SOS | $40 (+$400 late fee) | **ASAP** (90-day rule; formed Apr 3, 2026) | 🔴 URGENT | File immediately at ecorp.sos.ga.gov. First filing due ~July 2; late fee applies after. |
+| 2 | **Sensata Foundation** — STEM Education + Community Support | Sensata Foundation | $10K–$100K | **June 30, 2026** | 🟡 Draft ready | 501(c)(3) required. Georgia not a primary site but applications considered. Email PDF to foundation@sensata.com. |
+| 3 | **Mortgage Forbearance** | Loan servicer | Cash-flow relief | **June 30, 2026** | 📝 Script ready | Use Regulation X trigger phrase. Demand SPOC. |
+| 4 | **OpenAI People-First AI Fund** | OpenAI Foundation | Unrestricted | **Next window TBD** (likely Fall 2026) | 🔴 Prepare now | $50M fund. 4-question application. Watch for next window announcement. |
 
 ---
 
-## High-Value Pipeline (Major Grants)
+## 2026 Windows Missed — Archive for 2027
+
+| Grant | 2026 Deadline | 2027 Window | Amount | Notes |
+|-------|--------------|-------------|--------|-------|
+| Art Berg Fund | May 14, 2026 | Feb 1 – May 14, 2027 | $5,000 | Requires NSA member sponsor. |
+| Akamai Foundation Early Learner STEM | March 27, 2026 | Feb 2027 | Varies | 501(c)(3) required. |
+| Spectrum Digital Education Grants | Feb 2–27, 2026 | Early 2027 | $1M+ pool | Digital skills focus. |
+| AWS Imagine Grant | June 5, 2026 | Q2 2027 | $50K–$200K + credits | 3 categories: Pathfinder, Go Further, Momentum. |
+
+---
+
+## High-Value Pipeline (2027 Windows)
 
 | # | Grant / Program | Funder | Amount | Typical Deadline | Status | Fit |
 |---|-----------------|--------|--------|------------------|--------|-----|
-| 5 | **Spectrum Digital Education Grants** | Spectrum | Up to $50K+ | Varies (annual) | 🔴 | Digital skills, technology access, community expansion. Strong match. |
+| 5 | **Spectrum Digital Education Grants** | Spectrum | Up to $50K+ | Early 2027 (Feb window) | 🔴 2026 missed | Digital skills, technology access, community expansion. Strong match. |
 | 6 | **Mitsubishi Electric America Foundation (MEAF)** | MEAF | $25K–$100K+ | Varies | 🔴 | Education, employment, technology-enabled pathways for youth with disabilities. |
-| 7 | **AWS Imagine Grant Program** | Amazon Web Services | Cloud credits + $ | Annual | 🔴 | 501(c)(3) cloud infrastructure. Could cover entire tech bill. |
-| 8 | **OpenAI Foundation People-First AI Fund** | OpenAI Foundation | Varies | Rolling | 🔴 | U.S. 501(c)(3) AI and neurodivergent support. |
-| 9 | **SBIR/STTR Phase I** | NIH / NSF / DOE | Up to $700K | Varies by agency | 🔴 | Highly competitive. Reauthorized April 13, 2026. |
+| 7 | **AWS Imagine Grant Program** | Amazon Web Services | $50K–$200K + credits | Q2 2027 | 🔴 2026 missed | 501(c)(3) cloud infrastructure. Could cover entire tech bill. |
+| 8 | **Akamai Foundation — Early Learner STEM Grant** | Akamai Foundation | Varies | Feb 2027 | 🔴 2026 missed | STEM education for underserved populations. |
+| 9 | **SBIR/STTR Phase I** | NIH / NSF / DOE | Up to $323,090 | Rolling | 🔴 Start prep | Nonprofits can apply. Must partner with research institution for STTR (40/30 split). Reauthorized through 2031. |
 | 10 | **SBIR/STTR Phase II** | NIH / NSF / DOE | Up to $3M | — | 🔴 | Follow-on to Phase I. |
 
 ---
@@ -65,28 +76,29 @@
 
 ---
 
-## 48-Hour Execution Checklist
+## 48-Hour Execution Checklist (Updated — Research Backed)
 
-### Today (Immediate)
-- [ ] Make mortgage forbearance call using `docs/MORTGAGE_FORBEARANCE_SCRIPT.md`
-- [ ] Apply for **Art Berg Fund Grant** ($5,000) — draft proposal tonight
-- [ ] Apply for **Sensata Foundation** grant before **June 30** deadline
-- [ ] Create profiles on **Instrumentl** and **Grants.gov** with keyword alerts
-- [ ] Run `docs/DEPLOYMENT_VERIFICATION.md` smoke tests on live sites
+### Today (Immediate) — Priority Order
+1. 🔴 **File Georgia Annual Registration** via `ecorp.sos.ga.gov` — you may be late; $400 late fee applies after deadline. Do this FIRST.
+2. 🟡 **Draft & polish Sensata Foundation** proposal for June 30 submission — template ready at `docs/proposals/sensata-foundation.md`. Note: Georgia not a primary Sensata site, but applications are considered.
+3. 📝 **Mortgage forbearance call** — use Regulation X trigger phrase from `docs/MORTGAGE_FORBEARANCE_SCRIPT.md`. Demand SPOC.
+4. 🔴 **Start SBIR/STTR prep** — identify Georgia university partner (Georgia Tech, UGA, etc.) for STTR requirement. Phase I up to $323,090.
+5. 🔴 **Draft OpenAI People-First AI Fund 4-question response** — next window likely Fall 2026. Be ready to submit immediately when it opens.
 
 ### This Week
-- [ ] File **Georgia Annual Registration** via `ecorp.sos.ga.gov` (target: before July 2)
-- [ ] Draft proposal for **Akamai Foundation Early Learner STEM Grant**
-- [ ] Draft proposal for **Spectrum Digital Education Grant**
-- [ ] Contact **Arthur M. Blank Family Foundation** program officer for LOI guidelines
+- [ ] Submit Sensata Foundation application (PDF email to foundation@sensata.com)
+- [ ] Submit Art Berg Fund application — wait for 2027 window (opens Feb 1, 2027). Requires NSA member sponsor.
+- [ ] Create profiles on **Instrumentl** and **Grants.gov** with keyword alerts: "assistive technology," "STEM education," "neurodivergent," "Georgia nonprofit"
 - [ ] Order 3 × Raspberry Pi 5 (4GB) per `docs/PI_PROVISIONING_PLAN.md`
 
-### Next 30 Days
-- [ ] Submit **AWS Imagine Grant** application
-- [ ] Submit **OpenAI People-First AI Fund** application
-- [ ] Research and contact **Delta Community Credit Union** Philanthropic Fund
-- [ ] Begin SBIR/STTR Phase I preparation (agency-specific)
-- [ ] Set up grant tracking CRM or spreadsheet (this document)
+### 2027 Calendar (Don't Miss Again)
+
+| Grant | 2027 Window | Amount | Notes |
+|-------|-------------|--------|-------|
+| Art Berg Fund | Feb 1 – May 14, 2027 | $5,000 | Need NSA member sponsor |
+| Akamai Foundation | Opens Feb 2027 | Varies | Early Learner STEM |
+| Spectrum Digital Education | Feb 2 – Feb 27, 2027 | $1M+ pool | Digital skills focus |
+| AWS Imagine Grant | Q2 2027 | $50K–$200K + credits | Pathfinder/Go Further/Momentum |
 
 ---
 

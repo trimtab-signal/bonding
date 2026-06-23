@@ -3,7 +3,11 @@
 **Funder:** Sensata Foundation  
 **Type:** Program / project grant (not general operating support)  
 **Deadline:** June 30, 2026  
+**Amount range:** $10,000 – $100,000  
 **Eligibility:** 501(c)(3) nonprofits  
+**Primary sites:** MA, CA, VT, MI, ID, VA, MN  
+**Note:** Georgia is not a primary Sensata site, but applications from outside locations are considered. Emphasize alignment with STEM Education priority and underserved population served.  
+**Submission:** PDF form → email to `foundation@sensata.com`  
 **Template version:** 2026-06-23  
 
 ---
@@ -23,7 +27,7 @@ This initiative addresses two gaps: (a) ~85% unemployment/underemployment among 
 | STEM education & workforce development | 12-month training + certification + internship placement |
 | Underserved populations | Explicitly targets neurodivergent individuals |
 | Programs, not general ops | Fully scoped pilot with measurable outcomes |
-| Georgia focus | Based in Camden County, GA; regional recruitment |
+| Georgia focus | Camden County, GA regional focus; open-source curriculum for national replication. **Note:** Georgia is not a primary Sensata employee location, but applications from outside primary sites are considered. |
 
 ---
 
@@ -121,7 +125,9 @@ This initiative addresses two gaps: (a) ~85% unemployment/underemployment among 
 
 ## 11. Conclusion
 
-The Neuro-Tech Career Catalyst is a scalable, measurable solution to unemployment among neurodivergent adults. With Sensata's support, we will prove that a neuro-affirming, hands-on tech training model produces employable, confident individuals who fill critical gaps in Georgia's technology workforce.
+The Neuro-Tech Career Catalyst is a scalable, measurable solution to unemployment among neurodivergent adults. While P31 Labs is based in Georgia — not a primary Sensata site — our work directly aligns with the Foundation's STEM Education and Community Support priorities. We serve an underserved population (neurodivergent young adults) with a proven technical infrastructure and a neuro-affirming, open-source model.
+
+With Sensata's support, we will prove that a neuro-affirming, hands-on tech training model produces employable, confident individuals who fill critical gaps in America's technology workforce.
 
 We request **$50,000** to launch this 12-month pilot and demonstrate a replicable framework for the nation.
 
