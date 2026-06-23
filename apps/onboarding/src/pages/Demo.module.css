@@ -1,0 +1,182 @@
+.section {
+  padding: 2rem 1.5rem 3rem;
+  background: var(--bg);
+  min-height: calc(100vh - 72px);
+  display: flex;
+  align-items: center;
+}
+.inner { max-width: 1100px; margin: 0 auto; width: 100%; }
+.header { text-align: center; margin-bottom: 2rem; }
+.title { font-size: 2.4rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 0.3rem; }
+.desc { font-size: 1.05rem; color: var(--text-dim); max-width: 560px; margin: 0 auto; }
+
+.canvasWrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/9;
+  min-height: 360px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: #0a0a0f;
+  box-shadow: var(--shadow-hover);
+  touch-action: none;
+}
+.canvas { width: 100%; height: 100%; display: block; cursor: pointer; background: #0a0a0f; }
+
+.controls {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  background: rgba(10, 10, 15, 0.7);
+  backdrop-filter: blur(12px);
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  pointer-events: auto;
+}
+
+.zoneBtn {
+  padding: 0.35rem 1rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: transparent;
+  color: var(--text-dim);
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+  font-family: inherit;
+}
+.zoneBtn:hover { color: var(--text); background: rgba(255, 255, 255, 0.05); }
+.zoneBtn.active { background: var(--zone-color, var(--accent)); color: #fff; border-color: var(--zone-color, var(--accent)); }
+
+.resetBtn {
+  padding: 0.35rem 1rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: transparent;
+  color: var(--text-dim);
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+.resetBtn:hover { color: var(--text); background: rgba(255, 255, 255, 0.05); }
+
+.replayBtn {
+  display: inline-block;
+  margin-top: 0.5rem;
+  padding: 0.3rem 1rem;
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-dim);
+  font-size: 0.85rem;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+.replayBtn:hover { background: var(--bg-accent); color: var(--text); }
+
+.tutorialOverlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 10;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.highlight {
+  position: absolute;
+  border: 3px solid var(--accent);
+  border-radius: var(--radius);
+  box-shadow: 0 0 0 4px var(--accent-glow), 0 0 0 8px rgba(139, 111, 90, 0.1);
+  pointer-events: none;
+  animation: pulse-glow 1.2s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 4px var(--accent-glow), 0 0 0 8px rgba(139, 111, 90, 0.05); }
+  50% { box-shadow: 0 0 0 6px var(--accent-glow), 0 0 0 14px rgba(139, 111, 90, 0.1); }
+}
+
+.tooltip {
+  pointer-events: auto;
+  max-width: 400px;
+  width: 90%;
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-hover);
+  border: 1px solid var(--card-border);
+  animation: fadeInUp 0.3s ease-out both;
+  margin-bottom: 4rem;
+}
+
+.tooltipHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.tooltipStep {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.tooltipSkip { background: none; border: none; color: var(--text-dim); font-size: 0.8rem; cursor: pointer; font-family: inherit; }
+.tooltipSkip:hover { color: var(--text); }
+
+.tooltipTitle { font-size: 1.2rem; font-weight: 700; margin-bottom: 0.25rem; }
+.tooltipText { font-size: 0.95rem; color: var(--text-dim); line-height: 1.5; margin-bottom: 0.75rem; }
+
+.tooltipAction {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--accent);
+  padding: 0.4rem 0.8rem;
+  background: var(--bg-accent);
+  border-radius: var(--radius-sm);
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.tooltipNext {
+  width: 100%;
+  padding: 0.75rem;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: var(--accent);
+  color: #fff;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  font-family: inherit;
+}
+.tooltipNext:hover { background: var(--accent-light); }
+
+@media (max-width: 640px) {
+  .controls {
+    bottom: 1rem; padding: 0.4rem 0.6rem; gap: 0.3rem;
+    flex-wrap: wrap; justify-content: center; border-radius: var(--radius); max-width: 90%;
+  }
+  .zoneBtn, .resetBtn { font-size: 0.65rem; padding: 0.2rem 0.6rem; }
+  .tutorialOverlay { padding: 1rem; align-items: flex-end; }
+  .tooltip { max-width: 100%; margin-bottom: 6rem; padding: 1rem; }
+  .tooltipTitle { font-size: 1rem; }
+  .tooltipText { font-size: 0.85rem; }
+}

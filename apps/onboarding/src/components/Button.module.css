@@ -1,0 +1,11 @@
+.button { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; border: none; border-radius: var(--radius-sm); font-weight: 600; cursor: pointer; transition: all 0.2s; touch-action: manipulation; user-select: none; min-height: 44px; padding: 0 1.2rem; font-size: 1rem; }
+.primary { background: var(--accent); color: #fff; }
+.primary:hover { background: var(--accent-light); transform: translateY(-2px); box-shadow: var(--shadow-hover); }
+.secondary { background: var(--bg-accent); color: var(--text); }
+.secondary:hover { background: var(--warm-light); }
+.ghost { background: transparent; color: var(--text-dim); }
+.ghost:hover { color: var(--text); background: var(--bg-accent); }
+.sm { font-size: 0.85rem; padding: 0 0.8rem; min-height: 36px; }
+.md { font-size: 1rem; padding: 0 1.2rem; min-height: 44px; }
+.lg { font-size: 1.1rem; padding: 0 1.8rem; min-height: 52px; }
+.fullWidth { width: 100%; }

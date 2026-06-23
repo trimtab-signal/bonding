@@ -65,7 +65,7 @@ export const useGameStore = create<GameState>((set) => ({
   bonds: [],
   pendingPings: [],
   energyLevel: null,
-  healthOptIn: localStorage.getItem('bonding_health_opt_in') === 'true',
+  healthOptIn: (() => { try { return typeof localStorage !== 'undefined' && localStorage.getItem('bonding_health_opt_in') === 'true'; } catch { return false; } })(),
   messages: [],
 
   setConnected: (connected) => set({ connected }),
@@ -80,7 +80,7 @@ export const useGameStore = create<GameState>((set) => ({
   setServerUrl: (url) => set({ serverUrl: url }),
   setEnergyLevel: (level) => set({ energyLevel: level }),
   setHealthOptIn: (optIn) => {
-    localStorage.setItem('bonding_health_opt_in', String(optIn));
+    try { localStorage.setItem('bonding_health_opt_in', String(optIn)); } catch {}
     set({ healthOptIn: optIn });
   },
 }));

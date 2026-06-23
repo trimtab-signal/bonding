@@ -1,36 +1,68 @@
-name: Deploy Onboarding Site
+name: Deploy — Onboarding Site + Mobile App
 
 on:
   push:
     branches: [master]
     paths:
-      - 'apps/onboarding/**'
-      - 'packages/shared-types/**'
+      - 'apps/**'
+      - 'packages/**'
       - 'pnpm-lock.yaml'
       - '.github/workflows/deploy.yml'
+      - '.github/workflows/ci.yml'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  deploy:
+  onboard:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
-
       - uses: pnpm/action-setup@v4
-
       - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: pnpm
-
       - run: pnpm install --frozen-lockfile
-
-      - run: pnpm build:onboarding
-
+      - run: pnpm build:shared && pnpm build:onboarding
       - uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CF_API_TOKEN }}
           command: pages deploy apps/onboarding/dist --project-name bonding-meatspace --branch master
+
+  mobile:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build:shared && pnpm build:mobile
+      - uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CF_API_TOKEN }}
+          command: pages deploy apps/mobile/dist --project-name bonding-mobile --branch master
+
+  phos-link-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          echo "Verifying cross-project links..."
+          if grep -q "phos.p31ca.org" apps/onboarding/src/**/*.{tsx,ts} 2>/dev/null; then
+            echo "✅ PHOS link found in onboarding"
+          else
+            echo "⚠️ No PHOS link found in onboarding"
+          fi
+          if grep -q "github.com/trimtab-signal/bonding" README.md 2>/dev/null; then
+            echo "✅ GitHub link found in README"
+          else
+            echo "⚠️ No GitHub link in README"
+          fi

@@ -1,0 +1,80 @@
+name: CI — Typecheck, Lint, Test, Build
+
+on:
+  push:
+    branches: [master]
+    paths-ignore:
+      - 'docs/**'
+      - 'media/**'
+      - 'README.md'
+  pull_request:
+    branches: [master]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Build shared types
+        run: pnpm build:shared
+
+      - name: Type check
+        run: pnpm typecheck
+
+      - name: Lint
+        run: pnpm lint || echo "Lint warnings (non-blocking)"
+
+      - name: Unit tests
+        run: pnpm test
+
+      - name: Build mobile app
+        run: pnpm build:mobile
+
+      - name: Build onboarding site
+        run: pnpm build:onboarding
+
+      - name: Check bundle sizes
+        run: |
+          echo "--- Mobile bundle ---"
+          du -sh apps/mobile/dist/
+          echo "--- Onboarding bundle ---"
+          du -sh apps/onboarding/dist/
+
+  deploy-onboarding:
+    if: github.ref == 'refs/heads/master'
+    needs: quality
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - run: pnpm build:shared && pnpm build:onboarding
+
+      - uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CF_API_TOKEN }}
+          command: pages deploy apps/onboarding/dist --project-name bonding-meatspace --branch master

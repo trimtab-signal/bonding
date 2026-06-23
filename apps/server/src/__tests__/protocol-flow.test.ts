@@ -39,7 +39,7 @@ describe('full protocol flow with health integration', () => {
       {
         match: 'INSERT INTO check_ins',
         handler: (_t, params) => {
-          capturedEnergy = params[6] as number | null;
+          capturedEnergy = params[8] as number | null;
           checkInInserted = true;
           return { rows: [], rowCount: 1 };
         },
@@ -62,7 +62,7 @@ describe('full protocol flow with health integration', () => {
     const { adjustValence } = await import('../services/valence.js');
 
     // 1. Record check-in with energy level
-    const checkInId = await recordCheckIn(userId, 'lab', '9q8yy', [], energyLevel);
+    const checkInId = await recordCheckIn(userId, 'lab', '9q8yy', 0, 0, [], energyLevel);
     expect(checkInId).toBeTruthy();
     expect(checkInInserted).toBe(true);
     expect(capturedEnergy).toBe(energyLevel);
@@ -84,7 +84,7 @@ describe('full protocol flow with health integration', () => {
       {
         match: 'INSERT INTO check_ins',
         handler: (_t, params) => {
-          capturedEnergy = params[6] as number | null;
+          capturedEnergy = params[8] as number | null;
           return { rows: [], rowCount: 1 };
         },
       },
@@ -104,7 +104,7 @@ describe('full protocol flow with health integration', () => {
     const { recordCheckIn } = await import('../services/game-loop.js');
     const { adjustValence } = await import('../services/valence.js');
 
-    await recordCheckIn(userId, 'calm', 'abcd', [], energyLevel);
+    await recordCheckIn(userId, 'calm', 'abcd', 0, 0, [], energyLevel);
 
     const delta = energyToDelta(energyLevel);
     const newValence = await adjustValence(userId, delta);
@@ -121,7 +121,7 @@ describe('full protocol flow with health integration', () => {
       {
         match: 'INSERT INTO check_ins',
         handler: (_t, params) => {
-          capturedEnergy = params[6] as number | null;
+          capturedEnergy = params[8] as number | null;
           return { rows: [], rowCount: 1 };
         },
       },
@@ -141,7 +141,7 @@ describe('full protocol flow with health integration', () => {
     const { recordCheckIn } = await import('../services/game-loop.js');
 
     // Energy level is undefined when user opts out
-    await recordCheckIn(userId, 'kitchen', 'wxyz', []);
+    await recordCheckIn(userId, 'kitchen', 'wxyz', 0, 0, []);
     expect(capturedEnergy).toBeNull();
     // No valence adjustment from energy (simulating the guard in game-handler)
     expect(valenceAdjustmentCalled).toBe(false);
@@ -245,7 +245,7 @@ describe('full protocol flow with health integration', () => {
     ]));
 
     // Alice checks in
-    await recordCheckIn(atomA, 'lab', '9q8yy', []);
+    await recordCheckIn(atomA, 'lab', '9q8yy', 0, 0, []);
     expect(bondCheckInCounted).toBe(false); // no bond check-in counting until bonded atom nearby
 
     // Simulate the game-handler logic: find nearby bonded atom

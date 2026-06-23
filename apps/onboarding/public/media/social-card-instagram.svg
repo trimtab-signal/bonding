@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1080" viewBox="0 0 1080 1080">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f7f4f0"/>
+      <stop offset="100%" stop-color="#f0ebe4"/>
+    </linearGradient>
+  </defs>
+  <rect width="1080" height="1080" fill="url(#bg)"/>
+  <text x="540" y="360" font-family="system-ui,sans-serif" font-size="180" text-anchor="middle">🧬</text>
+  <text x="540" y="540" font-family="system-ui,sans-serif" font-size="64" font-weight="800" fill="#2c241e" text-anchor="middle">BONDING</text>
+  <text x="540" y="620" font-family="system-ui,sans-serif" font-size="32" fill="#6b5f54" text-anchor="middle">Humans are atoms. Relationships are bonds.</text>
+  <text x="540" y="700" font-family="system-ui,sans-serif" font-size="24" fill="#8a847e" text-anchor="middle" font-style="italic">Same bowl, same room — your people first.</text>
+  <text x="540" y="800" font-family="system-ui,sans-serif" font-size="28" fill="#6b5f54" text-anchor="middle">bonding.p31ca.org</text>
+</svg>

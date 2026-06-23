@@ -137,8 +137,8 @@ describe('game-loop', () => {
           match: 'INSERT INTO check_ins',
           handler: (_t, params) => {
             checkInInserted = true;
-            // params: [id, atomId, zoneId, geohashPrefix, witnessedBy, witnessCount, energyLevel]
-            expect(params[6]).toBeNull(); // no energy level
+            // params: [id, atomId, zoneId, geohashPrefix, lng, lat, witnessedBy, witnessCount, energyLevel]
+            expect(params[8]).toBeNull(); // no energy level
             return { rows: [], rowCount: 1 };
           },
         },
@@ -151,7 +151,7 @@ describe('game-loop', () => {
         },
       ]));
 
-      const id = await gameLoop.recordCheckIn('atom-1', 'lab', '9q8yy', []);
+      const id = await gameLoop.recordCheckIn('atom-1', 'lab', '9q8yy', 0, 0, []);
       expect(id).toBeTruthy();
       expect(checkInInserted).toBe(true);
       expect(atomUpdated).toBe(true);
@@ -163,7 +163,7 @@ describe('game-loop', () => {
         {
           match: 'INSERT INTO check_ins',
           handler: (_t, params) => {
-            storedEnergy = params[6] as number | null;
+            storedEnergy = params[8] as number | null;
             return { rows: [], rowCount: 1 };
           },
         },
@@ -173,7 +173,7 @@ describe('game-loop', () => {
         },
       ]));
 
-      await gameLoop.recordCheckIn('atom-1', 'calm', 'abcd', [], 0.75);
+      await gameLoop.recordCheckIn('atom-1', 'calm', 'abcd', 0, 0, [], 0.75);
       expect(storedEnergy).toBe(0.75);
     });
   });
@@ -182,7 +182,7 @@ describe('game-loop', () => {
     it('returns atoms in same zone', async () => {
       mockPool.setHandler(matchHandler([
         {
-          match: 'SELECT id, display_name',
+          match: /^SELECT a\.id/,
           handler: () => ({
             rows: [
               { id: 'atom-b', display_name: 'Bob', skills: ['js'], interests: ['music'], atom_type: 'friend', current_zone: 'lab', last_seen: new Date(), total_bonds: 1 },
@@ -192,7 +192,7 @@ describe('game-loop', () => {
         },
       ]));
 
-      const atoms = await gameLoop.getNearbyAtoms('lab', 'atom-a');
+      const atoms = await gameLoop.getNearbyAtoms(-81.6335, 30.7824, 500, 'atom-a');
       expect(atoms).toHaveLength(1);
       expect(atoms[0].id).toBe('atom-b');
     });

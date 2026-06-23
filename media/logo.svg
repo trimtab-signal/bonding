@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <rect width="512" height="512" fill="#f7f4f0" rx="64"/>
+  <text x="256" y="280" font-family="system-ui,sans-serif" font-size="200" text-anchor="middle">🧬</text>
+  <text x="256" y="400" font-family="system-ui,sans-serif" font-size="48" font-weight="800" fill="#2c241e" text-anchor="middle">BONDING</text>
+</svg>

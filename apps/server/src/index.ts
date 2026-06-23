@@ -36,6 +36,27 @@ app.get('/api/zones', (_req, res) => {
   res.json(ZONES);
 });
 
+// K₄ Fractal Flywheel endpoints
+app.get('/k4/graph', async (_req, res) => {
+  try {
+    const remote = await fetch(`${process.env.K4_SYNC_URL || 'https://cashpilot-sync.trimtab-signal.workers.dev'}/api/k4/graph?level=0`);
+    const data = await remote.json();
+    res.json({ source: 'bonding-server', ...data });
+  } catch {
+    res.json({ source: 'bonding-server', level: 0, matrix: {}, edges: {} });
+  }
+});
+
+app.get('/k4/ledger', async (_req, res) => {
+  try {
+    const remote = await fetch(`${process.env.K4_SYNC_URL || 'https://cashpilot-sync.trimtab-signal.workers.dev'}/api/k4/ledger?level=0&feature=valence`);
+    const data = await remote.json();
+    res.json(data);
+  } catch {
+    res.json({ entries: [], count: 0 });
+  }
+});
+
 // Register WebSocket game handlers
 registerGameHandlers(io);
 

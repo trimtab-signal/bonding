@@ -1,6 +1,15 @@
 node_modules/
 dist/
 .env
+**/.env
+android/
+ios/
+*.apk
+*.ipa
+**/.env
+.env.example.local
+.env.test.local
+.env.production.local
 *.local
 .DS_Store
 *.log

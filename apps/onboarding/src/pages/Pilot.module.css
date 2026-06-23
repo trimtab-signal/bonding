@@ -1,0 +1,31 @@
+.section { padding: 4rem 1.5rem; background: var(--bg); }
+.inner { max-width: 720px; margin: 0 auto; }
+.label {
+  display: inline-block; padding: 0.25rem 1rem; border-radius: 9999px;
+  background: var(--bg-accent); font-size: 0.75rem; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-dim); margin-bottom: 0.75rem;
+}
+.title { font-size: 2.4rem; margin-bottom: 0.5rem; }
+.desc { font-size: 1.1rem; color: var(--text-dim); max-width: 640px; margin-bottom: 2rem; }
+
+.form { padding: 2rem; }
+.field { margin-bottom: 1.25rem; }
+.field label { display: block; font-size: 0.85rem; font-weight: 600; color: var(--text-dim); margin-bottom: 0.3rem; }
+.field input {
+  width: 100%; padding: 0.7rem 1rem; border-radius: var(--radius-sm);
+  border: 1px solid rgba(44,36,30,0.12); background: var(--bg);
+  font-size: 1rem; color: var(--text); font-family: inherit; outline: none;
+}
+.field input:focus { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent-glow); }
+.privacy { font-size: 0.75rem; color: var(--text-dim); text-align: center; margin-top: 0.75rem; }
+
+.success { text-align: center; padding: 3rem 2rem; }
+.successIcon { font-size: 3rem; display: block; margin-bottom: 0.5rem; }
+.success h3 { font-size: 1.3rem; margin-bottom: 0.25rem; }
+.success p { font-size: 0.95rem; color: var(--text-dim); margin-bottom: 1rem; }
+.demoLink { display: inline-block; font-weight: 600; color: var(--accent); font-size: 1rem; }
+
+.info { margin-top: 3rem; padding: 1.5rem; background: var(--bg-accent); border-radius: var(--radius); }
+.info h3 { font-size: 1.1rem; margin-bottom: 0.75rem; }
+.steps { list-style: decimal; padding-left: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem; }
+.steps li { font-size: 0.95rem; color: var(--text-dim); }

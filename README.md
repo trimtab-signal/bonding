@@ -1,7 +1,13 @@
-# BONDING — Human/Meatspace Social Game
+# 🧬 BONDING — Human/Meatspace Social Game
+
+[![Live Demo](https://img.shields.io/badge/demo-live-b89d88?style=flat-square)](https://bonding-meatspace.pages.dev/#/demo)
+[![Server Status](https://img.shields.io/badge/server-live-6b9e6b?style=flat-square)](https://bonding-server.onrender.com/health)
+[![GitHub](https://img.shields.io/badge/github-open-8b6f5a?style=flat-square)](https://github.com/trimtab-signal/bonding)
+[![License](https://img.shields.io/badge/license-MIT-2c241e?style=flat-square)](LICENSE)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-9b6bb0?style=flat-square)](https://github.com/trimtab-signal/bonding/issues)
 
 **Version:** 0.1.0 (MVP)
-**Date:** 2026-06-17
+**Date:** 2026-06-18
 **North Star:** *"Same bowl, same room — your people first."*
 
 ---
@@ -143,3 +149,23 @@ pnpm dev:mobile
 - **Complementary matching** — different skills, shared interests
 - **Privacy first** — no raw GPS on server, ephemeral keys, opt‑in only
 - **No engagement loops** — no streaks, leaderboards, or variable‑ratio rewards
+
+---
+
+## 7. P31 Ecosystem Integration
+
+BONDING is part of the larger P31 Labs ecosystem:
+
+| Project | Role | Link |
+|---------|------|------|
+| **PHOS** | Cognitive convergence dashboard — spoon-aware UI, surface routing, quantum bridge | [phos.p31ca.org](https://phos.p31ca.org) |
+| **8-Ball** | Decision engine — spoon-weighted action recommender for AuDHD operators | [`/home/p31/andromeda/scripts/quantum-8ball.py`](https://github.com/trimtab-signal/bonding) |
+| **PMM Grader** | P31 Maturity Model — multi-dimension artifact scoring (CODE, TEST, DOCS, OPS, SEC) | [`grade-repo.py`](../../andromeda/scripts/grade-repo.py) |
+| **IntentEngine** | PHOS surface router — "bonding" keyword routes to BONDING surface | [`IntentEngine.ts`](../../andromeda/phos/src/lib/IntentEngine.ts) |
+
+### Cross-Project Links
+
+- **PHOS** routes "bonding" / "family" / "connect" intents to the BONDING surface
+- **BONDING onboarding** links to PHOS in navigation
+- **8-Ball** reads grading-index.json from the PMM Grader for ecosystem fidelity scoring
+- **PMM Grader** evaluates every P31 artifact including BONDING on 5 dimensions

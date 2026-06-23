@@ -20,8 +20,8 @@ export function useWebSocket(): UseWebSocketReturn {
 
   const connect = useCallback(async () => {
     // Generate or load identity
-    const storedPublic = localStorage.getItem('bonding_public_key');
-    const storedPrivate = localStorage.getItem('bonding_private_key');
+    const storedPublic = (() => { try { return localStorage.getItem('bonding_public_key'); } catch { return null; } })();
+    const storedPrivate = (() => { try { return localStorage.getItem('bonding_private_key'); } catch { return null; } })();
 
     let userId: string;
     let publicKeyJwk: JsonWebKey;
@@ -36,8 +36,7 @@ export function useWebSocket(): UseWebSocketReturn {
       publicKeyJwk = await exportPublicKeyJwk(keyPair.publicKey);
       privateKeyJwk = await exportPrivateKeyJwk(keyPair.privateKey);
       userId = await generateUserId(publicKeyJwk);
-      localStorage.setItem('bonding_public_key', JSON.stringify(publicKeyJwk));
-      localStorage.setItem('bonding_private_key', JSON.stringify(privateKeyJwk));
+      (() => { try { localStorage.setItem('bonding_public_key', JSON.stringify(publicKeyJwk)); localStorage.setItem('bonding_private_key', JSON.stringify(privateKeyJwk)); } catch {} })();
     }
 
     setIdentity(userId, publicKeyJwk, privateKeyJwk);
@@ -89,7 +88,7 @@ export function useWebSocket(): UseWebSocketReturn {
   }, []);
 
   const ping = useCallback((targetUserId: string, zoneId: string) => {
-    send({ type: 'ping', targetUserId, zoneId: zoneId as any });
+    send({ type: 'ping', targetUserId, zoneId: zoneId as import('@bonding/shared-types').ZoneId });
   }, [send]);
 
   const checkIn = useCallback(async (zoneId: string) => {
@@ -107,29 +106,25 @@ export function useWebSocket(): UseWebSocketReturn {
     const payload = `${geohash}:${latitude}:${longitude}:${timestamp}`;
     const signature = await signData(privateKey, payload);
 
-    const msg: ClientMessage = {
-      type: 'check_in',
-      zoneId: zoneId as any,
-      locationProof: {
-        geohashPrefix: geohash,
-        geohashPrecision: precision,
-        lat: latitude,
-        lng: longitude,
-        witnessedBy: [],
-        witnessSignatures: [],
-        timestamp,
-        signature,
-      },
+    const locationProof = {
+      geohashPrefix: geohash,
+      geohashPrecision: precision,
+      lat: latitude,
+      lng: longitude,
+      witnessedBy: [] as string[],
+      witnessSignatures: [] as string[],
+      timestamp,
+      signature,
     };
-    if (state.healthOptIn && state.energyLevel !== null) {
-      (msg as any).energyLevel = state.energyLevel;
-    }
+    const msg: ClientMessage = state.healthOptIn && state.energyLevel !== null
+      ? { type: 'check_in', zoneId: zoneId as import('@bonding/shared-types').ZoneId, locationProof, energyLevel: state.energyLevel }
+      : { type: 'check_in', zoneId: zoneId as import('@bonding/shared-types').ZoneId, locationProof };
     send(msg);
   }, [send]);
 
   const setZone = useCallback((zoneId: string | null) => {
-    send({ type: 'set_zone', zoneId: zoneId as any });
-    setCurrentZone(zoneId as any);
+    send({ type: 'set_zone', zoneId: zoneId as import('@bonding/shared-types').ZoneId | null });
+    setCurrentZone(zoneId as import('@bonding/shared-types').ZoneId | null);
   }, [send]);
 
   function handleServerMessage(msg: ServerMessage) {
