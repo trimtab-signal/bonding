@@ -3,7 +3,7 @@
 **Purpose:** One-page smoke test for all live P31 Labs sites. Run after every deploy, weekly, or after any infrastructure change.  
 **Owner:** [YOU]  
 **Last verified:** [YYYY-MM-DD]  
-**Sign-off:** ********\_\_\_********
+**Sign-off:** **\*\*\*\***\_\_\_**\*\*\*\***
 
 ---
 
@@ -132,9 +132,9 @@ git branch -v        # master must match origin/master
 | Local build + test clean | [ ]  | [ ]  |       |
 | Git state clean          | [ ]  | [ ]  |       |
 
-**Verified by:** ********\_\_\_********  
-**Date:** ********\_\_\_********  
-**Next verification due:** ********\_\_\_********
+**Verified by:** **\*\*\*\***\_\_\_**\*\*\*\***  
+**Date:** **\*\*\*\***\_\_\_**\*\*\*\***  
+**Next verification due:** **\*\*\*\***\_\_\_**\*\*\*\***
 
 ---
 

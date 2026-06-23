@@ -125,14 +125,12 @@ app.get('/health', async (_req, res) => {
     await query('SELECT 1');
     res.json({ status: 'ok', version: '0.1.0', service: 'bonding-server', database: 'connected' });
   } catch {
-    res
-      .status(503)
-      .json({
-        status: 'error',
-        version: '0.1.0',
-        service: 'bonding-server',
-        database: 'disconnected',
-      });
+    res.status(503).json({
+      status: 'error',
+      version: '0.1.0',
+      service: 'bonding-server',
+      database: 'disconnected',
+    });
   }
 });
 ```

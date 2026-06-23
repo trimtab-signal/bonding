@@ -17,3 +17,8 @@ apps/mobile/scripts/
 .DS_Store
 *.log
 .cache/
+coverage/
+apps/*/src/*.d.ts
+apps/*/src/*.d.ts.map
+apps/*/src/*.js.map
+

@@ -229,8 +229,8 @@ importers:
         specifier: ^4.8.0
         version: 4.8.3
       uuid:
-        specifier: ^10.0.0
-        version: 10.0.0
+        specifier: ^14.0.1
+        version: 14.0.1
     devDependencies:
       '@types/cors':
         specifier: ^2.8.17
@@ -3886,12 +3886,11 @@ packages:
       }
     engines: { node: '>= 0.4.0' }
 
-  uuid@10.0.0:
+  uuid@14.0.1:
     resolution:
       {
-        integrity: sha512-8XkAphELsDnEGrDxUOHB3RGvXz6TeuYSGEZBOjtTtPm2lwhGBjLgOzLHB63IUWfBpNucQjND6d3AOudO+H3RWQ==,
+        integrity: sha512-6ZxzVpzDXDa3bJWaHilVayA+BH/1zmxCJoVgvmqJnid/gPoKHxUrS/aC/T6LGQtNHT+XHG9fXPJB4d+IrU30Ew==,
       }
-    deprecated: uuid@10 and below is no longer supported.  For ESM codebases, update to uuid@latest.  For CommonJS codebases, use uuid@11 (but be aware this version will likely be deprecated in 2028).
     hasBin: true
 
   vary@1.1.2:
@@ -6233,7 +6232,7 @@ snapshots:
 
   utils-merge@1.0.1: {}
 
-  uuid@10.0.0: {}
+  uuid@14.0.1: {}
 
   vary@1.1.2: {}
 
