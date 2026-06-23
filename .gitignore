@@ -18,6 +18,8 @@ apps/mobile/scripts/
 *.log
 .cache/
 coverage/
+storybook-static/
+apps/*/dist/
 apps/*/src/*.d.ts
 apps/*/src/*.d.ts.map
 apps/*/src/*.js.map

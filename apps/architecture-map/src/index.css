@@ -1,0 +1,10 @@
+body {
+  margin: 0;
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', Menlo, Consolas, monospace;
+  background: #0a0e14;
+  color: #c9d1d9;
+}
+#root {
+  width: 100vw;
+  height: 100vh;
+}

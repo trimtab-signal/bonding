@@ -1,0 +1,817 @@
+{
+  "nodes": [
+    {
+      "id": "apps-delta-ignition-src-index.css",
+      "type": "app",
+      "path": "apps/delta-ignition/src/index.css"
+    },
+    {
+      "id": "apps-delta-ignition-src-main.tsx",
+      "type": "app",
+      "path": "apps/delta-ignition/src/main.tsx"
+    },
+    {
+      "id": "apps-delta-ignition-src-pages-Page.tsx",
+      "type": "app",
+      "path": "apps/delta-ignition/src/pages/Page.tsx"
+    },
+    {
+      "id": "apps-delta-ignition-src-pages-DeltaIgnition.module.css",
+      "type": "app",
+      "path": "apps/delta-ignition/src/pages/DeltaIgnition.module.css"
+    },
+    {
+      "id": "apps-delta-ignition-src-pages-DeltaIgnition.tsx",
+      "type": "app",
+      "path": "apps/delta-ignition/src/pages/DeltaIgnition.tsx"
+    },
+    {
+      "id": "apps-fleet-status-src-index.css",
+      "type": "app",
+      "path": "apps/fleet-status/src/index.css"
+    },
+    {
+      "id": "apps-fleet-status-src-main.tsx",
+      "type": "app",
+      "path": "apps/fleet-status/src/main.tsx"
+    },
+    {
+      "id": "apps-fleet-status-src-pages-Page.tsx",
+      "type": "app",
+      "path": "apps/fleet-status/src/pages/Page.tsx"
+    },
+    {
+      "id": "apps-fleet-status-src-pages-FleetStatus.module.css",
+      "type": "app",
+      "path": "apps/fleet-status/src/pages/FleetStatus.module.css"
+    },
+    {
+      "id": "apps-fleet-status-src-pages-FleetStatus.tsx",
+      "type": "app",
+      "path": "apps/fleet-status/src/pages/FleetStatus.tsx"
+    },
+    {
+      "id": "apps-onboarding-module-src-adapters-k4-bridge.ts",
+      "type": "app",
+      "path": "apps/onboarding-module/src/adapters/k4-bridge.ts"
+    },
+    {
+      "id": "apps-onboarding-module-src-adapters-meatspace-sync.ts",
+      "type": "app",
+      "path": "apps/onboarding-module/src/adapters/meatspace-sync.ts"
+    },
+    {
+      "id": "apps-onboarding-module-src-adapters-phos-proxy.ts",
+      "type": "app",
+      "path": "apps/onboarding-module/src/adapters/phos-proxy.ts"
+    },
+    {
+      "id": "apps-onboarding-module-src-global.css",
+      "type": "app",
+      "path": "apps/onboarding-module/src/global.css"
+    },
+    {
+      "id": "apps-onboarding-module-src-main.tsx",
+      "type": "app",
+      "path": "apps/onboarding-module/src/main.tsx"
+    },
+    {
+      "id": "apps-onboarding-module-src-planes-Orchestrator.tsx",
+      "type": "app",
+      "path": "apps/onboarding-module/src/planes/Orchestrator.tsx"
+    },
+    {
+      "id": "apps-onboarding-module-src-planes-FleetStatus.tsx",
+      "type": "app",
+      "path": "apps/onboarding-module/src/planes/FleetStatus.tsx"
+    },
+    {
+      "id": "apps-onboarding-module-src-planes-modules-FleetStatus.module.css",
+      "type": "app",
+      "path": "apps/onboarding-module/src/planes/modules/FleetStatus.module.css"
+    },
+    {
+      "id": "apps-onboarding-module-src-planes-MagnumWalk.tsx",
+      "type": "app",
+      "path": "apps/onboarding-module/src/planes/MagnumWalk.tsx"
+    },
+    {
+      "id": "apps-onboarding-module-src-planes-modules-MagnumWalk.module.css",
+      "type": "app",
+      "path": "apps/onboarding-module/src/planes/modules/MagnumWalk.module.css"
+    },
+    {
+      "id": "apps-onboarding-module-src-planes-OnboardingModule.module.css",
+      "type": "app",
+      "path": "apps/onboarding-module/src/planes/OnboardingModule.module.css"
+    },
+    {
+      "id": "apps-onboarding-module-src-planes-TrimTabs.tsx",
+      "type": "app",
+      "path": "apps/onboarding-module/src/planes/TrimTabs.tsx"
+    },
+    {
+      "id": "apps-onboarding-module-src-planes-modules-TrimTabs.module.css",
+      "type": "app",
+      "path": "apps/onboarding-module/src/planes/modules/TrimTabs.module.css"
+    },
+    {
+      "id": "apps-onboarding-src-App.module.css",
+      "type": "app",
+      "path": "apps/onboarding/src/App.module.css"
+    },
+    {
+      "id": "apps-onboarding-src-App.tsx",
+      "type": "app",
+      "path": "apps/onboarding/src/App.tsx"
+    },
+    {
+      "id": "apps-onboarding-src-components-ErrorBoundary.tsx",
+      "type": "app",
+      "path": "apps/onboarding/src/components/ErrorBoundary.tsx"
+    },
+    {
+      "id": "apps-onboarding-src-pages-About.tsx",
+      "type": "app",
+      "path": "apps/onboarding/src/pages/About.tsx"
+    },
+    {
+      "id": "apps-onboarding-src-pages-Demo.tsx",
+      "type": "app",
+      "path": "apps/onboarding/src/pages/Demo.tsx"
+    },
+    {
+      "id": "apps-onboarding-src-pages-Home.tsx",
+      "type": "app",
+      "path": "apps/onboarding/src/pages/Home.tsx"
+    },
+    {
+      "id": "apps-onboarding-src-pages-HowItWorks.tsx",
+      "type": "app",
+      "path": "apps/onboarding/src/pages/HowItWorks.tsx"
+    },
+    {
+      "id": "apps-onboarding-src-pages-Join.tsx",
+      "type": "app",
+      "path": "apps/onboarding/src/pages/Join.tsx"
+    },
+    {
+      "id": "apps-onboarding-src-pages-Pilot.tsx",
+      "type": "app",
+      "path": "apps/onboarding/src/pages/Pilot.tsx"
+    },
+    {
+      "id": "apps-onboarding-src-pages-Press.tsx",
+      "type": "app",
+      "path": "apps/onboarding/src/pages/Press.tsx"
+    },
+    {
+      "id": "apps-onboarding-src-pages-Zones.tsx",
+      "type": "app",
+      "path": "apps/onboarding/src/pages/Zones.tsx"
+    },
+    {
+      "id": "apps-onboarding-src-components-Button.module.css",
+      "type": "app",
+      "path": "apps/onboarding/src/components/Button.module.css"
+    },
+    {
+      "id": "apps-onboarding-src-components-Button.tsx",
+      "type": "app",
+      "path": "apps/onboarding/src/components/Button.tsx"
+    },
+    {
+      "id": "apps-onboarding-src-components-Card.module.css",
+      "type": "app",
+      "path": "apps/onboarding/src/components/Card.module.css"
+    },
+    {
+      "id": "apps-onboarding-src-components-Card.tsx",
+      "type": "app",
+      "path": "apps/onboarding/src/components/Card.tsx"
+    },
+    {
+      "id": "apps-onboarding-src-components-ErrorBoundary.module.css",
+      "type": "app",
+      "path": "apps/onboarding/src/components/ErrorBoundary.module.css"
+    },
+    {
+      "id": "apps-onboarding-src-components-Footer.module.css",
+      "type": "app",
+      "path": "apps/onboarding/src/components/Footer.module.css"
+    },
+    {
+      "id": "apps-onboarding-src-components-Footer.tsx",
+      "type": "app",
+      "path": "apps/onboarding/src/components/Footer.tsx"
+    },
+    {
+      "id": "apps-onboarding-src-components-Layout.module.css",
+      "type": "app",
+      "path": "apps/onboarding/src/components/Layout.module.css"
+    },
+    {
+      "id": "apps-onboarding-src-components-Layout.tsx",
+      "type": "app",
+      "path": "apps/onboarding/src/components/Layout.tsx"
+    },
+    {
+      "id": "apps-onboarding-src-components-Navigation.tsx",
+      "type": "app",
+      "path": "apps/onboarding/src/components/Navigation.tsx"
+    },
+    {
+      "id": "apps-onboarding-src-components-Navigation.module.css",
+      "type": "app",
+      "path": "apps/onboarding/src/components/Navigation.module.css"
+    },
+    {
+      "id": "apps-onboarding-src-components-ThemeToggle.tsx",
+      "type": "app",
+      "path": "apps/onboarding/src/components/ThemeToggle.tsx"
+    },
+    {
+      "id": "apps-onboarding-src-components-ThemeToggle.module.css",
+      "type": "app",
+      "path": "apps/onboarding/src/components/ThemeToggle.module.css"
+    },
+    {
+      "id": "apps-onboarding-src-index.css",
+      "type": "app",
+      "path": "apps/onboarding/src/index.css"
+    },
+    {
+      "id": "apps-onboarding-src-main.tsx",
+      "type": "app",
+      "path": "apps/onboarding/src/main.tsx"
+    },
+    {
+      "id": "apps-onboarding-src-pages-About.module.css",
+      "type": "app",
+      "path": "apps/onboarding/src/pages/About.module.css"
+    },
+    {
+      "id": "apps-onboarding-src-pages-Demo.module.css",
+      "type": "app",
+      "path": "apps/onboarding/src/pages/Demo.module.css"
+    },
+    {
+      "id": "apps-onboarding-src-pages-Home.module.css",
+      "type": "app",
+      "path": "apps/onboarding/src/pages/Home.module.css"
+    },
+    {
+      "id": "apps-onboarding-src-pages-HowItWorks.module.css",
+      "type": "app",
+      "path": "apps/onboarding/src/pages/HowItWorks.module.css"
+    },
+    {
+      "id": "apps-onboarding-src-pages-Join.module.css",
+      "type": "app",
+      "path": "apps/onboarding/src/pages/Join.module.css"
+    },
+    {
+      "id": "apps-onboarding-src-pages-Pilot.module.css",
+      "type": "app",
+      "path": "apps/onboarding/src/pages/Pilot.module.css"
+    },
+    {
+      "id": "apps-onboarding-src-pages-Press.module.css",
+      "type": "app",
+      "path": "apps/onboarding/src/pages/Press.module.css"
+    },
+    {
+      "id": "apps-onboarding-src-pages-Zones.module.css",
+      "type": "app",
+      "path": "apps/onboarding/src/pages/Zones.module.css"
+    },
+    {
+      "id": "apps-server-src-db-pool.ts",
+      "type": "app",
+      "path": "apps/server/src/db/pool.ts"
+    },
+    {
+      "id": "apps-server-src-index.ts",
+      "type": "app",
+      "path": "apps/server/src/index.ts"
+    },
+    {
+      "id": "apps-server-src-routes-auth.ts",
+      "type": "app",
+      "path": "apps/server/src/routes/auth.ts"
+    },
+    {
+      "id": "apps-server-src-routes-state.ts",
+      "type": "app",
+      "path": "apps/server/src/routes/state.ts"
+    },
+    {
+      "id": "apps-server-src-services-game-handler.ts",
+      "type": "app",
+      "path": "apps/server/src/services/game-handler.ts"
+    },
+    {
+      "id": "apps-server-src-services-era.ts",
+      "type": "app",
+      "path": "apps/server/src/services/era.ts"
+    },
+    {
+      "id": "apps-server-src-services-crypto.ts",
+      "type": "app",
+      "path": "apps/server/src/services/crypto.ts"
+    },
+    {
+      "id": "apps-server-src-services-game-loop.ts",
+      "type": "app",
+      "path": "apps/server/src/services/game-loop.ts"
+    },
+    {
+      "id": "apps-server-src-services-valence.ts",
+      "type": "app",
+      "path": "apps/server/src/services/valence.ts"
+    },
+    {
+      "id": "apps-server-src-services-witness.ts",
+      "type": "app",
+      "path": "apps/server/src/services/witness.ts"
+    },
+    {
+      "id": "apps-trim-sequence-src-index.css",
+      "type": "app",
+      "path": "apps/trim-sequence/src/index.css"
+    },
+    {
+      "id": "apps-trim-sequence-src-main.tsx",
+      "type": "app",
+      "path": "apps/trim-sequence/src/main.tsx"
+    },
+    {
+      "id": "apps-trim-sequence-src-pages-Page.tsx",
+      "type": "app",
+      "path": "apps/trim-sequence/src/pages/Page.tsx"
+    },
+    {
+      "id": "apps-trim-sequence-src-pages-TrimTabs.tsx",
+      "type": "app",
+      "path": "apps/trim-sequence/src/pages/TrimTabs.tsx"
+    },
+    {
+      "id": "apps-trim-sequence-src-pages-TrimTabs.module.css",
+      "type": "app",
+      "path": "apps/trim-sequence/src/pages/TrimTabs.module.css"
+    },
+    {
+      "id": "packages-k4-element-src-index.ts",
+      "type": "package",
+      "path": "packages/k4-element/src/index.ts"
+    },
+    {
+      "id": "packages-k4-element-src-lib-K4ValidationButton.tsx",
+      "type": "package",
+      "path": "packages/k4-element/src/lib/K4ValidationButton.tsx"
+    },
+    {
+      "id": "packages-k4-element-src-lib-Kerberos4Element.tsx",
+      "type": "package",
+      "path": "packages/k4-element/src/lib/Kerberos4Element.tsx"
+    },
+    {
+      "id": "packages-k4-element-src-lib-k4-geometry.ts",
+      "type": "package",
+      "path": "packages/k4-element/src/lib/k4-geometry.ts"
+    },
+    {
+      "id": "packages-k4-element-src-lib-K4ValidationButton.module.css",
+      "type": "package",
+      "path": "packages/k4-element/src/lib/K4ValidationButton.module.css"
+    },
+    {
+      "id": "packages-k4-ui-src-Tetrahedron.module.css",
+      "type": "package",
+      "path": "packages/k4-ui/src/Tetrahedron.module.css"
+    },
+    {
+      "id": "packages-k4-ui-src-Tetrahedron.tsx",
+      "type": "package",
+      "path": "packages/k4-ui/src/Tetrahedron.tsx"
+    },
+    {
+      "id": "packages-k4-ui-src-index.ts",
+      "type": "package",
+      "path": "packages/k4-ui/src/index.ts"
+    },
+    {
+      "id": "packages-k4-ui-src-types.ts",
+      "type": "package",
+      "path": "packages/k4-ui/src/types.ts"
+    },
+    {
+      "id": "packages-k4-ui-src-useK4Features.ts",
+      "type": "package",
+      "path": "packages/k4-ui/src/useK4Features.ts"
+    },
+    {
+      "id": "packages-shared-types-src-index.ts",
+      "type": "package",
+      "path": "packages/shared-types/src/index.ts"
+    }
+  ],
+  "edges": [
+    {
+      "from": "apps-delta-ignition-src-main.tsx",
+      "to": "apps-delta-ignition-src-index.css"
+    },
+    {
+      "from": "apps-delta-ignition-src-main.tsx",
+      "to": "apps-delta-ignition-src-pages-Page.tsx"
+    },
+    {
+      "from": "apps-delta-ignition-src-pages-DeltaIgnition.tsx",
+      "to": "apps-delta-ignition-src-pages-DeltaIgnition.module.css"
+    },
+    {
+      "from": "apps-delta-ignition-src-pages-Page.tsx",
+      "to": "apps-delta-ignition-src-pages-DeltaIgnition.tsx"
+    },
+    {
+      "from": "apps-fleet-status-src-main.tsx",
+      "to": "apps-fleet-status-src-index.css"
+    },
+    {
+      "from": "apps-fleet-status-src-main.tsx",
+      "to": "apps-fleet-status-src-pages-Page.tsx"
+    },
+    {
+      "from": "apps-fleet-status-src-pages-FleetStatus.tsx",
+      "to": "apps-fleet-status-src-pages-FleetStatus.module.css"
+    },
+    {
+      "from": "apps-fleet-status-src-pages-Page.tsx",
+      "to": "apps-fleet-status-src-pages-FleetStatus.tsx"
+    },
+    {
+      "from": "apps-onboarding-module-src-main.tsx",
+      "to": "apps-onboarding-module-src-global.css"
+    },
+    {
+      "from": "apps-onboarding-module-src-main.tsx",
+      "to": "apps-onboarding-module-src-planes-Orchestrator.tsx"
+    },
+    {
+      "from": "apps-onboarding-module-src-planes-FleetStatus.tsx",
+      "to": "apps-onboarding-module-src-planes-modules-FleetStatus.module.css"
+    },
+    {
+      "from": "apps-onboarding-module-src-planes-MagnumWalk.tsx",
+      "to": "apps-onboarding-module-src-planes-modules-MagnumWalk.module.css"
+    },
+    {
+      "from": "apps-onboarding-module-src-planes-Orchestrator.tsx",
+      "to": "apps-onboarding-module-src-adapters-k4-bridge.ts"
+    },
+    {
+      "from": "apps-onboarding-module-src-planes-Orchestrator.tsx",
+      "to": "apps-onboarding-module-src-adapters-meatspace-sync.ts"
+    },
+    {
+      "from": "apps-onboarding-module-src-planes-Orchestrator.tsx",
+      "to": "apps-onboarding-module-src-adapters-phos-proxy.ts"
+    },
+    {
+      "from": "apps-onboarding-module-src-planes-Orchestrator.tsx",
+      "to": "apps-onboarding-module-src-planes-FleetStatus.tsx"
+    },
+    {
+      "from": "apps-onboarding-module-src-planes-Orchestrator.tsx",
+      "to": "apps-onboarding-module-src-planes-MagnumWalk.tsx"
+    },
+    {
+      "from": "apps-onboarding-module-src-planes-Orchestrator.tsx",
+      "to": "apps-onboarding-module-src-planes-OnboardingModule.module.css"
+    },
+    {
+      "from": "apps-onboarding-module-src-planes-Orchestrator.tsx",
+      "to": "apps-onboarding-module-src-planes-TrimTabs.tsx"
+    },
+    {
+      "from": "apps-onboarding-module-src-planes-TrimTabs.tsx",
+      "to": "apps-onboarding-module-src-planes-modules-TrimTabs.module.css"
+    },
+    {
+      "from": "apps-onboarding-src-App.tsx",
+      "to": "apps-onboarding-src-App.module.css"
+    },
+    {
+      "from": "apps-onboarding-src-App.tsx",
+      "to": "apps-onboarding-src-components-ErrorBoundary.tsx"
+    },
+    {
+      "from": "apps-onboarding-src-App.tsx",
+      "to": "apps-onboarding-src-pages-About.tsx"
+    },
+    {
+      "from": "apps-onboarding-src-App.tsx",
+      "to": "apps-onboarding-src-pages-Demo.tsx"
+    },
+    {
+      "from": "apps-onboarding-src-App.tsx",
+      "to": "apps-onboarding-src-pages-Home.tsx"
+    },
+    {
+      "from": "apps-onboarding-src-App.tsx",
+      "to": "apps-onboarding-src-pages-HowItWorks.tsx"
+    },
+    {
+      "from": "apps-onboarding-src-App.tsx",
+      "to": "apps-onboarding-src-pages-Join.tsx"
+    },
+    {
+      "from": "apps-onboarding-src-App.tsx",
+      "to": "apps-onboarding-src-pages-Pilot.tsx"
+    },
+    {
+      "from": "apps-onboarding-src-App.tsx",
+      "to": "apps-onboarding-src-pages-Press.tsx"
+    },
+    {
+      "from": "apps-onboarding-src-App.tsx",
+      "to": "apps-onboarding-src-pages-Zones.tsx"
+    },
+    {
+      "from": "apps-onboarding-src-components-Button.tsx",
+      "to": "apps-onboarding-src-components-Button.module.css"
+    },
+    {
+      "from": "apps-onboarding-src-components-Card.tsx",
+      "to": "apps-onboarding-src-components-Card.module.css"
+    },
+    {
+      "from": "apps-onboarding-src-components-ErrorBoundary.tsx",
+      "to": "apps-onboarding-src-components-ErrorBoundary.module.css"
+    },
+    {
+      "from": "apps-onboarding-src-components-Footer.tsx",
+      "to": "apps-onboarding-src-components-Footer.module.css"
+    },
+    {
+      "from": "apps-onboarding-src-components-Layout.tsx",
+      "to": "apps-onboarding-src-components-Footer.tsx"
+    },
+    {
+      "from": "apps-onboarding-src-components-Layout.tsx",
+      "to": "apps-onboarding-src-components-Layout.module.css"
+    },
+    {
+      "from": "apps-onboarding-src-components-Layout.tsx",
+      "to": "apps-onboarding-src-components-Navigation.tsx"
+    },
+    {
+      "from": "apps-onboarding-src-components-Navigation.tsx",
+      "to": "apps-onboarding-src-components-Navigation.module.css"
+    },
+    {
+      "from": "apps-onboarding-src-components-Navigation.tsx",
+      "to": "apps-onboarding-src-components-ThemeToggle.tsx"
+    },
+    {
+      "from": "apps-onboarding-src-components-ThemeToggle.tsx",
+      "to": "apps-onboarding-src-components-ThemeToggle.module.css"
+    },
+    {
+      "from": "apps-onboarding-src-main.tsx",
+      "to": "apps-onboarding-src-App.tsx"
+    },
+    {
+      "from": "apps-onboarding-src-main.tsx",
+      "to": "apps-onboarding-src-index.css"
+    },
+    {
+      "from": "apps-onboarding-src-pages-About.tsx",
+      "to": "apps-onboarding-src-components-Card.tsx"
+    },
+    {
+      "from": "apps-onboarding-src-pages-About.tsx",
+      "to": "apps-onboarding-src-components-Layout.tsx"
+    },
+    {
+      "from": "apps-onboarding-src-pages-About.tsx",
+      "to": "apps-onboarding-src-pages-About.module.css"
+    },
+    {
+      "from": "apps-onboarding-src-pages-Demo.tsx",
+      "to": "apps-onboarding-src-components-Layout.tsx"
+    },
+    {
+      "from": "apps-onboarding-src-pages-Demo.tsx",
+      "to": "apps-onboarding-src-pages-Demo.module.css"
+    },
+    {
+      "from": "apps-onboarding-src-pages-Home.tsx",
+      "to": "apps-onboarding-src-components-Card.tsx"
+    },
+    {
+      "from": "apps-onboarding-src-pages-Home.tsx",
+      "to": "apps-onboarding-src-components-Layout.tsx"
+    },
+    {
+      "from": "apps-onboarding-src-pages-Home.tsx",
+      "to": "apps-onboarding-src-pages-Home.module.css"
+    },
+    {
+      "from": "apps-onboarding-src-pages-HowItWorks.tsx",
+      "to": "apps-onboarding-src-components-Card.tsx"
+    },
+    {
+      "from": "apps-onboarding-src-pages-HowItWorks.tsx",
+      "to": "apps-onboarding-src-components-Layout.tsx"
+    },
+    {
+      "from": "apps-onboarding-src-pages-HowItWorks.tsx",
+      "to": "apps-onboarding-src-pages-HowItWorks.module.css"
+    },
+    {
+      "from": "apps-onboarding-src-pages-Join.tsx",
+      "to": "apps-onboarding-src-components-Button.tsx"
+    },
+    {
+      "from": "apps-onboarding-src-pages-Join.tsx",
+      "to": "apps-onboarding-src-components-Card.tsx"
+    },
+    {
+      "from": "apps-onboarding-src-pages-Join.tsx",
+      "to": "apps-onboarding-src-components-Layout.tsx"
+    },
+    {
+      "from": "apps-onboarding-src-pages-Join.tsx",
+      "to": "apps-onboarding-src-pages-Join.module.css"
+    },
+    {
+      "from": "apps-onboarding-src-pages-Pilot.tsx",
+      "to": "apps-onboarding-src-components-Button.tsx"
+    },
+    {
+      "from": "apps-onboarding-src-pages-Pilot.tsx",
+      "to": "apps-onboarding-src-components-Card.tsx"
+    },
+    {
+      "from": "apps-onboarding-src-pages-Pilot.tsx",
+      "to": "apps-onboarding-src-components-Layout.tsx"
+    },
+    {
+      "from": "apps-onboarding-src-pages-Pilot.tsx",
+      "to": "apps-onboarding-src-pages-Pilot.module.css"
+    },
+    {
+      "from": "apps-onboarding-src-pages-Press.tsx",
+      "to": "apps-onboarding-src-components-Card.tsx"
+    },
+    {
+      "from": "apps-onboarding-src-pages-Press.tsx",
+      "to": "apps-onboarding-src-components-Layout.tsx"
+    },
+    {
+      "from": "apps-onboarding-src-pages-Press.tsx",
+      "to": "apps-onboarding-src-pages-Press.module.css"
+    },
+    {
+      "from": "apps-onboarding-src-pages-Zones.tsx",
+      "to": "apps-onboarding-src-components-Card.tsx"
+    },
+    {
+      "from": "apps-onboarding-src-pages-Zones.tsx",
+      "to": "apps-onboarding-src-components-Layout.tsx"
+    },
+    {
+      "from": "apps-onboarding-src-pages-Zones.tsx",
+      "to": "apps-onboarding-src-pages-Zones.module.css"
+    },
+    {
+      "from": "apps-server-src-index.ts",
+      "to": "apps-server-src-db-pool.ts"
+    },
+    {
+      "from": "apps-server-src-index.ts",
+      "to": "apps-server-src-routes-auth.ts"
+    },
+    {
+      "from": "apps-server-src-index.ts",
+      "to": "apps-server-src-routes-state.ts"
+    },
+    {
+      "from": "apps-server-src-index.ts",
+      "to": "apps-server-src-services-game-handler.ts"
+    },
+    {
+      "from": "apps-server-src-routes-auth.ts",
+      "to": "apps-server-src-db-pool.ts"
+    },
+    {
+      "from": "apps-server-src-routes-state.ts",
+      "to": "apps-server-src-services-era.ts"
+    },
+    {
+      "from": "apps-server-src-services-era.ts",
+      "to": "apps-server-src-db-pool.ts"
+    },
+    {
+      "from": "apps-server-src-services-game-handler.ts",
+      "to": "apps-server-src-db-pool.ts"
+    },
+    {
+      "from": "apps-server-src-services-game-handler.ts",
+      "to": "apps-server-src-services-crypto.ts"
+    },
+    {
+      "from": "apps-server-src-services-game-handler.ts",
+      "to": "apps-server-src-services-era.ts"
+    },
+    {
+      "from": "apps-server-src-services-game-handler.ts",
+      "to": "apps-server-src-services-game-loop.ts"
+    },
+    {
+      "from": "apps-server-src-services-game-handler.ts",
+      "to": "apps-server-src-services-valence.ts"
+    },
+    {
+      "from": "apps-server-src-services-game-handler.ts",
+      "to": "apps-server-src-services-witness.ts"
+    },
+    {
+      "from": "apps-server-src-services-game-loop.ts",
+      "to": "apps-server-src-db-pool.ts"
+    },
+    {
+      "from": "apps-server-src-services-valence.ts",
+      "to": "apps-server-src-db-pool.ts"
+    },
+    {
+      "from": "apps-server-src-services-witness.ts",
+      "to": "apps-server-src-db-pool.ts"
+    },
+    {
+      "from": "apps-trim-sequence-src-main.tsx",
+      "to": "apps-trim-sequence-src-index.css"
+    },
+    {
+      "from": "apps-trim-sequence-src-main.tsx",
+      "to": "apps-trim-sequence-src-pages-Page.tsx"
+    },
+    {
+      "from": "apps-trim-sequence-src-pages-Page.tsx",
+      "to": "apps-trim-sequence-src-pages-TrimTabs.tsx"
+    },
+    {
+      "from": "apps-trim-sequence-src-pages-TrimTabs.tsx",
+      "to": "apps-trim-sequence-src-pages-TrimTabs.module.css"
+    },
+    {
+      "from": "packages-k4-element-src-index.ts",
+      "to": "packages-k4-element-src-lib-K4ValidationButton.tsx"
+    },
+    {
+      "from": "packages-k4-element-src-index.ts",
+      "to": "packages-k4-element-src-lib-Kerberos4Element.tsx"
+    },
+    {
+      "from": "packages-k4-element-src-index.ts",
+      "to": "packages-k4-element-src-lib-k4-geometry.ts"
+    },
+    {
+      "from": "packages-k4-element-src-lib-K4ValidationButton.tsx",
+      "to": "packages-k4-element-src-lib-K4ValidationButton.module.css"
+    },
+    {
+      "from": "packages-k4-element-src-lib-K4ValidationButton.tsx",
+      "to": "packages-k4-element-src-lib-Kerberos4Element.tsx"
+    },
+    {
+      "from": "packages-k4-element-src-lib-K4ValidationButton.tsx",
+      "to": "packages-k4-element-src-lib-k4-geometry.ts"
+    },
+    {
+      "from": "packages-k4-element-src-lib-Kerberos4Element.tsx",
+      "to": "packages-k4-element-src-lib-k4-geometry.ts"
+    },
+    {
+      "from": "packages-k4-ui-src-Tetrahedron.tsx",
+      "to": "packages-k4-ui-src-Tetrahedron.module.css"
+    },
+    {
+      "from": "packages-k4-ui-src-index.ts",
+      "to": "packages-k4-ui-src-Tetrahedron.tsx"
+    },
+    {
+      "from": "packages-k4-ui-src-index.ts",
+      "to": "packages-k4-ui-src-types.ts"
+    },
+    {
+      "from": "packages-k4-ui-src-index.ts",
+      "to": "packages-k4-ui-src-useK4Features.ts"
+    },
+    {
+      "from": "packages-k4-ui-src-useK4Features.ts",
+      "to": "packages-k4-ui-src-types.ts"
+    }
+  ]
+}
