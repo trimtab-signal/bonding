@@ -19,7 +19,7 @@ export const Default: Story = {
 export const WithHandlers: Story = {
   args: {
     label: 'Validate K4 Topology',
-    onValid: (result) => console.log('Valid!', result),
-    onInvalid: (result) => console.log('Invalid!', result),
+    onValid: (result) => console.warn('Valid!', result),
+    onInvalid: (result) => console.warn('Invalid!', result),
   },
 };
