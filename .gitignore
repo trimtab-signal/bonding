@@ -6,6 +6,9 @@ android/
 ios/
 *.apk
 *.ipa
+**/*.tsbuildinfo
+apps/mobile/public/
+apps/mobile/scripts/
 **/.env
 .env.example.local
 .env.test.local
