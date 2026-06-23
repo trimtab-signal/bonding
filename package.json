@@ -38,6 +38,8 @@
     "deploy:onboarding-module": "pnpm build:onboarding-module && wrangler pages deploy apps/onboarding-module/dist --project-name onboarding-module --branch master",
     "deploy:server": "git push origin master  # triggers auto-deploy on Render/Railway",
     "deploy:all": "pnpm deploy:planes && pnpm deploy:onboarding && pnpm build:onboarding-module && pnpm deploy:onboarding-module && echo '✓ All projects deployed'",
+    "deploy:storybook": "pnpm build:storybook && wrangler pages deploy storybook-static --project-name=storybook --branch=master",
+    "deploy:architecture-map": "pnpm --filter @meatspace/architecture-map build && wrangler pages deploy apps/architecture-map/dist --project-name=architecture-map --branch=master",
     "setup": "pnpm install && docker compose up -d && pnpm --filter @meatspace/server db:migrate && pnpm --filter @meatspace/server db:seed",
     "graph": "node scripts/generate-graph.js",
     "storybook": "storybook dev -p 6006",
