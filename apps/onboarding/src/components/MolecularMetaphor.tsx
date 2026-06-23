@@ -1,9 +1,34 @@
 const MAPPING = [
-  { car: 'Atoms', bonding: 'Humans', icon: '⚛️', desc: 'Each person is a unique atom with properties — skills, interests, energy level.' },
-  { car: 'Bonds', bonding: 'Relationships', icon: '🤝', desc: 'Real connections form between atoms through mutual opt-in and shared presence.' },
-  { car: 'Reactions', bonding: 'Collaborative problem-solving', icon: '⚡', desc: 'When atoms come together, reactions happen — helping, building, sharing.' },
-  { car: 'Zones', bonding: 'Physical places', icon: '📍', desc: 'Calm, Lab, Kitchen, Deep, Wild — each zone defines a social context.' },
-  { car: 'Valence', bonding: 'Trust & reliability', icon: '💎', desc: 'A hidden reputation scalar that rewards showing up and penalizes flaking.' },
+  {
+    car: 'Atoms',
+    bonding: 'Humans',
+    icon: '⚛️',
+    desc: 'Each person is a unique atom with properties — skills, interests, energy level.',
+  },
+  {
+    car: 'Bonds',
+    bonding: 'Relationships',
+    icon: '🤝',
+    desc: 'Real connections form between atoms through mutual opt-in and shared presence.',
+  },
+  {
+    car: 'Reactions',
+    bonding: 'Collaborative problem-solving',
+    icon: '⚡',
+    desc: 'When atoms come together, reactions happen — helping, building, sharing.',
+  },
+  {
+    car: 'Zones',
+    bonding: 'Physical places',
+    icon: '📍',
+    desc: 'Calm, Lab, Kitchen, Deep, Wild — each zone defines a social context.',
+  },
+  {
+    car: 'Valence',
+    bonding: 'Trust & reliability',
+    icon: '💎',
+    desc: 'A hidden reputation scalar that rewards showing up and penalizes flaking.',
+  },
 ];
 
 const ZONE_ENERGY = [
@@ -20,9 +45,8 @@ export function MolecularMetaphor() {
         <div className="section-label">The Science Metaphor</div>
         <h2>From C.A.R.S. to Meatspace</h2>
         <p className="lead">
-          BONDING translates the digital molecular simulation C.A.R.S.
-          into a real-world game. Every concept maps directly from
-          chemistry to human connection.
+          BONDING translates the digital molecular simulation C.A.R.S. into a real-world game. Every
+          concept maps directly from chemistry to human connection.
         </p>
 
         <div className="metaphor-diagram">
@@ -31,11 +55,19 @@ export function MolecularMetaphor() {
               <div
                 key={i}
                 className="metaphor-electron"
-                style={{
-                  animationDelay: `${i * 0.7}s`,
-                  '--orbit-angle': `${i * 72}deg`,
-                  '--orbit-color': ['var(--accent)', 'var(--lab)', 'var(--kitchen)', 'var(--deep)', 'var(--wild)'][i],
-                } as React.CSSProperties}
+                style={
+                  {
+                    animationDelay: `${i * 0.7}s`,
+                    '--orbit-angle': `${i * 72}deg`,
+                    '--orbit-color': [
+                      'var(--accent)',
+                      'var(--lab)',
+                      'var(--kitchen)',
+                      'var(--deep)',
+                      'var(--wild)',
+                    ][i],
+                  } as React.CSSProperties
+                }
               />
             ))}
             <div className="metaphor-nucleus">
@@ -71,8 +103,8 @@ export function MolecularMetaphor() {
             Your State Picks the Space
           </h3>
           <p className="lead" style={{ marginBottom: 32 }}>
-            Your energy level — computed from PHOS health data on-device —
-            determines which zone fits your current capacity.
+            Your energy level — computed from PHOS health data on-device — determines which zone
+            fits your current capacity.
           </p>
           <div className="energy-bar-track">
             <div className="energy-bar">

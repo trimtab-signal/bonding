@@ -1,7 +1,14 @@
 import { useRef, useCallback } from 'react';
 import { io, Socket } from 'socket.io-client';
 import { useGameStore } from '../store/game-store.js';
-import { generateKeyPair, exportPublicKeyJwk, exportPrivateKeyJwk, importPrivateKey, signData, generateUserId } from './crypto.js';
+import {
+  generateKeyPair,
+  exportPublicKeyJwk,
+  exportPrivateKeyJwk,
+  importPrivateKey,
+  signData,
+  generateUserId,
+} from './crypto.js';
 import { geohashEncode } from '@meatspace/shared-types';
 import type { ClientMessage, ServerMessage } from '@meatspace/shared-types';
 
@@ -16,12 +23,34 @@ interface UseWebSocketReturn {
 
 export function useWebSocket(): UseWebSocketReturn {
   const socketRef = useRef<Socket | null>(null);
-  const { serverUrl, setConnected, setIdentity, addBond, addPing, removePing, addMessage, setCurrentZone, setNearbyAtoms } = useGameStore();
+  const {
+    serverUrl,
+    setConnected,
+    setIdentity,
+    addBond,
+    addPing,
+    removePing,
+    addMessage,
+    setCurrentZone,
+    setNearbyAtoms,
+  } = useGameStore();
 
   const connect = useCallback(async () => {
     // Generate or load identity
-    const storedPublic = (() => { try { return localStorage.getItem('bonding_public_key'); } catch { return null; } })();
-    const storedPrivate = (() => { try { return localStorage.getItem('bonding_private_key'); } catch { return null; } })();
+    const storedPublic = (() => {
+      try {
+        return localStorage.getItem('bonding_public_key');
+      } catch {
+        return null;
+      }
+    })();
+    const storedPrivate = (() => {
+      try {
+        return localStorage.getItem('bonding_private_key');
+      } catch {
+        return null;
+      }
+    })();
 
     let userId: string;
     let publicKeyJwk: JsonWebKey;
@@ -36,7 +65,12 @@ export function useWebSocket(): UseWebSocketReturn {
       publicKeyJwk = await exportPublicKeyJwk(keyPair.publicKey);
       privateKeyJwk = await exportPrivateKeyJwk(keyPair.privateKey);
       userId = await generateUserId(publicKeyJwk);
-      (() => { try { localStorage.setItem('bonding_public_key', JSON.stringify(publicKeyJwk)); localStorage.setItem('bonding_private_key', JSON.stringify(privateKeyJwk)); } catch {} })();
+      (() => {
+        try {
+          localStorage.setItem('bonding_public_key', JSON.stringify(publicKeyJwk));
+          localStorage.setItem('bonding_private_key', JSON.stringify(privateKeyJwk));
+        } catch {}
+      })();
     }
 
     setIdentity(userId, publicKeyJwk, privateKeyJwk);
@@ -65,7 +99,9 @@ export function useWebSocket(): UseWebSocketReturn {
       try {
         const msg: ServerMessage = JSON.parse(raw);
         handleServerMessage(msg);
-      } catch { /* skip malformed */ }
+      } catch {
+        /* skip malformed */
+      }
     });
 
     socket.on('connect_error', (err) => {
@@ -87,45 +123,71 @@ export function useWebSocket(): UseWebSocketReturn {
     }
   }, []);
 
-  const ping = useCallback((targetUserId: string, zoneId: string) => {
-    send({ type: 'ping', targetUserId, zoneId: zoneId as import('@meatspace/shared-types').ZoneId });
-  }, [send]);
+  const ping = useCallback(
+    (targetUserId: string, zoneId: string) => {
+      send({
+        type: 'ping',
+        targetUserId,
+        zoneId: zoneId as import('@meatspace/shared-types').ZoneId,
+      });
+    },
+    [send],
+  );
 
-  const checkIn = useCallback(async (zoneId: string) => {
-    const state = useGameStore.getState();
-    const coords = (window as any).__bonding_last_coords__ as { latitude: number; longitude: number } | null;
-    if (!coords) {
-      addMessage('error', 'No GPS location available');
-      return;
-    }
-    const { latitude, longitude } = coords;
-    const precision = zoneId === 'deep' ? 6 : 5;
-    const geohash = geohashEncode(latitude, longitude, precision);
-    const timestamp = Date.now();
-    const privateKey = await importPrivateKey(state.privateKeyJwk!);
-    const payload = `${geohash}:${latitude}:${longitude}:${timestamp}`;
-    const signature = await signData(privateKey, payload);
+  const checkIn = useCallback(
+    async (zoneId: string) => {
+      const state = useGameStore.getState();
+      const coords = (window as any).__bonding_last_coords__ as {
+        latitude: number;
+        longitude: number;
+      } | null;
+      if (!coords) {
+        addMessage('error', 'No GPS location available');
+        return;
+      }
+      const { latitude, longitude } = coords;
+      const precision = zoneId === 'deep' ? 6 : 5;
+      const geohash = geohashEncode(latitude, longitude, precision);
+      const timestamp = Date.now();
+      const privateKey = await importPrivateKey(state.privateKeyJwk!);
+      const payload = `${geohash}:${latitude}:${longitude}:${timestamp}`;
+      const signature = await signData(privateKey, payload);
 
-    const locationProof = {
-      geohashPrefix: geohash,
-      geohashPrecision: precision,
-      lat: latitude,
-      lng: longitude,
-      witnessedBy: [] as string[],
-      witnessSignatures: [] as string[],
-      timestamp,
-      signature,
-    };
-    const msg: ClientMessage = state.healthOptIn && state.energyLevel !== null
-      ? { type: 'check_in', zoneId: zoneId as import('@meatspace/shared-types').ZoneId, locationProof, energyLevel: state.energyLevel }
-      : { type: 'check_in', zoneId: zoneId as import('@meatspace/shared-types').ZoneId, locationProof };
-    send(msg);
-  }, [send]);
+      const locationProof = {
+        geohashPrefix: geohash,
+        geohashPrecision: precision,
+        lat: latitude,
+        lng: longitude,
+        witnessedBy: [] as string[],
+        witnessSignatures: [] as string[],
+        timestamp,
+        signature,
+      };
+      const msg: ClientMessage =
+        state.healthOptIn && state.energyLevel !== null
+          ? {
+              type: 'check_in',
+              zoneId: zoneId as import('@meatspace/shared-types').ZoneId,
+              locationProof,
+              energyLevel: state.energyLevel,
+            }
+          : {
+              type: 'check_in',
+              zoneId: zoneId as import('@meatspace/shared-types').ZoneId,
+              locationProof,
+            };
+      send(msg);
+    },
+    [send],
+  );
 
-  const setZone = useCallback((zoneId: string | null) => {
-    send({ type: 'set_zone', zoneId: zoneId as import('@meatspace/shared-types').ZoneId | null });
-    setCurrentZone(zoneId as import('@meatspace/shared-types').ZoneId | null);
-  }, [send]);
+  const setZone = useCallback(
+    (zoneId: string | null) => {
+      send({ type: 'set_zone', zoneId: zoneId as import('@meatspace/shared-types').ZoneId | null });
+      setCurrentZone(zoneId as import('@meatspace/shared-types').ZoneId | null);
+    },
+    [send],
+  );
 
   function handleServerMessage(msg: ServerMessage) {
     switch (msg.type) {
@@ -146,7 +208,10 @@ export function useWebSocket(): UseWebSocketReturn {
         break;
       case 'bond_formed':
         addBond(msg.bond);
-        addMessage('success', `Bond formed with ${msg.bond.atomA === useGameStore.getState().userId ? msg.bond.atomB : msg.bond.atomA}`);
+        addMessage(
+          'success',
+          `Bond formed with ${msg.bond.atomA === useGameStore.getState().userId ? msg.bond.atomB : msg.bond.atomA}`,
+        );
         break;
       case 'check_in_confirmed':
         addMessage('success', 'Check-in confirmed');
@@ -158,7 +223,10 @@ export function useWebSocket(): UseWebSocketReturn {
         setNearbyAtoms(msg.atoms);
         break;
       case 'witness_request':
-        addMessage('info', `Witness request from ${msg.fromUserId} (nonce: ${msg.nonce.slice(0, 8)}…)`);
+        addMessage(
+          'info',
+          `Witness request from ${msg.fromUserId} (nonce: ${msg.nonce.slice(0, 8)}…)`,
+        );
         break;
       case 'error':
         addMessage('error', msg.message);

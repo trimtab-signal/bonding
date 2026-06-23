@@ -13,7 +13,7 @@ export function safeParseK4Payload(raw: unknown): Record<string, FeatureRow> {
   for (const [key, val] of Object.entries(data)) {
     if (typeof val === 'object' && val !== null) {
       const levels = ['L0', 'L1', 'L2', 'L3', 'L4'];
-      const valid = levels.every(l => typeof (val as any)[l] === 'number');
+      const valid = levels.every((l) => typeof (val as any)[l] === 'number');
       if (valid) safe[key] = val as FeatureRow;
     }
   }

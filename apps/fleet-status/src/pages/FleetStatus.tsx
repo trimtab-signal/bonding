@@ -27,27 +27,32 @@ const FLEET_DATA: Unit[] = [
 const COMMANDS: Command[] = [
   {
     input: 'fleet status --all',
-    output: '──── K4 COORDINATED FLEET ────\n\nATOM-01  Base Alpha    ● ONLINE    Δ-1  [████████] 98%\nATOM-02  Outpost Seven  ● ONLINE    Δ-2  [███████░] 87%\nATOM-03  Relay Point    ● DEGRADED  Δ-1  [█████░░░] 64%\nATOM-04  R&D Lab        ● ONLINE    Δ-0  [████████] 92%\nATOM-05  Sector West    ● OFFLINE   ---   [█░░░░░░░] 12%\nATOM-06  Node Gamma     ● ONLINE    Δ-2  [███████░] 81%',
+    output:
+      '──── K4 COORDINATED FLEET ────\n\nATOM-01  Base Alpha    ● ONLINE    Δ-1  [████████] 98%\nATOM-02  Outpost Seven  ● ONLINE    Δ-2  [███████░] 87%\nATOM-03  Relay Point    ● DEGRADED  Δ-1  [█████░░░] 64%\nATOM-04  R&D Lab        ● ONLINE    Δ-0  [████████] 92%\nATOM-05  Sector West    ● OFFLINE   ---   [█░░░░░░░] 12%\nATOM-06  Node Gamma     ● ONLINE    Δ-2  [███████░] 81%',
     type: 'system',
   },
   {
     input: 'health report ATOM-01',
-    output: '\n── HEALTH REPORT: ATOM-01 (Base Alpha) ──\n\nStatus:        NOMINAL\nBond Strength: 94% (Synchronized)\nLast Sync:     0.3s ago\nDelta Class:   Δ-1 (Isostatic)\nColor:         BLUE\n\n[BIOS] All buffers within tolerance.\n[NET] Uplink stable at 1.2 Gbps.',
+    output:
+      '\n── HEALTH REPORT: ATOM-01 (Base Alpha) ──\n\nStatus:        NOMINAL\nBond Strength: 94% (Synchronized)\nLast Sync:     0.3s ago\nDelta Class:   Δ-1 (Isostatic)\nColor:         BLUE\n\n[BIOS] All buffers within tolerance.\n[NET] Uplink stable at 1.2 Gbps.',
     type: 'system',
   },
   {
     input: 'delta topology --map',
-    output: '\n── DELTA TOPOLOGY ──\n\n       [ATOM-01]\n       /        \\\n[ATOM-04]──[ATOM-06]\n       \\        /\n       [ATOM-02]\n\nActive flights: 4\nBackground relay: 1\nDegraded node: 1 (ATOM-03)\n',
+    output:
+      '\n── DELTA TOPOLOGY ──\n\n       [ATOM-01]\n       /        \\\n[ATOM-04]──[ATOM-06]\n       \\        /\n       [ATOM-02]\n\nActive flights: 4\nBackground relay: 1\nDegraded node: 1 (ATOM-03)\n',
     type: 'system',
   },
   {
     input: 'deploy patch ATOM-05',
-    output: 'ERROR: ATOM-05 is OFFLINE.\nReason: Maintenance cycle in progress.\nETA: 4h 23m\n\nNo patch deployed. Back up the node first.\n',
+    output:
+      'ERROR: ATOM-05 is OFFLINE.\nReason: Maintenance cycle in progress.\nETA: 4h 23m\n\nNo patch deployed. Back up the node first.\n',
     type: 'error',
   },
   {
     input: 'show metrics',
-    output: '\n── SYSTEM METRICS ──\n\nActive nodes:      5 / 6\nTotal bonds:       2,847\nActive psi-messages: 312\nAvg response time: 1.2s\n\nK4 compliance:     100%\nArchitecture:      Diamond (isostatic)',
+    output:
+      '\n── SYSTEM METRICS ──\n\nActive nodes:      5 / 6\nTotal bonds:       2,847\nActive psi-messages: 312\nAvg response time: 1.2s\n\nK4 compliance:     100%\nArchitecture:      Diamond (isostatic)',
     type: 'system',
   },
 ];
@@ -80,7 +85,11 @@ export default function FleetStatus() {
     } else {
       setHistory((prev) => [
         ...prev,
-        { input: val, output: `Command not found: ${val}\nType 'help' for available commands.`, type: 'error' },
+        {
+          input: val,
+          output: `Command not found: ${val}\nType 'help' for available commands.`,
+          type: 'error',
+        },
       ]);
     }
     setInput('');
@@ -97,13 +106,16 @@ export default function FleetStatus() {
           <div>
             <h1 className={styles.title}>Δ FLEET STATUS</h1>
             <p className={styles.sub}>
-              K₄ Coordinated Fleet · {activeCount} active · {degradedCount} degraded · {offlineCount} offline
+              K₄ Coordinated Fleet · {activeCount} active · {degradedCount} degraded ·{' '}
+              {offlineCount} offline
             </p>
           </div>
         </div>
         <div className={styles.kpiGrid}>
           <div className={styles.kpiCard}>
-            <div className={styles.kpiValue}>{activeCount}/{FLEET_DATA.length}</div>
+            <div className={styles.kpiValue}>
+              {activeCount}/{FLEET_DATA.length}
+            </div>
             <div className={styles.kpiLabel}>UNITS ONLINE</div>
           </div>
           <div className={styles.kpiCard}>
@@ -141,7 +153,8 @@ export default function FleetStatus() {
               <div className={styles.systemPrompt}>Initializing fleet monitor...</div>
             )}
             <form onSubmit={handleSubmit}>
-              <div className={styles.prompt}>$ {input}
+              <div className={styles.prompt}>
+                $ {input}
                 <span className={styles.cursor} />
               </div>
             </form>

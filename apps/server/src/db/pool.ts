@@ -6,22 +6,28 @@ import { fileURLToPath } from 'url';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const pool = new pg.Pool({
-  connectionString: process.env.DATABASE_URL || 'postgresql://bonding:bonding_dev@localhost:5432/bonding',
+  connectionString:
+    process.env.DATABASE_URL || 'postgresql://bonding:bonding_dev@localhost:5432/bonding',
   max: 20,
   idleTimeoutMillis: 30000,
 });
 
 export async function migrate(): Promise<void> {
   const migrationsDir = join(__dirname, '../../migrations');
-  const files = readdirSync(migrationsDir).filter(f => f.endsWith('.sql')).sort();
+  const files = readdirSync(migrationsDir)
+    .filter((f) => f.endsWith('.sql'))
+    .sort();
   for (const file of files) {
     const sql = readFileSync(join(migrationsDir, file), 'utf8');
     await pool.query(sql);
-    console.log(`[bonding] Migration ${file} applied`);
+    console.warn(`[bonding] Migration ${file} applied`);
   }
 }
 
-export async function query<T extends pg.QueryResultRow = any>(text: string, params?: any[]): Promise<pg.QueryResult<T>> {
+export async function query<T extends pg.QueryResultRow = any>(
+  text: string,
+  params?: any[],
+): Promise<pg.QueryResult<T>> {
   return pool.query<T>(text, params);
 }
 

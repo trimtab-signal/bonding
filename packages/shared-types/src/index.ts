@@ -15,14 +15,14 @@ export interface SignedPayload<T = unknown> {
 // ─── Location & Check-in ─────────────────────────────────────────
 
 export interface LocationProof {
-  geohashPrefix: string;       // e.g. "9q8yy" — client-derived geohash
-  geohashPrecision: number;    // 5 (~4.9km) for standard, 6 (~100m) for Deep
-  lat: number;                 // raw GPS latitude — signed as part of payload
-  lng: number;                 // raw GPS longitude — signed as part of payload
-  witnessedBy: string[];       // public key fingerprints of witnesses
+  geohashPrefix: string; // e.g. "9q8yy" — client-derived geohash
+  geohashPrecision: number; // 5 (~4.9km) for standard, 6 (~100m) for Deep
+  lat: number; // raw GPS latitude — signed as part of payload
+  lng: number; // raw GPS longitude — signed as part of payload
+  witnessedBy: string[]; // public key fingerprints of witnesses
   witnessSignatures: string[];
   timestamp: number;
-  signature: string;           // client ECDSA signature over `${geohashPrefix}:${lat}:${lng}:${timestamp}`
+  signature: string; // client ECDSA signature over `${geohashPrefix}:${lat}:${lng}:${timestamp}`
 }
 
 export interface CheckIn {
@@ -58,7 +58,9 @@ export const ZONES: Record<ZoneId, ZoneDefinition> = {
     name: 'Calm',
     description: 'Rest, reflection, low-stimulus presence',
     color: '#6b9e6b',
-    lat: KNG_STM_CENTROID.lat, lng: KNG_STM_CENTROID.lng, radiusMeters: 300,
+    lat: KNG_STM_CENTROID.lat,
+    lng: KNG_STM_CENTROID.lng,
+    radiusMeters: 300,
     emoji: '🌿',
   },
   lab: {
@@ -66,7 +68,9 @@ export const ZONES: Record<ZoneId, ZoneDefinition> = {
     name: 'Lab',
     description: 'Build, create, experiment together',
     color: '#9b6bb0',
-    lat: KNG_STM_CENTROID.lat, lng: KNG_STM_CENTROID.lng, radiusMeters: 300,
+    lat: KNG_STM_CENTROID.lat,
+    lng: KNG_STM_CENTROID.lng,
+    radiusMeters: 300,
     emoji: '🔬',
   },
   kitchen: {
@@ -74,7 +78,9 @@ export const ZONES: Record<ZoneId, ZoneDefinition> = {
     name: 'Kitchen',
     description: 'Share food, conversation, warmth',
     color: '#d4a84b',
-    lat: KNG_STM_CENTROID.lat, lng: KNG_STM_CENTROID.lng, radiusMeters: 300,
+    lat: KNG_STM_CENTROID.lat,
+    lng: KNG_STM_CENTROID.lng,
+    radiusMeters: 300,
     emoji: '🍳',
   },
   deep: {
@@ -82,7 +88,9 @@ export const ZONES: Record<ZoneId, ZoneDefinition> = {
     name: 'Deep',
     description: 'Vulnerable conversation, emotional support',
     color: '#4a7c9b',
-    lat: KNG_STM_CENTROID.lat, lng: KNG_STM_CENTROID.lng, radiusMeters: 100,
+    lat: KNG_STM_CENTROID.lat,
+    lng: KNG_STM_CENTROID.lng,
+    radiusMeters: 100,
     emoji: '🌊',
   },
   wild: {
@@ -90,7 +98,9 @@ export const ZONES: Record<ZoneId, ZoneDefinition> = {
     name: 'Wild',
     description: 'Adventure, exploration, serendipity',
     color: '#d46b4b',
-    lat: KNG_STM_CENTROID.lat, lng: KNG_STM_CENTROID.lng, radiusMeters: 1000,
+    lat: KNG_STM_CENTROID.lat,
+    lng: KNG_STM_CENTROID.lng,
+    radiusMeters: 1000,
     emoji: '🌀',
   },
 };
@@ -98,12 +108,12 @@ export const ZONES: Record<ZoneId, ZoneDefinition> = {
 // ─── Atoms (Users) ───────────────────────────────────────────────
 
 export interface AtomPublic {
-  id: string;                        // fingerprint of public key
+  id: string; // fingerprint of public key
   displayName: string;
   bio: string;
   skills: string[];
   interests: string[];
-  zoneId: ZoneId | null;             // current zone (null = offline/unavailable)
+  zoneId: ZoneId | null; // current zone (null = offline/unavailable)
   lastSeen: number;
   bondCount: number;
   atomType: 'operator' | 'family' | 'friend' | 'ally';
@@ -111,7 +121,7 @@ export interface AtomPublic {
 
 export interface AtomProfile {
   public: AtomPublic;
-  valence: number;                   // 0.1–2.0, private — never sent to client
+  valence: number; // 0.1–2.0, private — never sent to client
   createdAt: number;
   totalCheckIns: number;
   totalBonds: number;
@@ -160,9 +170,22 @@ export type ClientMessage =
   | { type: 'accept_ping'; pingId: string }
   | { type: 'reject_ping'; pingId: string }
   | { type: 'check_in'; zoneId: ZoneId; locationProof: LocationProof; energyLevel?: number }
-  | { type: 'update_profile'; displayName?: string; bio?: string; skills?: string[]; interests?: string[] }
+  | {
+      type: 'update_profile';
+      displayName?: string;
+      bio?: string;
+      skills?: string[];
+      interests?: string[];
+    }
   | { type: 'request_witness'; targetUserId: string; locationProofHash: string; requestId: string }
-  | { type: 'provide_witness'; claimerId: string; geohashPrefix: string; timestamp: number; nonce: string; signature: string }
+  | {
+      type: 'provide_witness';
+      claimerId: string;
+      geohashPrefix: string;
+      timestamp: number;
+      nonce: string;
+      signature: string;
+    }
   | { type: 'submit_reaction'; bondId: string; reactionType: ReactionType; description: string }
   | { type: 'set_zone'; zoneId: ZoneId | null };
 
@@ -174,7 +197,13 @@ export type ServerMessage =
   | { type: 'bond_formed'; bond: Bond }
   | { type: 'bond_decayed'; bondId: string }
   | { type: 'check_in_confirmed'; checkIn: CheckIn }
-  | { type: 'witness_request'; requestId: string; fromUserId: string; locationProofHash: string; nonce: string }
+  | {
+      type: 'witness_request';
+      requestId: string;
+      fromUserId: string;
+      locationProofHash: string;
+      nonce: string;
+    }
   | { type: 'witness_confirmed'; checkInId: string }
   | { type: 'reaction_recorded'; reaction: Reaction }
   | { type: 'nearby_atoms'; atoms: AtomPublic[] }
@@ -185,16 +214,20 @@ export type ServerMessage =
 
 export function distanceMeters(lat1: number, lng1: number, lat2: number, lng2: number): number {
   const R = 6371000;
-  const dLat = (lat2 - lat1) * Math.PI / 180;
-  const dLng = (lng2 - lng1) * Math.PI / 180;
-  const a = Math.sin(dLat / 2) ** 2 + Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLng / 2) ** 2;
+  const dLat = ((lat2 - lat1) * Math.PI) / 180;
+  const dLng = ((lng2 - lng1) * Math.PI) / 180;
+  const a =
+    Math.sin(dLat / 2) ** 2 +
+    Math.cos((lat1 * Math.PI) / 180) * Math.cos((lat2 * Math.PI) / 180) * Math.sin(dLng / 2) ** 2;
   return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 }
 
 export function geohashEncode(lat: number, lng: number, precision: number = 5): string {
   const BASE32 = '0123456789bcdefghjkmnpqrstuvwxyz';
-  let latMin = -90, latMax = 90;
-  let lngMin = -180, lngMax = 180;
+  let latMin = -90,
+    latMax = 90;
+  let lngMin = -180,
+    lngMax = 180;
   let hash = '';
   let isEven = true;
   let bit = 0;
@@ -203,16 +236,29 @@ export function geohashEncode(lat: number, lng: number, precision: number = 5): 
   while (hash.length < precision) {
     if (isEven) {
       const mid = (lngMin + lngMax) / 2;
-      if (lng >= mid) { ch |= (1 << (4 - bit)); lngMin = mid; }
-      else { lngMax = mid; }
+      if (lng >= mid) {
+        ch |= 1 << (4 - bit);
+        lngMin = mid;
+      } else {
+        lngMax = mid;
+      }
     } else {
       const mid = (latMin + latMax) / 2;
-      if (lat >= mid) { ch |= (1 << (4 - bit)); latMin = mid; }
-      else { latMax = mid; }
+      if (lat >= mid) {
+        ch |= 1 << (4 - bit);
+        latMin = mid;
+      } else {
+        latMax = mid;
+      }
     }
     isEven = !isEven;
-    if (bit < 4) { bit++; }
-    else { hash += BASE32[ch]; bit = 0; ch = 0; }
+    if (bit < 4) {
+      bit++;
+    } else {
+      hash += BASE32[ch];
+      bit = 0;
+      ch = 0;
+    }
   }
   return hash;
 }

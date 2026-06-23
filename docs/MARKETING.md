@@ -16,13 +16,13 @@
 
 ## Key Messages
 
-| Audience | Message |
-|----------|---------|
-| **Lonely urbanites** | "Same bowl, same room — your people first." |
-| **Creators & makers** | "Find your lab partner. Build something real." |
-| **Community organizers** | "Turn your neighborhood into a living molecule." |
-| **Privacy‑conscious** | "We don't track you. Your location stays with you." |
-| **Ethical designers** | "No engagement loops. No variable rewards. Just connection." |
+| Audience                 | Message                                                      |
+| ------------------------ | ------------------------------------------------------------ |
+| **Lonely urbanites**     | "Same bowl, same room — your people first."                  |
+| **Creators & makers**    | "Find your lab partner. Build something real."               |
+| **Community organizers** | "Turn your neighborhood into a living molecule."             |
+| **Privacy‑conscious**    | "We don't track you. Your location stays with you."          |
+| **Ethical designers**    | "No engagement loops. No variable rewards. Just connection." |
 
 ---
 

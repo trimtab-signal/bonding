@@ -15,7 +15,11 @@ export interface GroundTruthPayload {
 export async function syncGroundTruth(endpoint: string | undefined, payload: GroundTruthPayload) {
   if (!endpoint) return { synced: false, reason: 'no-endpoint' };
   try {
-    const res = await fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+    const res = await fetch(endpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
     if (!res.ok) return { synced: false, reason: `http-${res.status}` };
     return { synced: true, endpoint, at: new Date().toISOString() };
   } catch (err) {
@@ -23,7 +27,10 @@ export async function syncGroundTruth(endpoint: string | undefined, payload: Gro
   }
 }
 
-export async function syncMedicalFloor(endpoint: string | undefined, floorData: Record<string, unknown>) {
+export async function syncMedicalFloor(
+  endpoint: string | undefined,
+  floorData: Record<string, unknown>,
+) {
   return syncGroundTruth(endpoint, {
     plane: 'medical-floor',
     planeData: floorData,

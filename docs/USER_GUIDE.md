@@ -17,6 +17,7 @@ You are an **atom**. Your mission: form **bonds** with other atoms, collaborate 
 ## The Map
 
 You'll see a map with **five zones**:
+
 - **🌿 Calm** — parks, libraries, quiet spaces.
 - **🔬 Lab** — makerspaces, coworking, workshops.
 - **🍳 Kitchen** — cafes, restaurants, community kitchens.
@@ -41,7 +42,7 @@ To connect with someone in the same zone, **send a ping**. If they accept, a **b
 
 ## Bond & React
 
-Once bonded, you can **check in together** more often. Complete a **reaction** together: *"We helped carry groceries"* or *"We built a bookshelf"*. Reactions are logged and count toward your shared history.
+Once bonded, you can **check in together** more often. Complete a **reaction** together: _"We helped carry groceries"_ or _"We built a bookshelf"_. Reactions are logged and count toward your shared history.
 
 ---
 
@@ -68,6 +69,7 @@ View your stats: bonds, check‑ins, current zone. See your list of bonds and yo
 ## Success
 
 BONDING succeeds when you:
+
 - **Make a new friend**.
 - **Help someone with a task**.
 - **Discover a new place in your neighborhood**.

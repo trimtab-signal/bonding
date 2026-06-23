@@ -11,6 +11,7 @@ A successful pilot requires **density** (critical mass in one area) and **intent
 ### 1. Choose Your Zone
 
 Pick a neighborhood or campus with:
+
 - Good walkability.
 - At least 5 distinct locations that map to our zones (Calm, Lab, Kitchen, Deep, Wild).
 - A community of people who are open to connection.
@@ -23,7 +24,7 @@ Edit `packages/shared-types/src/index.ts` and replace the default `lat: 0, lng: 
 
 - Invite 5–10 people you trust.
 - Aim for diversity: different skills, interests, backgrounds.
-- Explain the north star: *"We're not testing retention; we're testing whether people actually meet."*
+- Explain the north star: _"We're not testing retention; we're testing whether people actually meet."_
 
 ### 4. Install & Configure
 
@@ -52,12 +53,12 @@ Edit `packages/shared-types/src/index.ts` and replace the default `lat: 0, lng: 
 
 ### Key Metrics (Off‑Platform)
 
-| Metric | How to Measure |
-|--------|----------------|
-| Bonds formed | Count active bonds in the database. |
-| Real meetings | Self‑report via reactions or check‑ins. |
-| Problems solved | Reaction type `problem_solved`. |
-| Satisfaction | Post‑pilot survey (optional). |
+| Metric          | How to Measure                          |
+| --------------- | --------------------------------------- |
+| Bonds formed    | Count active bonds in the database.     |
+| Real meetings   | Self‑report via reactions or check‑ins. |
+| Problems solved | Reaction type `problem_solved`.         |
+| Satisfaction    | Post‑pilot survey (optional).           |
 
 ### Qualitative Feedback
 
@@ -93,9 +94,9 @@ Edit `packages/shared-types/src/index.ts` and replace the default `lat: 0, lng: 
 
 ## Risks & Mitigations
 
-| Risk | Mitigation |
-|------|------------|
-| Low engagement | Remind participants of the mission; organise a group check‑in event. |
-| Flaking | Valence penalty will discourage it; start with high‑trust group. |
-| Technical issues | Have a debug channel (e.g., Discord) for quick support. |
-| Privacy concerns | Re‑emphasise the geohash + witness model; no exact location stored. |
+| Risk             | Mitigation                                                           |
+| ---------------- | -------------------------------------------------------------------- |
+| Low engagement   | Remind participants of the mission; organise a group check‑in event. |
+| Flaking          | Valence penalty will discourage it; start with high‑trust group.     |
+| Technical issues | Have a debug channel (e.g., Discord) for quick support.              |
+| Privacy concerns | Re‑emphasise the geohash + witness model; no exact location stored.  |

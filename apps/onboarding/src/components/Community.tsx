@@ -5,9 +5,8 @@ export function Community() {
         <div className="section-label">Join the Reaction</div>
         <h2>Be Part of the Molecule</h2>
         <p className="lead">
-          BONDING is open source and community-driven. Whether you want
-          to run a pilot, contribute code, or just follow along, there's
-          a place for you.
+          BONDING is open source and community-driven. Whether you want to run a pilot, contribute
+          code, or just follow along, there's a place for you.
         </p>
 
         <div className="community-grid">
@@ -41,7 +40,10 @@ export function Community() {
           <div className="community-card community-card--spotlight">
             <div className="community-icon">📬</div>
             <h3>Pilot Sign-Up</h3>
-            <p>Running a pilot in your neighborhood? We want to hear from you. Get early access and support.</p>
+            <p>
+              Running a pilot in your neighborhood? We want to hear from you. Get early access and
+              support.
+            </p>
             <a href="mailto:pilot@bonding.p31ca.org" className="community-link">
               pilot@bonding.p31ca.org →
             </a>

@@ -1,6 +1,6 @@
 interface LayoutProps {
-    children: React.ReactNode;
-    showFooter?: boolean;
+  children: React.ReactNode;
+  showFooter?: boolean;
 }
 export declare const Layout: React.FC<LayoutProps>;
 export {};

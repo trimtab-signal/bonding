@@ -65,22 +65,36 @@ export const useGameStore = create<GameState>((set) => ({
   bonds: [],
   pendingPings: [],
   energyLevel: null,
-  healthOptIn: (() => { try { return typeof localStorage !== 'undefined' && localStorage.getItem('bonding_health_opt_in') === 'true'; } catch { return false; } })(),
+  healthOptIn: (() => {
+    try {
+      return (
+        typeof localStorage !== 'undefined' &&
+        localStorage.getItem('bonding_health_opt_in') === 'true'
+      );
+    } catch {
+      return false;
+    }
+  })(),
   messages: [],
 
   setConnected: (connected) => set({ connected }),
-  setIdentity: (userId, publicKey, privateKey) => set({ userId, publicKeyJwk: publicKey, privateKeyJwk: privateKey }),
+  setIdentity: (userId, publicKey, privateKey) =>
+    set({ userId, publicKeyJwk: publicKey, privateKeyJwk: privateKey }),
   setProfile: (profile) => set({ profile }),
   setNearbyAtoms: (atoms) => set({ nearbyAtoms: atoms }),
   setCurrentZone: (zone) => set({ currentZone: zone }),
-  addBond: (bond) => set((s) => ({ bonds: [...s.bonds.filter(b => b.id !== bond.id), bond] })),
+  addBond: (bond) => set((s) => ({ bonds: [...s.bonds.filter((b) => b.id !== bond.id), bond] })),
   addPing: (ping) => set((s) => ({ pendingPings: [...s.pendingPings, ping] })),
-  removePing: (pingId) => set((s) => ({ pendingPings: s.pendingPings.filter(p => p.pingId !== pingId) })),
-  addMessage: (type, data) => set((s) => ({ messages: [...s.messages.slice(-50), { type, data, timestamp: Date.now() }] })),
+  removePing: (pingId) =>
+    set((s) => ({ pendingPings: s.pendingPings.filter((p) => p.pingId !== pingId) })),
+  addMessage: (type, data) =>
+    set((s) => ({ messages: [...s.messages.slice(-50), { type, data, timestamp: Date.now() }] })),
   setServerUrl: (url) => set({ serverUrl: url }),
   setEnergyLevel: (level) => set({ energyLevel: level }),
   setHealthOptIn: (optIn) => {
-    try { localStorage.setItem('bonding_health_opt_in', String(optIn)); } catch {}
+    try {
+      localStorage.setItem('bonding_health_opt_in', String(optIn));
+    } catch {}
     set({ healthOptIn: optIn });
   },
 }));

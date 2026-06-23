@@ -9,7 +9,12 @@ export interface BadgeProps {
   className?: string;
 }
 
-export const Badge: React.FC<BadgeProps> = ({ variant = 'default', size = 'md', children, className = '' }) => {
+export const Badge: React.FC<BadgeProps> = ({
+  variant = 'default',
+  size = 'md',
+  children,
+  className = '',
+}) => {
   const cls = [styles.badge, styles[variant], styles[size], className].filter(Boolean).join(' ');
   return <span className={cls}>{children}</span>;
 };

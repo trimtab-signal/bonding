@@ -3,11 +3,41 @@ import { Card } from '../components/Card';
 import styles from './Zones.module.css';
 
 const ZONES = [
-  { id: 'calm', emoji: '🌿', name: 'Calm', desc: 'Rest, reflection, low-stimulus presence', radius: '200m' },
-  { id: 'lab', emoji: '🔬', name: 'Lab', desc: 'Build, create, experiment together', radius: '200m' },
-  { id: 'kitchen', emoji: '🍳', name: 'Kitchen', desc: 'Share food, conversation, warmth', radius: '200m' },
-  { id: 'deep', emoji: '🌊', name: 'Deep', desc: 'Vulnerable conversation, emotional support', radius: '100m' },
-  { id: 'wild', emoji: '🌀', name: 'Wild', desc: 'Adventure, exploration, serendipity', radius: '500m' },
+  {
+    id: 'calm',
+    emoji: '🌿',
+    name: 'Calm',
+    desc: 'Rest, reflection, low-stimulus presence',
+    radius: '200m',
+  },
+  {
+    id: 'lab',
+    emoji: '🔬',
+    name: 'Lab',
+    desc: 'Build, create, experiment together',
+    radius: '200m',
+  },
+  {
+    id: 'kitchen',
+    emoji: '🍳',
+    name: 'Kitchen',
+    desc: 'Share food, conversation, warmth',
+    radius: '200m',
+  },
+  {
+    id: 'deep',
+    emoji: '🌊',
+    name: 'Deep',
+    desc: 'Vulnerable conversation, emotional support',
+    radius: '100m',
+  },
+  {
+    id: 'wild',
+    emoji: '🌀',
+    name: 'Wild',
+    desc: 'Adventure, exploration, serendipity',
+    radius: '500m',
+  },
 ];
 
 export const Zones: React.FC = () => (
@@ -17,8 +47,8 @@ export const Zones: React.FC = () => (
         <span className={styles.label}>The Five Zones</span>
         <h2 className={styles.title}>Choose Your Space</h2>
         <p className={styles.desc}>
-          Each zone defines a different social context. Your energy level
-          and intentions guide which zone fits the moment.
+          Each zone defines a different social context. Your energy level and intentions guide which
+          zone fits the moment.
         </p>
         <div className={styles.grid}>
           {ZONES.map((z) => (

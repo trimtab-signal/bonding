@@ -6,10 +6,18 @@ function mockLocalStorage() {
   Object.defineProperty(globalThis, 'localStorage', {
     value: {
       getItem: vi.fn((key: string) => store.get(key) ?? null),
-      setItem: vi.fn((key: string, value: string) => { store.set(key, value); }),
-      removeItem: vi.fn((key: string) => { store.delete(key); }),
-      clear: vi.fn(() => { store.clear(); }),
-      get length() { return store.size; },
+      setItem: vi.fn((key: string, value: string) => {
+        store.set(key, value);
+      }),
+      removeItem: vi.fn((key: string) => {
+        store.delete(key);
+      }),
+      clear: vi.fn(() => {
+        store.clear();
+      }),
+      get length() {
+        return store.size;
+      },
       key: vi.fn((i: number) => [...store.keys()][i] ?? null),
     },
     configurable: true,
@@ -36,13 +44,19 @@ function createTestStore() {
   };
 
   function loadOptIn(): boolean {
-    try { return localStorage.getItem('bonding_health_opt_in') === 'true'; }
-    catch { return false; }
+    try {
+      return localStorage.getItem('bonding_health_opt_in') === 'true';
+    } catch {
+      return false;
+    }
   }
 
   function saveOptIn(v: boolean) {
-    try { localStorage.setItem('bonding_health_opt_in', String(v)); }
-    catch { /* noop */ }
+    try {
+      localStorage.setItem('bonding_health_opt_in', String(v));
+    } catch {
+      /* noop */
+    }
   }
 
   // Initialize from localStorage like the real game-store
@@ -50,13 +64,19 @@ function createTestStore() {
 
   return {
     getState: () => state,
-    setEnergyLevel: (level: number | null) => { state.energyLevel = level; },
+    setEnergyLevel: (level: number | null) => {
+      state.energyLevel = level;
+    },
     setHealthOptIn: (optIn: boolean) => {
       state.healthOptIn = optIn;
       saveOptIn(optIn);
     },
-    setUserId: (id: string) => { state.userId = id; },
-    setConnected: (c: boolean) => { state.connected = c; },
+    setUserId: (id: string) => {
+      state.userId = id;
+    },
+    setConnected: (c: boolean) => {
+      state.connected = c;
+    },
     loadOptIn,
     reset: () => {
       state.energyLevel = null;

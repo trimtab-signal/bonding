@@ -3,12 +3,15 @@
 ## Apple App Store
 
 ### App Name
+
 BONDING — Real Connection, Real World
 
 ### Subtitle (30 chars max)
+
 Find your people. IRL.
 
 ### Description (4000 chars max)
+
 **Real connection doesn't happen on a screen.**
 
 BONDING is a private, location-aware app that helps you discover and connect with people near you — without surveillance, algorithms, or engagement loops.
@@ -39,18 +42,23 @@ Built for people who want to reclaim real-world connection — one check-in at a
 **Note:** BONDING is currently in pilot. You may encounter empty zones as the community grows. Check in anyway — you'll help map the meatspace.
 
 ### Keywords
+
 location-based social, meet people near me, real life connection, privacy first social, open source social network, meatspace
 
 ### Promotional Text (170 chars max)
+
 Your private proximity network is here. Check in. Connect IRL. No algorithms, no surveillance, no bullshit.
 
 ### Support URL
+
 https://github.com/p31-org/bonding/issues
 
 ### Marketing URL
+
 https://bonding.p31ca.org
 
 ### Privacy Policy URL
+
 https://bonding.p31ca.org/#/privacy
 
 ---
@@ -58,12 +66,15 @@ https://bonding.p31ca.org/#/privacy
 ## Google Play Store
 
 ### App Name
+
 BONDING — Real Connection, Real World
 
 ### Short Description (80 chars max)
+
 Your private proximity network. Meet people near you — no surveillance, no algorithms.
 
 ### Full Description (4000 chars max)
+
 **Real connection doesn't happen on a screen.**
 
 BONDING is a private, location-aware app that helps you discover and connect with people near you — without surveillance, algorithms, or engagement loops.
@@ -94,9 +105,11 @@ Built for people who want to reclaim real-world connection — one check-in at a
 Note: BONDING is currently in pilot. You may encounter empty zones as the community grows. Check in anyway — you'll help map the meatspace.
 
 ### Feature Graphic (1024x500)
+
 See `/bonding/media/google-play-feature.png`
 
 ### Screenshots
+
 6 per platform — see `screenshots/` directory.
 
 ---

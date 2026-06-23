@@ -64,12 +64,14 @@ describe('valence module (with mocked DB)', () => {
     });
 
     it('returns stored valence', async () => {
-      mockPool.setHandler(matchHandler([
-        {
-          match: 'SELECT valence',
-          handler: () => ({ rows: [{ valence: 1.5 }], rowCount: 1 }),
-        },
-      ]));
+      mockPool.setHandler(
+        matchHandler([
+          {
+            match: 'SELECT valence',
+            handler: () => ({ rows: [{ valence: 1.5 }], rowCount: 1 }),
+          },
+        ]),
+      );
       const v = await valenceModule.getValence('atom-1');
       expect(v).toBe(1.5);
     });
@@ -77,53 +79,67 @@ describe('valence module (with mocked DB)', () => {
 
   describe('adjustValence', () => {
     it('adds positive delta', async () => {
-      mockPool.setHandler(matchHandler([
-        {
-          match: 'UPDATE atoms SET valence',
-          handler: (_t, params) => ({ rows: [{ valence: 1.0 + (params[2] as number) }], rowCount: 1 }),
-        },
-      ]));
+      mockPool.setHandler(
+        matchHandler([
+          {
+            match: 'UPDATE atoms SET valence',
+            handler: (_t, params) => ({
+              rows: [{ valence: 1.0 + (params[2] as number) }],
+              rowCount: 1,
+            }),
+          },
+        ]),
+      );
       const v = await valenceModule.adjustValence('atom-1', 0.05);
       expect(v).toBe(1.05);
     });
 
     it('subtracts negative delta', async () => {
-      mockPool.setHandler(matchHandler([
-        {
-          match: 'UPDATE atoms SET valence',
-          handler: (_t, params) => ({ rows: [{ valence: 1.0 + (params[2] as number) }], rowCount: 1 }),
-        },
-      ]));
+      mockPool.setHandler(
+        matchHandler([
+          {
+            match: 'UPDATE atoms SET valence',
+            handler: (_t, params) => ({
+              rows: [{ valence: 1.0 + (params[2] as number) }],
+              rowCount: 1,
+            }),
+          },
+        ]),
+      );
       const v = await valenceModule.adjustValence('atom-1', -0.02);
       expect(v).toBe(0.98);
     });
 
     it('clamps to minimum 0.1', async () => {
-      mockPool.setHandler(matchHandler([
-        {
-          match: 'UPDATE atoms SET valence',
-          handler: (_t, params) => {
-            const delta = params[2] as number;
-            const result = Math.max(0.1, Math.min(2.0, 1.0 + delta));
-            return { rows: [{ valence: result }], rowCount: 1 };
+      mockPool.setHandler(
+        matchHandler([
+          {
+            match: 'UPDATE atoms SET valence',
+            handler: (_t, params) => {
+              const delta = params[2] as number;
+              const result = Math.max(0.1, Math.min(2.0, 1.0 + delta));
+              return { rows: [{ valence: result }], rowCount: 1 };
+            },
           },
-        },
-      ]));
+        ]),
+      );
       const v = await valenceModule.adjustValence('atom-1', -5.0);
       expect(v).toBe(0.1);
     });
 
     it('clamps to maximum 2.0', async () => {
-      mockPool.setHandler(matchHandler([
-        {
-          match: 'UPDATE atoms SET valence',
-          handler: (_t, params) => {
-            const delta = params[2] as number;
-            const result = Math.max(0.1, Math.min(2.0, 1.0 + delta));
-            return { rows: [{ valence: result }], rowCount: 1 };
+      mockPool.setHandler(
+        matchHandler([
+          {
+            match: 'UPDATE atoms SET valence',
+            handler: (_t, params) => {
+              const delta = params[2] as number;
+              const result = Math.max(0.1, Math.min(2.0, 1.0 + delta));
+              return { rows: [{ valence: result }], rowCount: 1 };
+            },
           },
-        },
-      ]));
+        ]),
+      );
       const v = await valenceModule.adjustValence('atom-1', 5.0);
       expect(v).toBe(2.0);
     });
@@ -131,31 +147,35 @@ describe('valence module (with mocked DB)', () => {
 
   describe('boostCheckIn', () => {
     it('boosts valence when bond is active', async () => {
-      mockPool.setHandler(matchHandler([
-        {
-          match: 'SELECT id FROM bonds',
-          handler: () => ({ rows: [{ id: 'bond-1' }], rowCount: 1 }),
-        },
-        {
-          match: 'UPDATE atoms SET valence',
-          handler: () => ({ rows: [{ valence: 1.05 }], rowCount: 1 }),
-        },
-      ]));
+      mockPool.setHandler(
+        matchHandler([
+          {
+            match: 'SELECT id FROM bonds',
+            handler: () => ({ rows: [{ id: 'bond-1' }], rowCount: 1 }),
+          },
+          {
+            match: 'UPDATE atoms SET valence',
+            handler: () => ({ rows: [{ valence: 1.05 }], rowCount: 1 }),
+          },
+        ]),
+      );
       const v = await valenceModule.boostCheckIn('atom-1', 'bond-1');
       expect(v).toBe(1.05);
     });
 
     it('returns current valence when bond is not active', async () => {
-      mockPool.setHandler(matchHandler([
-        {
-          match: 'SELECT id FROM bonds',
-          handler: () => ({ rows: [], rowCount: 0 }),
-        },
-        {
-          match: 'SELECT valence',
-          handler: () => ({ rows: [{ valence: 0.8 }], rowCount: 1 }),
-        },
-      ]));
+      mockPool.setHandler(
+        matchHandler([
+          {
+            match: 'SELECT id FROM bonds',
+            handler: () => ({ rows: [], rowCount: 0 }),
+          },
+          {
+            match: 'SELECT valence',
+            handler: () => ({ rows: [{ valence: 0.8 }], rowCount: 1 }),
+          },
+        ]),
+      );
       const v = await valenceModule.boostCheckIn('atom-1', 'bond-dead');
       expect(v).toBe(0.8);
     });
@@ -163,15 +183,17 @@ describe('valence module (with mocked DB)', () => {
 
   describe('penalizeRejection', () => {
     it('reduces valence by penalty amount', async () => {
-      mockPool.setHandler(matchHandler([
-        {
-          match: 'UPDATE atoms SET valence',
-          handler: (_t, params) => {
-            const newVal = 1.0 + (params[2] as number);
-            return { rows: [{ valence: newVal }], rowCount: 1 };
+      mockPool.setHandler(
+        matchHandler([
+          {
+            match: 'UPDATE atoms SET valence',
+            handler: (_t, params) => {
+              const newVal = 1.0 + (params[2] as number);
+              return { rows: [{ valence: newVal }], rowCount: 1 };
+            },
           },
-        },
-      ]));
+        ]),
+      );
       const v = await valenceModule.penalizeRejection('atom-1');
       expect(v).toBeLessThan(1.0);
     });

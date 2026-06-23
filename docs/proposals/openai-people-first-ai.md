@@ -7,7 +7,7 @@
 **Focus areas:** AI literacy & public understanding; community innovation; economic opportunity  
 **Eligibility:** U.S. 501(c)(3) organizations  
 **Application:** Short form (4 questions)  
-**Template version:** 2026-06-23 (pre-staged for Fall 2026 window)  
+**Template version:** 2026-06-23 (pre-staged for Fall 2026 window)
 
 ---
 
@@ -19,7 +19,7 @@
 
 **Draft response (250 words):**
 
-> P31 Labs, Inc. is a 501(c)(3) nonprofit technology laboratory based in Camden County, Georgia. We build open-source infrastructure for social coordination, cryptographic identity, and neurodivergent accessibility. Our flagship projects include CashPilot (a local DePIN stack for passive income generation), the Delta Ignition onboarding module (a sovereign IIFE bundle for embedding K₄-based interfaces), and QuantumCalm (an assistive communication system merging tetrahedral geometry with biofeedback for autistic and ADHD users). We run four live Cloudflare Pages projects, maintain 95/95 test coverage, and operate under the @meatspace/* namespace to ensure ethical, self-sovereign software. Our mission is to prove that small, lean teams can build production-grade, self-hosted systems that serve human flourishing without engagement hacks, surveillance, or extractive business models.
+> P31 Labs, Inc. is a 501(c)(3) nonprofit technology laboratory based in Camden County, Georgia. We build open-source infrastructure for social coordination, cryptographic identity, and neurodivergent accessibility. Our flagship projects include CashPilot (a local DePIN stack for passive income generation), the Delta Ignition onboarding module (a sovereign IIFE bundle for embedding K₄-based interfaces), and QuantumCalm (an assistive communication system merging tetrahedral geometry with biofeedback for autistic and ADHD users). We run four live Cloudflare Pages projects, maintain 95/95 test coverage, and operate under the @meatspace/\* namespace to ensure ethical, self-sovereign software. Our mission is to prove that small, lean teams can build production-grade, self-hosted systems that serve human flourishing without engagement hacks, surveillance, or extractive business models.
 
 ---
 
@@ -40,17 +40,20 @@
 **Draft response (250 words):**
 
 > **Short-term (6 months):**
+>
 > - 5 neurodivergent beta testers complete 3+ sessions
 > - 20% reduction in self-reported communication anxiety (pre/post survey)
 > - 50+ GitHub stars; 10+ forks
 > - 3 units deployed in pilot locations (Kingsland, GA area)
 >
 > **Medium-term (12 months):**
+>
 > - 12 participants complete Neuro-Tech Career Catalyst bootcamp + project lab
 > - 8/12 secure internships in Georgia tech firms
 > - Curriculum adopted by 2+ external organizations
 >
 > **Long-term (24 months):**
+>
 > - 20+ QuantumCalm units deployed across 3+ communities
 > - Replicable framework adopted by assistive-tech nonprofits nationally
 > - Evidence base published: open dataset of HRV-to-expression mappings for neurodivergent users
@@ -66,6 +69,7 @@
 **Draft response (300 words):**
 
 > **Budget allocation for QuantumCalm Kiosk (if funded at $50,000–$100,000 level):**
+>
 > - Hardware (10 Pi 5 kiosks + sensors): $1,500
 > - Developer stipends (2 neurodivergent devs × 20 hrs/wk × 6 months): $24,000
 > - beta tester stipends (10 participants × $500): $5,000
@@ -76,6 +80,7 @@
 > - **Total:** $58,000 (flexible based on actual award amount)
 >
 > **Sustainability:**
+>
 > - **Open-source model:** No licensing fees for end users; community contributions reduce maintenance cost.
 > - **Hardware-as-donation:** Seek hardware donations from corporate CSR programs (Raspberry Pi Foundation, Microsoft Accessibility).
 > - **Training contracts:** After pilot validation, offer paid caregiver training to schools and therapy centers ($500–$2,000/session).

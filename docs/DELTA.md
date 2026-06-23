@@ -8,18 +8,18 @@ C.A.R.S. (Collaborative Affective Realtime Sim) is a browser‑based 2D molecula
 
 ## Key Differences
 
-| Aspect | C.A.R.S. (Digital) | BONDING (Meatspace) |
-|--------|---------------------|----------------------|
-| **Environment** | Browser, 2D canvas | Real world, mobile app |
-| **Interaction** | Click / drag molecules | Physical presence, check‑ins, pings |
-| **Bonds** | Simulated chemical bonds | Real human relationships |
-| **Reactions** | Visual animations | Real‑world tasks (helping, building, sharing) |
-| **Zones** | Abstract zones (Calm, Lab, Kitchen, Deep, Wild) | Physical places mapped to GPS |
-| **Era progression** | Game time milestones | Cumulative real‑world impact |
-| **Valence** | Atom property | Hidden reputation scalar (0.1–2.0) |
-| **Identity** | Anonymous cookie | WebCrypto ephemeral keys |
-| **Data** | All on server | Geohash‑only, witness‑signed proofs |
-| **Engagement** | Simulation loop | Human‑driven, off‑platform |
+| Aspect              | C.A.R.S. (Digital)                              | BONDING (Meatspace)                           |
+| ------------------- | ----------------------------------------------- | --------------------------------------------- |
+| **Environment**     | Browser, 2D canvas                              | Real world, mobile app                        |
+| **Interaction**     | Click / drag molecules                          | Physical presence, check‑ins, pings           |
+| **Bonds**           | Simulated chemical bonds                        | Real human relationships                      |
+| **Reactions**       | Visual animations                               | Real‑world tasks (helping, building, sharing) |
+| **Zones**           | Abstract zones (Calm, Lab, Kitchen, Deep, Wild) | Physical places mapped to GPS                 |
+| **Era progression** | Game time milestones                            | Cumulative real‑world impact                  |
+| **Valence**         | Atom property                                   | Hidden reputation scalar (0.1–2.0)            |
+| **Identity**        | Anonymous cookie                                | WebCrypto ephemeral keys                      |
+| **Data**            | All on server                                   | Geohash‑only, witness‑signed proofs           |
+| **Engagement**      | Simulation loop                                 | Human‑driven, off‑platform                    |
 
 ---
 

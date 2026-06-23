@@ -21,18 +21,18 @@ describe('ZONES', () => {
   });
 
   it('all zones have unique colors', () => {
-    const colors = Object.values(ZONES).map(z => z.color);
+    const colors = Object.values(ZONES).map((z) => z.color);
     expect(new Set(colors).size).toBe(colors.length);
   });
 
   it('all zones have unique emoji', () => {
-    const emojis = Object.values(ZONES).map(z => z.emoji);
+    const emojis = Object.values(ZONES).map((z) => z.emoji);
     expect(new Set(emojis).size).toBe(emojis.length);
   });
 
   it('deep zone has smallest radius (intimate zone)', () => {
     const deep = ZONES.deep;
-    const radii = Object.values(ZONES).map(z => z.radiusMeters);
+    const radii = Object.values(ZONES).map((z) => z.radiusMeters);
     const minRadius = Math.min(...radii);
     expect(deep.radiusMeters).toBe(minRadius);
   });

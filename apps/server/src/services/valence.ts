@@ -12,19 +12,19 @@ const BOOST_PER_CHECKIN = 0.05;
 const PENALTY_REJECTED_PING = 0.02;
 
 export async function applyDailyDecay(): Promise<void> {
-  await query(`UPDATE atoms SET valence = GREATEST($1, valence * $2) WHERE valence > 0`, [VALENCE_MIN, DECAY_FACTOR]);
+  await query(`UPDATE atoms SET valence = GREATEST($1, valence * $2) WHERE valence > 0`, [
+    VALENCE_MIN,
+    DECAY_FACTOR,
+  ]);
 }
 
 export async function getValence(atomId: string): Promise<number> {
-  const result = await query(
-    `SELECT valence, last_seen FROM atoms WHERE id = $1`,
-    [atomId]
-  );
+  const result = await query(`SELECT valence, last_seen FROM atoms WHERE id = $1`, [atomId]);
   if (result.rows.length === 0) return VALENCE_DEFAULT;
   const { valence, last_seen } = result.rows[0]!;
   if (!last_seen) return valence;
   const daysSinceLastCheckIn = Math.floor(
-    (Date.now() - new Date(last_seen).getTime()) / (1000 * 60 * 60 * 24)
+    (Date.now() - new Date(last_seen).getTime()) / (1000 * 60 * 60 * 24),
   );
   if (daysSinceLastCheckIn <= 0) return valence;
   const decayed = valence * Math.pow(DECAY_FACTOR, daysSinceLastCheckIn);
@@ -52,23 +52,22 @@ async function pushK4ValenceEntry(atomId: string, delta: number, source: string)
         timestamp: new Date().toISOString(),
       }),
     });
-  } catch { /* non-blocking */ }
+  } catch {
+    /* non-blocking */
+  }
 }
 
 export async function adjustValence(atomId: string, delta: number): Promise<number> {
   const result = await query(
     `UPDATE atoms SET valence = GREATEST($1, LEAST($2, valence + $3)) WHERE id = $4 RETURNING valence`,
-    [VALENCE_MIN, VALENCE_MAX, delta, atomId]
+    [VALENCE_MIN, VALENCE_MAX, delta, atomId],
   );
   pushK4ValenceEntry(atomId, delta, 'adjust');
   return result.rows[0]!.valence;
 }
 
 export async function boostCheckIn(atomId: string, bondId: string): Promise<number> {
-  const bond = await query(
-    `SELECT id FROM bonds WHERE id = $1 AND status = 'active'`,
-    [bondId]
-  );
+  const bond = await query(`SELECT id FROM bonds WHERE id = $1 AND status = 'active'`, [bondId]);
   if (bond.rows.length > 0) {
     return adjustValence(atomId, BOOST_PER_CHECKIN);
   }
@@ -89,10 +88,14 @@ export async function distributeDividends(bondId: string): Promise<void> {
 
 // Compute matching score between two atoms for the algorithm
 // Returns higher scores for complementary pairs (different skills, shared interests)
-export function computeMatchScore(atomA: { skills: string[]; interests: string[] }, atomB: { skills: string[]; interests: string[] }): number {
-  const skillComplement = atomA.skills.filter(s => !atomB.skills.includes(s)).length +
-    atomB.skills.filter(s => !atomA.skills.includes(s)).length;
-  const sharedInterests = atomA.interests.filter(i => atomB.interests.includes(i)).length;
+export function computeMatchScore(
+  atomA: { skills: string[]; interests: string[] },
+  atomB: { skills: string[]; interests: string[] },
+): number {
+  const skillComplement =
+    atomA.skills.filter((s) => !atomB.skills.includes(s)).length +
+    atomB.skills.filter((s) => !atomA.skills.includes(s)).length;
+  const sharedInterests = atomA.interests.filter((i) => atomB.interests.includes(i)).length;
 
   // Normalize: skillComplement 0–1, sharedInterests 0–1, weight complementarity
   const maxSkills = Math.max(atomA.skills.length, atomB.skills.length, 1);

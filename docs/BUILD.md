@@ -88,9 +88,9 @@ pnpm build:shared && pnpm build:server && pnpm build:mobile
 
 ## Troubleshooting
 
-| Issue | Solution |
-|-------|----------|
-| `docker: command not found` | Install Docker Desktop. |
-| `DATABASE_URL` error | Check `.env` and ensure Docker container is running. |
+| Issue                             | Solution                                                    |
+| --------------------------------- | ----------------------------------------------------------- |
+| `docker: command not found`       | Install Docker Desktop.                                     |
+| `DATABASE_URL` error              | Check `.env` and ensure Docker container is running.        |
 | Migration fails (relation exists) | The init script is idempotent; run `pnpm db:migrate` again. |
-| CORS errors | Set `CORS_ORIGIN` in `.env` to your frontend URL. |
+| CORS errors                       | Set `CORS_ORIGIN` in `.env` to your frontend URL.           |

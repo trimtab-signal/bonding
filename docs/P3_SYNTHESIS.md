@@ -8,14 +8,14 @@
 
 ## 1. Decisions (from Discovery)
 
-| Item | Decision | Rationale |
-|------|----------|-----------|
-| **Deploy target** | Render.com — Docker web + managed PostgreSQL | Render config (`render.yaml`) already exists. Auto-provisions DB, health checks built-in. |
-| **Logging** | Pino — structured JSON output, zero deps conflict | Lightweight, native ESM support, integrates with Render log dashboard. |
-| **Error handling** | Global `unhandledRejection` + `uncaughtException` handlers + Socket.io per-handler try/catch wrapper | Prevents server crashes from unhandled promise rejections. |
-| **Health check** | Extend `/health` to probe `SELECT 1` and return `503` on failure | Required by Render for auto-restart. Gives visibility into DB connectivity. |
-| **Pilot metrics** | Inline counters in community_state (already done in P2) + a weekly summary log | No new infra needed. Community era IS the progress metric. |
-| **Mobile secure storage** | Defer to P4 | Acceptable for 3–10 person pilot; users consenting. |
+| Item                      | Decision                                                                                             | Rationale                                                                                 |
+| ------------------------- | ---------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| **Deploy target**         | Render.com — Docker web + managed PostgreSQL                                                         | Render config (`render.yaml`) already exists. Auto-provisions DB, health checks built-in. |
+| **Logging**               | Pino — structured JSON output, zero deps conflict                                                    | Lightweight, native ESM support, integrates with Render log dashboard.                    |
+| **Error handling**        | Global `unhandledRejection` + `uncaughtException` handlers + Socket.io per-handler try/catch wrapper | Prevents server crashes from unhandled promise rejections.                                |
+| **Health check**          | Extend `/health` to probe `SELECT 1` and return `503` on failure                                     | Required by Render for auto-restart. Gives visibility into DB connectivity.               |
+| **Pilot metrics**         | Inline counters in community_state (already done in P2) + a weekly summary log                       | No new infra needed. Community era IS the progress metric.                                |
+| **Mobile secure storage** | Defer to P4                                                                                          | Acceptable for 3–10 person pilot; users consenting.                                       |
 
 ---
 
@@ -23,45 +23,45 @@
 
 ### Phase 1: Dockerfile + Deploy Config
 
-| Task | Files | Description |
-|------|-------|-------------|
-| 1.1 | `Dockerfile` (new — missing!) | Multi-stage Node 22 Alpine: `pnpm install --frozen-lockfile`, `pnpm build`, run server. |
-| 1.2 | `.dockerignore` (new) | Exclude `node_modules`, `.git`, `dist`, `*.md`. |
-| 1.3 | `render.yaml` | Already exists — verify health check path. |
-| 1.4 | `railway.json` | Already exists — verify health check path. |
-| 1.5 | `docs/DEPLOYMENT.md` | Update API Server URL (was `localhost:3001`) and deployment instructions. |
+| Task | Files                         | Description                                                                             |
+| ---- | ----------------------------- | --------------------------------------------------------------------------------------- |
+| 1.1  | `Dockerfile` (new — missing!) | Multi-stage Node 22 Alpine: `pnpm install --frozen-lockfile`, `pnpm build`, run server. |
+| 1.2  | `.dockerignore` (new)         | Exclude `node_modules`, `.git`, `dist`, `*.md`.                                         |
+| 1.3  | `render.yaml`                 | Already exists — verify health check path.                                              |
+| 1.4  | `railway.json`                | Already exists — verify health check path.                                              |
+| 1.5  | `docs/DEPLOYMENT.md`          | Update API Server URL (was `localhost:3001`) and deployment instructions.               |
 
 ### Phase 2: Structured Logging
 
-| Task | Files | Description |
-|------|-------|-------------|
-| 2.1 | `apps/server/package.json` | Add `pino` dependency. |
-| 2.2 | `apps/server/src/lib/logger.ts` (new) | Create Pino logger instance with pino-pretty in dev, JSON in prod. |
-| 2.3 | `apps/server/src/index.ts` | Replace `console.log` with `logger.info`. |
-| 2.4 | `apps/server/src/services/game-handler.ts` | Replace `console.log` with `logger.info` / `logger.error`. |
+| Task | Files                                      | Description                                                        |
+| ---- | ------------------------------------------ | ------------------------------------------------------------------ |
+| 2.1  | `apps/server/package.json`                 | Add `pino` dependency.                                             |
+| 2.2  | `apps/server/src/lib/logger.ts` (new)      | Create Pino logger instance with pino-pretty in dev, JSON in prod. |
+| 2.3  | `apps/server/src/index.ts`                 | Replace `console.log` with `logger.info`.                          |
+| 2.4  | `apps/server/src/services/game-handler.ts` | Replace `console.log` with `logger.info` / `logger.error`.         |
 
 ### Phase 3: Global Error Handling
 
-| Task | Files | Description |
-|------|-------|-------------|
-| 3.1 | `apps/server/src/index.ts` | Add `process.on('unhandledRejection')` and `process.on('uncaughtException')` handlers. |
-| 3.2 | `apps/server/src/services/game-handler.ts` | Wrap per-message handler in try/catch; emit error to client and log. |
+| Task | Files                                      | Description                                                                            |
+| ---- | ------------------------------------------ | -------------------------------------------------------------------------------------- |
+| 3.1  | `apps/server/src/index.ts`                 | Add `process.on('unhandledRejection')` and `process.on('uncaughtException')` handlers. |
+| 3.2  | `apps/server/src/services/game-handler.ts` | Wrap per-message handler in try/catch; emit error to client and log.                   |
 
 ### Phase 4: Health Check with DB Probe
 
-| Task | Files | Description |
-|------|-------|-------------|
-| 4.1 | `apps/server/src/index.ts` | Extend `/health` to run `SELECT 1`, return 200/503 with DB status. |
+| Task | Files                      | Description                                                        |
+| ---- | -------------------------- | ------------------------------------------------------------------ |
+| 4.1  | `apps/server/src/index.ts` | Extend `/health` to run `SELECT 1`, return 200/503 with DB status. |
 
 ### Phase 5: Manual Deploy
 
-| Task | Description |
-|------|-------------|
-| 5.1 | Create Render account (if needed) |
-| 5.2 | Connect GitHub repo, create Web Service (Docker) |
-| 5.3 | Add PostgreSQL database via Render dashboard |
-| 5.4 | Set `DATABASE_URL` env var |
-| 5.5 | Deploy — monitor health checks |
+| Task | Description                                      |
+| ---- | ------------------------------------------------ |
+| 5.1  | Create Render account (if needed)                |
+| 5.2  | Connect GitHub repo, create Web Service (Docker) |
+| 5.3  | Add PostgreSQL database via Render dashboard     |
+| 5.4  | Set `DATABASE_URL` env var                       |
+| 5.5  | Deploy — monitor health checks                   |
 
 ---
 
@@ -106,9 +106,10 @@ import pino from 'pino';
 
 const logger = pino({
   level: process.env.LOG_LEVEL || (process.env.NODE_ENV === 'production' ? 'info' : 'debug'),
-  transport: process.env.NODE_ENV !== 'production'
-    ? { target: 'pino-pretty', options: { colorize: true } }
-    : undefined,
+  transport:
+    process.env.NODE_ENV !== 'production'
+      ? { target: 'pino-pretty', options: { colorize: true } }
+      : undefined,
 });
 
 export default logger;
@@ -124,7 +125,14 @@ app.get('/health', async (_req, res) => {
     await query('SELECT 1');
     res.json({ status: 'ok', version: '0.1.0', service: 'bonding-server', database: 'connected' });
   } catch {
-    res.status(503).json({ status: 'error', version: '0.1.0', service: 'bonding-server', database: 'disconnected' });
+    res
+      .status(503)
+      .json({
+        status: 'error',
+        version: '0.1.0',
+        service: 'bonding-server',
+        database: 'disconnected',
+      });
   }
 });
 ```
@@ -151,9 +159,14 @@ socket.on('message', async (raw: string) => {
     await handleMessage(io, socket, userId, msg);
   } catch (e) {
     logger.error({ err: e, userId, raw }, 'Error handling message');
-    socket.emit('message', JSON.stringify({
-      type: 'error', code: 'INTERNAL_ERROR', message: 'Something went wrong',
-    } satisfies ServerMessage));
+    socket.emit(
+      'message',
+      JSON.stringify({
+        type: 'error',
+        code: 'INTERNAL_ERROR',
+        message: 'Something went wrong',
+      } satisfies ServerMessage),
+    );
   }
 });
 ```
@@ -162,13 +175,13 @@ socket.on('message', async (raw: string) => {
 
 ## 4. Success Criteria (for Node 4 Validation)
 
-| Phase | Criteria |
-|-------|----------|
-| **Docker** | `docker build -t bonding-server .` succeeds. Container starts and responds on port 3001. |
-| **Health** | `/health` returns 200 + `database: connected` when DB is up. Returns 503 when DB is down. |
-| **Logging** | Server outputs structured JSON logs. Log level configurable via `LOG_LEVEL` env var. |
-| **Errors** | Unhandled promise rejections are logged, don't crash the process. Malformed messages return error to client. |
-| **Deploy** | Server accessible at `https://bonding-server.onrender.com` (or custom domain). WebSocket connections succeed. |
+| Phase       | Criteria                                                                                                      |
+| ----------- | ------------------------------------------------------------------------------------------------------------- |
+| **Docker**  | `docker build -t bonding-server .` succeeds. Container starts and responds on port 3001.                      |
+| **Health**  | `/health` returns 200 + `database: connected` when DB is up. Returns 503 when DB is down.                     |
+| **Logging** | Server outputs structured JSON logs. Log level configurable via `LOG_LEVEL` env var.                          |
+| **Errors**  | Unhandled promise rejections are logged, don't crash the process. Malformed messages return error to client.  |
+| **Deploy**  | Server accessible at `https://bonding-server.onrender.com` (or custom domain). WebSocket connections succeed. |
 
 ---
 

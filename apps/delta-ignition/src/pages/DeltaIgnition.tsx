@@ -68,12 +68,19 @@ export default function DeltaIgnition() {
 
   return (
     <div className={styles.container}>
-      <div className={`${styles.bg} ${
-        phase === 'wye' ? styles.bgWye :
-        phase === 'implosion' ? styles.bgImplosion :
-        phase === 'stride' || phase === 'delta' ? styles.bgDelta :
-        phase === 'intro' ? styles.bgComplete : ''
-      }`} />
+      <div
+        className={`${styles.bg} ${
+          phase === 'wye'
+            ? styles.bgWye
+            : phase === 'implosion'
+              ? styles.bgImplosion
+              : phase === 'stride' || phase === 'delta'
+                ? styles.bgDelta
+                : phase === 'intro'
+                  ? styles.bgComplete
+                  : ''
+        }`}
+      />
 
       <AnimatePresence mode="wait">
         {phase === 'intro' && (
@@ -85,7 +92,10 @@ export default function DeltaIgnition() {
             transition={{ duration: 0.4 }}
             className={`${styles.layer} ${styles.layerInteractive}`}
           >
-            <p className={styles.phaseFlash} style={{ fontSize: 'clamp(0.9rem, 1.8vw, 1.2rem)', letterSpacing: '0.18em' }}>
+            <p
+              className={styles.phaseFlash}
+              style={{ fontSize: 'clamp(0.9rem, 1.8vw, 1.2rem)', letterSpacing: '0.18em' }}
+            >
               INITIALIZING SEQUENCE
             </p>
           </motion.div>
@@ -101,16 +111,32 @@ export default function DeltaIgnition() {
             className={`${styles.layer} ${styles.layerInteractive}`}
           >
             <div className={styles.wyeWrap}>
-              <svg viewBox="-220 -220 440 440" style={{ width: 'min(440px, 85vw)', height: 'min(440px, 85vw)' }}>
+              <svg
+                viewBox="-220 -220 440 440"
+                style={{ width: 'min(440px, 85vw)', height: 'min(440px, 85vw)' }}
+              >
                 <defs>
                   <filter id="wyeGlow" x="-50%" y="-50%" width="200%" height="200%">
                     <feGaussianBlur stdDeviation="6" />
                   </filter>
                 </defs>
                 <circle cx="0" cy="0" r="36" fill="#e0405a" opacity="0.85" filter="url(#wyeGlow)">
-                  <animate attributeName="opacity" values="0.85;0.4;0.85" dur="0.9s" repeatCount="indefinite" />
+                  <animate
+                    attributeName="opacity"
+                    values="0.85;0.4;0.85"
+                    dur="0.9s"
+                    repeatCount="indefinite"
+                  />
                 </circle>
-                <text x="0" y="5" textAnchor="middle" fill="#fff" fontSize="11" fontFamily="monospace" fontWeight="600">
+                <text
+                  x="0"
+                  y="5"
+                  textAnchor="middle"
+                  fill="#fff"
+                  fontSize="11"
+                  fontFamily="monospace"
+                  fontWeight="600"
+                >
                   THEY BELIEVE
                 </text>
                 {[
@@ -119,18 +145,49 @@ export default function DeltaIgnition() {
                   { x: 0, y: 125, label: 'YOUR BELIEF' },
                 ].map((node, i) => (
                   <g key={i}>
-                    <circle cx={node.x} cy={node.y} r="22" fill="#2a2030" stroke="#4a3040" strokeWidth="1.2" />
-                    <text x={node.x} y={node.y + 4} textAnchor="middle" fill="#9080a0" fontSize="9" fontFamily="monospace">
+                    <circle
+                      cx={node.x}
+                      cy={node.y}
+                      r="22"
+                      fill="#2a2030"
+                      stroke="#4a3040"
+                      strokeWidth="1.2"
+                    />
+                    <text
+                      x={node.x}
+                      y={node.y + 4}
+                      textAnchor="middle"
+                      fill="#9080a0"
+                      fontSize="9"
+                      fontFamily="monospace"
+                    >
                       {node.label}
                     </text>
-                    <line x1="0" y1="0" x2={node.x} y2={node.y} stroke="#e0405a" strokeWidth="1.6" strokeDasharray="4 5" opacity="0.7">
-                      <animate attributeName="stroke-opacity" values="0.7;0.25;0.7" dur="0.9s" repeatCount="indefinite" />
+                    <line
+                      x1="0"
+                      y1="0"
+                      x2={node.x}
+                      y2={node.y}
+                      stroke="#e0405a"
+                      strokeWidth="1.6"
+                      strokeDasharray="4 5"
+                      opacity="0.7"
+                    >
+                      <animate
+                        attributeName="stroke-opacity"
+                        values="0.7;0.25;0.7"
+                        dur="0.9s"
+                        repeatCount="indefinite"
+                      />
                     </line>
                   </g>
                 ))}
               </svg>
             </div>
-            <div className={`${styles.phaseFlash} ${styles.phaseFlashRed}`} style={{ bottom: '14%', top: 'auto', left: '50%', transform: 'translateX(-50%)' }}>
+            <div
+              className={`${styles.phaseFlash} ${styles.phaseFlashRed}`}
+              style={{ bottom: '14%', top: 'auto', left: '50%', transform: 'translateX(-50%)' }}
+            >
               {labels.main}
             </div>
           </motion.div>
@@ -165,9 +222,29 @@ export default function DeltaIgnition() {
                 />
               </div>
             </div>
-            <div className={`${styles.phaseFlash}`} style={{ bottom: '10%', top: 'auto', left: '50%', transform: 'translateX(-50%)', textAlign: 'center' }}>
+            <div
+              className={`${styles.phaseFlash}`}
+              style={{
+                bottom: '10%',
+                top: 'auto',
+                left: '50%',
+                transform: 'translateX(-50%)',
+                textAlign: 'center',
+              }}
+            >
               <div>{labels.main}</div>
-              {labels.sub && <div style={{ fontSize: '0.7em', opacity: 0.7, marginTop: '0.3rem', letterSpacing: '0.16em' }}>{labels.sub}</div>}
+              {labels.sub && (
+                <div
+                  style={{
+                    fontSize: '0.7em',
+                    opacity: 0.7,
+                    marginTop: '0.3rem',
+                    letterSpacing: '0.16em',
+                  }}
+                >
+                  {labels.sub}
+                </div>
+              )}
             </div>
           </motion.div>
         )}
@@ -194,7 +271,10 @@ export default function DeltaIgnition() {
       </AnimatePresence>
 
       <div className={styles.progressTrack}>
-        <div className={styles.progressFill} style={{ width: `${Math.min(progress * 100, 100)}%` }} />
+        <div
+          className={styles.progressFill}
+          style={{ width: `${Math.min(progress * 100, 100)}%` }}
+        />
       </div>
     </div>
   );

@@ -10,7 +10,12 @@ function mount(container: HTMLElement | null, config: any) {
 
 declare global {
   interface Window {
-    initDeltaIgnition: (config: any) => { start: () => void; resume: () => void; skipTo: (plane: string) => void; getState: () => any };
+    initDeltaIgnition: (config: any) => {
+      start: () => void;
+      resume: () => void;
+      skipTo: (plane: string) => void;
+      getState: () => any;
+    };
   }
 }
 
@@ -25,7 +30,9 @@ window.initDeltaIgnition = (config: any) => {
   return {
     start: () => mount(container, config),
     resume: () => mount(container, { ...config, resume: true }),
-    skipTo: (_plane: string) => { /* orchestrator handles hash */ },
+    skipTo: (_plane: string) => {
+      /* orchestrator handles hash */
+    },
     getState: () => ({ mode: config.mode, timestamp: Date.now() }),
   };
 };
@@ -33,5 +40,5 @@ window.initDeltaIgnition = (config: any) => {
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <OnboardingModule mode="full" resume={false} onComplete={() => {}} onError={() => {}} />
-  </StrictMode>
+  </StrictMode>,
 );

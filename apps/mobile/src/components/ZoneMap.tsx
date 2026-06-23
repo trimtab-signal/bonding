@@ -80,9 +80,7 @@ export function ZoneMap({ onZoneSelect, selectedZone, userLocation }: ZoneMapPro
         `;
         el.addEventListener('click', () => onZoneSelect?.(zone.id));
 
-        new maplibregl.Marker({ element: el })
-          .setLngLat([zone.lng, zone.lat])
-          .addTo(map);
+        new maplibregl.Marker({ element: el }).setLngLat([zone.lng, zone.lat]).addTo(map);
       });
     });
 
@@ -99,7 +97,7 @@ export function ZoneMap({ onZoneSelect, selectedZone, userLocation }: ZoneMapPro
     if (!mapRef.current || !userLocation) return;
 
     // Remove old markers
-    markersRef.current.forEach(m => m.remove());
+    markersRef.current.forEach((m) => m.remove());
     markersRef.current = [];
 
     const el = document.createElement('div');
@@ -120,11 +118,19 @@ export function ZoneMap({ onZoneSelect, selectedZone, userLocation }: ZoneMapPro
 
   const zoneDefs = Object.values(ZONES);
   const zonesRow = (
-    <div style={{
-      position: 'absolute', bottom: 24, left: 16, right: 16,
-      display: 'flex', gap: 8, justifyContent: 'center', zIndex: 10,
-    }}>
-      {zoneDefs.map(zone => (
+    <div
+      style={{
+        position: 'absolute',
+        bottom: 24,
+        left: 16,
+        right: 16,
+        display: 'flex',
+        gap: 8,
+        justifyContent: 'center',
+        zIndex: 10,
+      }}
+    >
+      {zoneDefs.map((zone) => (
         <button
           key={zone.id}
           onClick={() => onZoneSelect?.(zone.id)}
@@ -143,7 +149,8 @@ export function ZoneMap({ onZoneSelect, selectedZone, userLocation }: ZoneMapPro
             textAlign: 'center',
           }}
         >
-          {zone.emoji}<br />
+          {zone.emoji}
+          <br />
           {zone.name}
         </button>
       ))}

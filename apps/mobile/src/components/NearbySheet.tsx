@@ -16,7 +16,7 @@ export const NearbySheet: React.FC<NearbySheetProps> = ({ atoms, onPing, onReact
       <p className={styles.empty}>No atoms nearby yet. Check in to be seen.</p>
     ) : (
       <div className={styles.list}>
-        {atoms.map(a => (
+        {atoms.map((a) => (
           <Card key={a.id} padding="0.5rem">
             <ListItem
               icon={<Avatar size="sm" emoji="🧬" />}
@@ -24,9 +24,15 @@ export const NearbySheet: React.FC<NearbySheetProps> = ({ atoms, onPing, onReact
               subtitle={a.atomType}
               right={
                 <div className={styles.actions}>
-                  <Badge variant={a.zoneId || 'default'} size="sm">{a.zoneId || 'unknown'}</Badge>
-                  <Button size="sm" variant="ghost" onClick={() => onPing(a.id)}>Ping</Button>
-                  <Button size="sm" variant="ghost" onClick={() => onReact(a.id)}>React</Button>
+                  <Badge variant={a.zoneId || 'default'} size="sm">
+                    {a.zoneId || 'unknown'}
+                  </Badge>
+                  <Button size="sm" variant="ghost" onClick={() => onPing(a.id)}>
+                    Ping
+                  </Button>
+                  <Button size="sm" variant="ghost" onClick={() => onReact(a.id)}>
+                    React
+                  </Button>
                 </div>
               }
             />

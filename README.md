@@ -8,7 +8,7 @@
 
 **Version:** 0.1.0 (MVP)
 **Date:** 2026-06-18
-**North Star:** *"Same bowl, same room — your people first."*
+**North Star:** _"Same bowl, same room — your people first."_
 
 ---
 
@@ -17,6 +17,7 @@
 **BONDING** is a real‑world social game that turns humans into atoms, relationships into chemical bonds, and collaborative problem‑solving into reactions. It is the meatspace equivalent of the existing C.A.R.S. digital molecular simulation, designed as **calm technology** — a tool you open to find your people, then put away.
 
 This repository contains a complete, working TypeScript monorepo with:
+
 - A **Capacitor‑ready mobile web app** (React + MapLibre)
 - A **Node.js + Socket.io + PostgreSQL/PostGIS backend**
 - **Shared types** for cryptographic identity, location proofs, and game state
@@ -28,16 +29,16 @@ All code is open‑source, zero‑budget, and designed for a solo operator with 
 
 ## 2. Architecture Stack
 
-| Layer | Technology | Purpose |
-|-------|------------|---------|
-| **Frontend** | React 18 + TypeScript | Interactive UI |
-| **State** | Zustand | Simple, boilerplate‑free store |
-| **Mobile wrapper** | Capacitor (Ionic) | PWA + native plugins (camera, GPS) |
-| **Maps** | MapLibre GL JS | Free vector maps |
-| **Backend** | Node.js + Express + Socket.io | REST API + real‑time game events |
-| **Database** | PostgreSQL + PostGIS | Geospatial queries, relational storage |
-| **Identity** | WebCrypto (ECDSA) | Client‑generated key pairs, no password storage |
-| **Location proof** | Geohash prefix + witness signatures | Privacy‑preserving presence proof |
+| Layer              | Technology                          | Purpose                                         |
+| ------------------ | ----------------------------------- | ----------------------------------------------- |
+| **Frontend**       | React 18 + TypeScript               | Interactive UI                                  |
+| **State**          | Zustand                             | Simple, boilerplate‑free store                  |
+| **Mobile wrapper** | Capacitor (Ionic)                   | PWA + native plugins (camera, GPS)              |
+| **Maps**           | MapLibre GL JS                      | Free vector maps                                |
+| **Backend**        | Node.js + Express + Socket.io       | REST API + real‑time game events                |
+| **Database**       | PostgreSQL + PostGIS                | Geospatial queries, relational storage          |
+| **Identity**       | WebCrypto (ECDSA)                   | Client‑generated key pairs, no password storage |
+| **Location proof** | Geohash prefix + witness signatures | Privacy‑preserving presence proof               |
 
 ---
 
@@ -101,6 +102,7 @@ bonding/
 ## 4. Build & Run
 
 ### Prerequisites
+
 - **Node.js** >= 20
 - **pnpm** >= 9
 - **Docker** (for PostgreSQL + PostGIS)
@@ -156,12 +158,12 @@ pnpm dev:mobile
 
 BONDING is part of the larger P31 Labs ecosystem:
 
-| Project | Role | Link |
-|---------|------|------|
-| **PHOS** | Cognitive convergence dashboard — spoon-aware UI, surface routing, quantum bridge | [phos.p31ca.org](https://phos.p31ca.org) |
-| **8-Ball** | Decision engine — spoon-weighted action recommender for AuDHD operators | [`/home/p31/andromeda/scripts/quantum-8ball.py`](https://github.com/trimtab-signal/bonding) |
-| **PMM Grader** | P31 Maturity Model — multi-dimension artifact scoring (CODE, TEST, DOCS, OPS, SEC) | [`grade-repo.py`](../../andromeda/scripts/grade-repo.py) |
-| **IntentEngine** | PHOS surface router — "bonding" keyword routes to BONDING surface | [`IntentEngine.ts`](../../andromeda/phos/src/lib/IntentEngine.ts) |
+| Project          | Role                                                                               | Link                                                                                        |
+| ---------------- | ---------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| **PHOS**         | Cognitive convergence dashboard — spoon-aware UI, surface routing, quantum bridge  | [phos.p31ca.org](https://phos.p31ca.org)                                                    |
+| **8-Ball**       | Decision engine — spoon-weighted action recommender for AuDHD operators            | [`/home/p31/andromeda/scripts/quantum-8ball.py`](https://github.com/trimtab-signal/bonding) |
+| **PMM Grader**   | P31 Maturity Model — multi-dimension artifact scoring (CODE, TEST, DOCS, OPS, SEC) | [`grade-repo.py`](../../andromeda/scripts/grade-repo.py)                                    |
+| **IntentEngine** | PHOS surface router — "bonding" keyword routes to BONDING surface                  | [`IntentEngine.ts`](../../andromeda/phos/src/lib/IntentEngine.ts)                           |
 
 ### Cross-Project Links
 

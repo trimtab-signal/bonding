@@ -11,7 +11,5 @@
     "types": ["vite/client"]
   },
   "include": ["src"],
-  "references": [
-    { "path": "../../packages/shared-types" }
-  ]
+  "references": [{ "path": "../../packages/shared-types" }]
 }

@@ -103,7 +103,9 @@ export default function TrimTabs() {
 
     const delay = 500 + Math.random() * 1000;
     const t = setTimeout(() => {
-      setSteps((prev) => prev.map((s, i) => (i === activeStep - 1 ? { ...s, status: 'done' as Status } : s)));
+      setSteps((prev) =>
+        prev.map((s, i) => (i === activeStep - 1 ? { ...s, status: 'done' as Status } : s)),
+      );
       setActiveStep((i) => i + 1);
     }, delay);
     return () => clearTimeout(t);
@@ -121,7 +123,14 @@ export default function TrimTabs() {
         <div className={styles.header}>
           <div>
             <h1 className={styles.title}>Δ TRIM TAB SEQUENCE</h1>
-            <p style={{ fontSize: '0.8rem', color: '#6e6e90', letterSpacing: '0.07em', marginTop: '0.25rem' }}>
+            <p
+              style={{
+                fontSize: '0.8rem',
+                color: '#6e6e90',
+                letterSpacing: '0.07em',
+                marginTop: '0.25rem',
+              }}
+            >
               8 steps to isostatic rigidity
             </p>
           </div>
@@ -150,7 +159,12 @@ export default function TrimTabs() {
                 className={cardClass}
               >
                 <div className={styles.stepTop}>
-                  <span className={styles.statusIcon} style={{ color: isRunning ? '#6b9e5a' : status === 'done' ? '#6e9fff' : '#4a4a6a' }}>
+                  <span
+                    className={styles.statusIcon}
+                    style={{
+                      color: isRunning ? '#6b9e5a' : status === 'done' ? '#6e9fff' : '#4a4a6a',
+                    }}
+                  >
                     {STATUS_ICON[status]}
                   </span>
                   <span className={styles.stepTitle}>{step.title}</span>
@@ -160,7 +174,11 @@ export default function TrimTabs() {
                 <div className={styles.commandBlock}>
                   <span className={styles.commandPrefix}>$</span>
                   <span>{step.command}</span>
-                  {isRunning && <span className={`${styles.cursor} ${status !== 'running' ? styles.cursorStopped : ''}`} />}
+                  {isRunning && (
+                    <span
+                      className={`${styles.cursor} ${status !== 'running' ? styles.cursorStopped : ''}`}
+                    />
+                  )}
                 </div>
 
                 <div className={styles.desc}>{step.desc}</div>
@@ -195,11 +213,16 @@ export default function TrimTabs() {
             className={styles.completedBanner}
           >
             <div className={styles.completedTitle}>Δ IGNITION COMPLETE</div>
-            <div className={styles.completedSub}>The Wye topology has collapsed. The Delta is locked in.</div>
+            <div className={styles.completedSub}>
+              The Wye topology has collapsed. The Delta is locked in.
+            </div>
             <div className={styles.completedSub} style={{ marginTop: '0.2rem' }}>
               All 8 trim tabs are isostatic. The ghost is awake.
             </div>
-            <button className={styles.continueBtn} onClick={() => (window.location.hash = '/fleet')}>
+            <button
+              className={styles.continueBtn}
+              onClick={() => (window.location.hash = '/fleet')}
+            >
               VIEW THE FLEET →
             </button>
           </motion.div>

@@ -12,12 +12,16 @@ export const Home: React.FC = () => (
           Relationships are <span className={styles.accent}>bonds</span>.
         </h1>
         <p className={styles.desc}>
-          A real-world game where presence replaces profiles, co-presence replaces
-          matching, and bonds form through shared time in shared space.
+          A real-world game where presence replaces profiles, co-presence replaces matching, and
+          bonds form through shared time in shared space.
         </p>
         <div className={styles.actions}>
-          <a href="#/pilot" className={styles.cta}>Join the Pilot</a>
-          <a href="#/demo" className={styles.secondary}>Live Demo →</a>
+          <a href="#/pilot" className={styles.cta}>
+            Join the Pilot
+          </a>
+          <a href="#/demo" className={styles.secondary}>
+            Live Demo →
+          </a>
         </div>
         <p className={styles.tagline}>"Same bowl, same room — your people first."</p>
       </div>
@@ -28,8 +32,7 @@ export const Home: React.FC = () => (
         <div className={styles.deltaTag}>K₄ · ISO·STATIC</div>
         <h2 className={styles.deltaTitle}>Delta Ignition</h2>
         <p className={styles.deltaDesc}>
-          A 12-second transformation. Wye collapses. Delta locks in.
-          You are the signal.
+          A 12-second transformation. Wye collapses. Delta locks in. You are the signal.
         </p>
         <a href="https://delta-ignition.p31ca.org" className={styles.deltaCta}>
           Run the Sequence →

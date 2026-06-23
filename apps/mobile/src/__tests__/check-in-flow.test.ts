@@ -11,7 +11,7 @@ interface LocationProof {
 // Replicates the checkIn logic from useWebSocket.ts
 function buildCheckInMessage(
   zoneId: string,
-  opts: { healthOptIn: boolean; energyLevel: number | null }
+  opts: { healthOptIn: boolean; energyLevel: number | null },
 ): Record<string, unknown> {
   const msg: Record<string, unknown> = {
     type: 'check_in',

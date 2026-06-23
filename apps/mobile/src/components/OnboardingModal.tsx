@@ -21,11 +21,12 @@ export const OnboardingModal: React.FC = () => {
         <p className={styles.desc}>You are an atom. Set your display name to begin.</p>
         <input
           className={styles.input}
-          value={name} onChange={e => setName(e.target.value)}
+          value={name}
+          onChange={(e) => setName(e.target.value)}
           placeholder="Your name"
           maxLength={32}
           autoFocus
-          onKeyDown={e => e.key === 'Enter' && handleSave()}
+          onKeyDown={(e) => e.key === 'Enter' && handleSave()}
         />
         <Button variant="primary" fullWidth disabled={!name.trim()} onClick={handleSave}>
           Enter BONDING

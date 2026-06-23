@@ -54,14 +54,17 @@ bonding/
 ## Deployment
 
 ### Backend (Render / Railway)
+
 - Set `DATABASE_URL` to a managed PostgreSQL.
 - Set `CORS_ORIGIN` to your frontend URL.
 - Build: `pnpm build:server` → start: `node dist/index.js`.
 
 ### Frontend (Vercel / Netlify)
+
 - Build: `pnpm build:mobile` → deploy `apps/mobile/dist`.
 
 ### Mobile Apps (Capacitor)
+
 - Add platforms: `npx cap add ios` / `npx cap add android`.
 - Sync: `npx cap sync`.
 - Open native IDE: `npx cap open ios` etc.

@@ -5,12 +5,13 @@ We live in a world of hyper‑connected digital isolation. Apps promise connecti
 **BONDING** exists to reverse that.
 
 **We believe:**
+
 - Real connection happens in physical space, not on screens.
 - Relationships are built through shared experiences, not notifications.
 - Meaningful collaboration solves real problems, not virtual ones.
 
 **Our North Star:**
-*"Same bowl, same room — your people first."*
+_"Same bowl, same room — your people first."_
 
 This isn't a social network. It's a permission structure for human chemistry.
 
@@ -28,6 +29,7 @@ This isn't a social network. It's a permission structure for human chemistry.
 ## Our Solution
 
 BONDING is a tool you open to find your people, then put away. It:
+
 - Gives you an excuse to meet (the game).
 - Holds you accountable (Valence reputation).
 - Protects your privacy (no raw GPS, ephemeral keys).
@@ -39,23 +41,23 @@ BONDING is a tool you open to find your people, then put away. It:
 
 ## The Metaphor
 
-| C.A.R.S. (Digital) | BONDING (Meatspace) |
-|---------------------|----------------------|
-| Atoms | Humans |
-| Bonds | Relationships |
-| Reactions | Collaborative problem‑solving |
-| Zones | Physical places (Calm, Lab, Kitchen, Deep, Wild) |
-| Valence | Trust & reliability |
+| C.A.R.S. (Digital) | BONDING (Meatspace)                              |
+| ------------------ | ------------------------------------------------ |
+| Atoms              | Humans                                           |
+| Bonds              | Relationships                                    |
+| Reactions          | Collaborative problem‑solving                    |
+| Zones              | Physical places (Calm, Lab, Kitchen, Deep, Wild) |
+| Valence            | Trust & reliability                              |
 
 ---
 
 ## Ethical Design Principles
 
-| Principle | Implementation |
-|-----------|----------------|
-| **Calm technology** | Open → find people → close. No infinite scroll. |
-| **No engagement loops** | No streaks, leaderboards, variable‑ratio rewards. |
-| **Privacy by default** | Client‑side geohash only; witness consensus, no continuous tracking. |
-| **Mutual opt‑in** | Both parties must agree to bond. No "likes" notifications. |
-| **Complementary matching** | Match different skills, shared interests—not just similarity. |
-| **Off‑platform success** | We measure real friendships formed, problems solved, not DAU. |
+| Principle                  | Implementation                                                       |
+| -------------------------- | -------------------------------------------------------------------- |
+| **Calm technology**        | Open → find people → close. No infinite scroll.                      |
+| **No engagement loops**    | No streaks, leaderboards, variable‑ratio rewards.                    |
+| **Privacy by default**     | Client‑side geohash only; witness consensus, no continuous tracking. |
+| **Mutual opt‑in**          | Both parties must agree to bond. No "likes" notifications.           |
+| **Complementary matching** | Match different skills, shared interests—not just similarity.        |
+| **Off‑platform success**   | We measure real friendships formed, problems solved, not DAU.        |

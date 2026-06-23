@@ -3,22 +3,22 @@
 **Purpose:** One-page smoke test for all live P31 Labs sites. Run after every deploy, weekly, or after any infrastructure change.  
 **Owner:** [YOU]  
 **Last verified:** [YYYY-MM-DD]  
-**Sign-off:** ___________________
+**Sign-off:** ********\_\_\_********
 
 ---
 
 ## 1. Cloudflare Pages — Site Matrix
 
-| Site | URL | Expected | Verified |
-|------|-----|----------|----------|
-| bonding-meatspace (onboarding shell) | https://bonding.p31ca.org | 200, redirects to `#/delta-ignition` or plane | [ ] |
-| delta-ignition (plane) | https://delta-ignition.p31ca.org | 200, MagnumWalk / Tetrahedron renders | [ ] |
-| trim-sequence (plane) | https://trim-sequence.p31ca.org | 200, TrimTabs CLI renders | [ ] |
-| fleet-status (plane) | https://fleet-status.p31ca.org | 200, FleetStatus terminal renders | [ ] |
-| bonding-meatspace (raw Pages) | https://bonding-meatspace.pages.dev | 200 (fallback) | [ ] |
-| delta-ignition (raw Pages) | https://delta-ignition.pages.dev | 200 (fallback) | [ ] |
-| trim-sequence (raw Pages) | https://trim-sequence.pages.dev | 200 (fallback) | [ ] |
-| fleet-status (raw Pages) | https://fleet-status.pages.dev | 200 (fallback) | [ ] |
+| Site                                 | URL                                 | Expected                                      | Verified |
+| ------------------------------------ | ----------------------------------- | --------------------------------------------- | -------- |
+| bonding-meatspace (onboarding shell) | https://bonding.p31ca.org           | 200, redirects to `#/delta-ignition` or plane | [ ]      |
+| delta-ignition (plane)               | https://delta-ignition.p31ca.org    | 200, MagnumWalk / Tetrahedron renders         | [ ]      |
+| trim-sequence (plane)                | https://trim-sequence.p31ca.org     | 200, TrimTabs CLI renders                     | [ ]      |
+| fleet-status (plane)                 | https://fleet-status.p31ca.org      | 200, FleetStatus terminal renders             | [ ]      |
+| bonding-meatspace (raw Pages)        | https://bonding-meatspace.pages.dev | 200 (fallback)                                | [ ]      |
+| delta-ignition (raw Pages)           | https://delta-ignition.pages.dev    | 200 (fallback)                                | [ ]      |
+| trim-sequence (raw Pages)            | https://trim-sequence.pages.dev     | 200 (fallback)                                | [ ]      |
+| fleet-status (raw Pages)             | https://fleet-status.pages.dev      | 200 (fallback)                                | [ ]      |
 
 ---
 
@@ -63,24 +63,24 @@ dig +short chemistry.p31ca.org
 
 ## 4. Cross-Site Link Validation
 
-| Test | Steps | Expected |
-|------|-------|----------|
-| Shell → delta-ignition | Visit `https://bonding.p31ca.org`, wait for auto-redirect or click "Delta Ignition" | Loads `delta-ignition.p31ca.org` |
-| Shell → trim-sequence | Click "Trim Sequence" from shell or manually navigate | Loads `trim-sequence.p31ca.org` |
-| Shell → fleet-status | Click "Fleet Status" | Loads `fleet-status.p31ca.org` |
-| FleetStatus back-link | In FleetStatus terminal, click `← Back` | Returns to `bonding.p31ca.org` |
-| IIFE global API | Add `<script src="https://delta-ignition.p31ca.org/delta-ignition.iife.js">` to any page, console: `window.initDeltaIgnition({ mode: 'minimal' })` | Returns object with `start`, `resume`, `skipTo`, `getState` |
+| Test                   | Steps                                                                                                                                              | Expected                                                    |
+| ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------- |
+| Shell → delta-ignition | Visit `https://bonding.p31ca.org`, wait for auto-redirect or click "Delta Ignition"                                                                | Loads `delta-ignition.p31ca.org`                            |
+| Shell → trim-sequence  | Click "Trim Sequence" from shell or manually navigate                                                                                              | Loads `trim-sequence.p31ca.org`                             |
+| Shell → fleet-status   | Click "Fleet Status"                                                                                                                               | Loads `fleet-status.p31ca.org`                              |
+| FleetStatus back-link  | In FleetStatus terminal, click `← Back`                                                                                                            | Returns to `bonding.p31ca.org`                              |
+| IIFE global API        | Add `<script src="https://delta-ignition.p31ca.org/delta-ignition.iife.js">` to any page, console: `window.initDeltaIgnition({ mode: 'minimal' })` | Returns object with `start`, `resume`, `skipTo`, `getState` |
 
 ---
 
 ## 5. Functional Smoke Tests
 
-| Plane | Key Interaction | Expected Result |
-|-------|-----------------|-----------------|
+| Plane                       | Key Interaction                                                 | Expected Result                                                  |
+| --------------------------- | --------------------------------------------------------------- | ---------------------------------------------------------------- |
 | MagnumWalk (delta-ignition) | Auto-play phases run (intro → wye → implosion → delta → stride) | 5 phases complete in ~15s, then "ENTER THE DELTA" button appears |
-| TrimTabs (trim-sequence) | Steps advance one-by-one | 8 steps complete, terminal builds correctly |
-| FleetStatus (fleet-status) | Click terminal, type `fleet status --all` and press Enter | K₴ fleet table renders with 6 ATOMs |
-| FleetStatus | Type `help` and press Enter | Shows available commands |
+| TrimTabs (trim-sequence)    | Steps advance one-by-one                                        | 8 steps complete, terminal builds correctly                      |
+| FleetStatus (fleet-status)  | Click terminal, type `fleet status --all` and press Enter       | K₴ fleet table renders with 6 ATOMs                              |
+| FleetStatus                 | Type `help` and press Enter                                     | Shows available commands                                         |
 
 ---
 
@@ -113,28 +113,28 @@ git branch -v        # master must match origin/master
 
 ## 8. Monitoring Alerts
 
-| Signal | Alert Threshold | Check Frequency |
-|--------|-----------------|-----------------|
-| CF Pages error rate | >1% over 5 min | Daily |
-| DNS resolution failure | Any timeout | Weekly |
-| IIFE bundle size | >200 KB (uncompressed) | Per deploy |
-| Test suite | Any failure | Every deploy |
+| Signal                 | Alert Threshold        | Check Frequency |
+| ---------------------- | ---------------------- | --------------- |
+| CF Pages error rate    | >1% over 5 min         | Daily           |
+| DNS resolution failure | Any timeout            | Weekly          |
+| IIFE bundle size       | >200 KB (uncompressed) | Per deploy      |
+| Test suite             | Any failure            | Every deploy    |
 
 ---
 
 ## 9. Sign-off
 
-| Item | Pass | Fail | Notes |
-|------|------|------|-------|
-| All 4 planes HTTP 200 | [ ] | [ ] | |
-| DNS propagation correct | [ ] | [ ] | |
-| Functional smoke tests | [ ] | [ ] | |
-| Local build + test clean | [ ] | [ ] | |
-| Git state clean | [ ] | [ ] | |
+| Item                     | Pass | Fail | Notes |
+| ------------------------ | ---- | ---- | ----- |
+| All 4 planes HTTP 200    | [ ]  | [ ]  |       |
+| DNS propagation correct  | [ ]  | [ ]  |       |
+| Functional smoke tests   | [ ]  | [ ]  |       |
+| Local build + test clean | [ ]  | [ ]  |       |
+| Git state clean          | [ ]  | [ ]  |       |
 
-**Verified by:** ___________________  
-**Date:** ___________________  
-**Next verification due:** ___________________
+**Verified by:** ********\_\_\_********  
+**Date:** ********\_\_\_********  
+**Next verification due:** ********\_\_\_********
 
 ---
 

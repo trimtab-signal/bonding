@@ -14,6 +14,7 @@ router.get('/community', async (_req, res) => {
       total_reactions: state.total_reactions,
     });
   } catch (e) {
+    console.error('Failed to fetch community state:', e);
     res.status(500).json({ error: 'Failed to fetch community state' });
   }
 });

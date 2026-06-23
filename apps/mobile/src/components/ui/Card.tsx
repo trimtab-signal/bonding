@@ -8,11 +8,25 @@ export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 export const Card: React.FC<CardProps> = ({
-  variant = 'default', padding = '1rem', onClick, className = '', children, ...rest
+  variant = 'default',
+  padding = '1rem',
+  onClick,
+  className = '',
+  children,
+  ...rest
 }) => {
-  const cls = [styles.card, styles[variant], onClick ? styles.clickable : '', className].filter(Boolean).join(' ');
+  const cls = [styles.card, styles[variant], onClick ? styles.clickable : '', className]
+    .filter(Boolean)
+    .join(' ');
   return (
-    <div className={cls} style={{ padding }} onClick={onClick} role={onClick ? 'button' : undefined} tabIndex={onClick ? 0 : undefined} {...rest}>
+    <div
+      className={cls}
+      style={{ padding }}
+      onClick={onClick}
+      role={onClick ? 'button' : undefined}
+      tabIndex={onClick ? 0 : undefined}
+      {...rest}
+    >
       {children}
     </div>
   );

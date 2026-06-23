@@ -13,8 +13,8 @@ export function LiveDemo() {
         <div className="section-label">Live Demo</div>
         <h2>See the Molecule in Motion</h2>
         <p className="lead">
-          Atoms orbiting, bonds forming, zones lighting up.
-          This is BONDING — your neighborhood as a living molecule.
+          Atoms orbiting, bonds forming, zones lighting up. This is BONDING — your neighborhood as a
+          living molecule.
         </p>
 
         <div className="demo-container">
@@ -26,12 +26,14 @@ export function LiveDemo() {
               <div
                 key={p.label}
                 className="demo-particle"
-                style={{
-                  '--orbit': p.orbit,
-                  '--speed': p.speed,
-                  '--delay': `${p.delay}s`,
-                  '--color': p.color,
-                } as React.CSSProperties}
+                style={
+                  {
+                    '--orbit': p.orbit,
+                    '--speed': p.speed,
+                    '--delay': `${p.delay}s`,
+                    '--color': p.color,
+                  } as React.CSSProperties
+                }
               >
                 <div className="demo-atom" style={{ background: p.color }}>
                   <span>{p.label}</span>
@@ -50,7 +52,10 @@ export function LiveDemo() {
               Available
             </div>
             <div className="demo-legend">
-              <span className="demo-legend-dot" style={{ background: 'var(--accent)', opacity: 0.3 }} />
+              <span
+                className="demo-legend-dot"
+                style={{ background: 'var(--accent)', opacity: 0.3 }}
+              />
               In Zone
             </div>
           </div>

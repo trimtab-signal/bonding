@@ -18,15 +18,25 @@
   animation: edgePulse 2.2s ease-in-out infinite;
 }
 @keyframes edgePulse {
-  0%, 100% { opacity: 0.35; }
-  50% { opacity: 0.9; }
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 0.9;
+  }
 }
 .vertexNode {
   animation: vertexPulse 1.8s ease-in-out infinite;
 }
 @keyframes vertexPulse {
-  0%, 100% { r: 0.14; }
-  50% { r: 0.18; }
+  0%,
+  100% {
+    r: 0.14;
+  }
+  50% {
+    r: 0.18;
+  }
 }
 .labelText {
   font-family: 'SF Mono', 'Fira Code', 'Courier New', monospace;

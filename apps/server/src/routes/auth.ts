@@ -17,10 +17,11 @@ router.post('/register', async (req: Request, res: Response) => {
          interests = CASE WHEN $6 IS NOT NULL THEN $6 ELSE atoms.interests END,
          last_seen = NOW()
        RETURNING id, display_name, bio, skills, interests, atom_type, current_zone, created_at`,
-      [id, JSON.stringify(publicKeyJwk), displayName, bio, skills, interests]
+      [id, JSON.stringify(publicKeyJwk), displayName, bio, skills, interests],
     );
     res.json(result.rows[0]);
   } catch (e) {
+    console.error('Registration failed:', e);
     res.status(500).json({ error: 'Registration failed' });
   }
 });
@@ -32,11 +33,12 @@ router.get('/atoms/:id', async (req: Request, res: Response) => {
     const result = await query(
       `SELECT id, display_name, bio, skills, interests, atom_type, current_zone, last_seen, total_bonds
        FROM atoms WHERE id = $1`,
-      [req.params.id]
+      [req.params.id],
     );
     if (result.rows.length === 0) return res.status(404).json({ error: 'Not found' });
     res.json(result.rows[0]);
   } catch (e) {
+    console.error('Query failed:', e);
     res.status(500).json({ error: 'Query failed' });
   }
 });
@@ -47,10 +49,11 @@ router.get('/atoms', async (_req: Request, res: Response) => {
     const { query } = await import('../db/pool.js');
     const result = await query(
       `SELECT id, display_name, bio, skills, interests, atom_type, current_zone, last_seen, total_bonds
-       FROM atoms ORDER BY last_seen DESC`
+       FROM atoms ORDER BY last_seen DESC`,
     );
     res.json(result.rows);
   } catch (e) {
+    console.error('Query failed:', e);
     res.status(500).json({ error: 'Query failed' });
   }
 });

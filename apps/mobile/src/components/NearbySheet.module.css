@@ -1,5 +1,25 @@
-.sheet { padding: 0.5rem 0; }
-.title { font-size: 0.9rem; color: var(--text-dim); padding: 0.5rem 1rem; font-weight: 600; }
-.list { display: flex; flex-direction: column; gap: 0.25rem; }
-.empty { font-size: 0.85rem; color: var(--text-dim); padding: 1rem; text-align: center; }
-.actions { display: flex; align-items: center; gap: 0.25rem; }
+.sheet {
+  padding: 0.5rem 0;
+}
+.title {
+  font-size: 0.9rem;
+  color: var(--text-dim);
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+}
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.empty {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  padding: 1rem;
+  text-align: center;
+}
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}

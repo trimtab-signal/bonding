@@ -6,17 +6,17 @@
 
 ## Hardware Bill of Materials (×1 node)
 
-| Item | Spec | Qty | Est. Cost |
-|------|------|-----|-----------|
-| Raspberry Pi 5 | 4 GB RAM (recommended) | 1 | $50–$80 |
-| Raspberry Pi 5 | 8 GB RAM (if memory-intensive workloads) | 1 | $80–$100 |
-| Official Pi 5 power supply | USB-C 27 W | 1 | $12 |
-| MicroSD card | 64 GB A2-class (for boot) | 1 | $10 |
-| NVMe SSD (optional but recommended) | M.2 2230, 128 GB+ | 1 | $15–$25 |
-| Pi 5 case + cooling | Active cooler recommended | 1 | $10 |
-| Ethernet cable | Cat6, 1 m | 1 | $2 |
-| **Total per node (4GB config)** | | | **~$85** |
-| **×3 nodes + misc** | | | **~$295** |
+| Item                                | Spec                                     | Qty | Est. Cost |
+| ----------------------------------- | ---------------------------------------- | --- | --------- |
+| Raspberry Pi 5                      | 4 GB RAM (recommended)                   | 1   | $50–$80   |
+| Raspberry Pi 5                      | 8 GB RAM (if memory-intensive workloads) | 1   | $80–$100  |
+| Official Pi 5 power supply          | USB-C 27 W                               | 1   | $12       |
+| MicroSD card                        | 64 GB A2-class (for boot)                | 1   | $10       |
+| NVMe SSD (optional but recommended) | M.2 2230, 128 GB+                        | 1   | $15–$25   |
+| Pi 5 case + cooling                 | Active cooler recommended                | 1   | $10       |
+| Ethernet cable                      | Cat6, 1 m                                | 1   | $2        |
+| **Total per node (4GB config)**     |                                          |     | **~$85**  |
+| **×3 nodes + misc**                 |                                          |     | **~$295** |
 
 **Recommended retailer:** [raspberrypi.com](https://www.raspberrypi.com/products/) or [adafruit.com](https://www.adafruit.com/) (check for bundle deals).
 
@@ -170,13 +170,13 @@ curl -s https://k4.p31ca.org/nodes | jq '.[] | select(.id | startswith("rpi5"))'
 
 ## Open Questions
 
-| Item | Decision needed |
-|------|----------------|
-| Static IPs or DHCP reservations? | Prefer DHCP reservations on router |
-| Tailscale / ZeroTier for remote access? | Recommended — keeps SSH off public internet |
-| Domain for per-node APIs? | e.g., `rpi5-01.p31ca.org` via CF Tunnel |
-| Auto-update policy? | Manual on pilot; consider unattended-upgrades later |
-| Pre-provisioning testing? | Use [ptrsr/pi-ci](https://github.com/ptrsr/pi-ci) Docker image for reproducible Pi 5 VM testing before flashing |
+| Item                                    | Decision needed                                                                                                 |
+| --------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| Static IPs or DHCP reservations?        | Prefer DHCP reservations on router                                                                              |
+| Tailscale / ZeroTier for remote access? | Recommended — keeps SSH off public internet                                                                     |
+| Domain for per-node APIs?               | e.g., `rpi5-01.p31ca.org` via CF Tunnel                                                                         |
+| Auto-update policy?                     | Manual on pilot; consider unattended-upgrades later                                                             |
+| Pre-provisioning testing?               | Use [ptrsr/pi-ci](https://github.com/ptrsr/pi-ci) Docker image for reproducible Pi 5 VM testing before flashing |
 
 ---
 

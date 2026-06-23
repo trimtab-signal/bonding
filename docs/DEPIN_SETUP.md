@@ -3,7 +3,7 @@
 **Purpose:** Turn your primary workstation into an active DePIN node (Node 0) to generate $5–30/month in passive income while you execute the funding pipeline.  
 **Target:** Linux workstation (Ubuntu/Debian) with Docker + Docker Compose  
 **Est. earnings:** $5–30/month depending on services enabled and network conditions  
-**Time to deploy:** 15–30 minutes  
+**Time to deploy:** 15–30 minutes
 
 ---
 
@@ -50,14 +50,14 @@ curl -s http://localhost:3000/health | jq .
 
 Edit `docker-compose.yml` or `.env` to enable/disable specific DePIN services based on your hardware:
 
-| Service | Resource Cost | Est. Earnings | Notes |
-|---------|--------------|---------------|-------|
-| Honeygain | Low (bandwidth) | $2–10/mo | Passive bandwidth sharing |
-| Pawns.app | Low (bandwidth) | $1–5/mo | Similar bandwidth model |
-| TraffMonetizer | Low (bandwidth) | $1–5/mo | Traffic monetization |
-| Storage node | Medium (disk) | $2–8/mo | If running Filecoin/Storj |
-| Compute node | High (CPU/GPU) | $5–20/mo | Akash, Render, etc. |
-| Full verification node | Medium (disk+bandwidth) | $2–10/mo | Ethereum/Tenderly-style |
+| Service                | Resource Cost           | Est. Earnings | Notes                     |
+| ---------------------- | ----------------------- | ------------- | ------------------------- |
+| Honeygain              | Low (bandwidth)         | $2–10/mo      | Passive bandwidth sharing |
+| Pawns.app              | Low (bandwidth)         | $1–5/mo       | Similar bandwidth model   |
+| TraffMonetizer         | Low (bandwidth)         | $1–5/mo       | Traffic monetization      |
+| Storage node           | Medium (disk)           | $2–8/mo       | If running Filecoin/Storj |
+| Compute node           | High (CPU/GPU)          | $5–20/mo      | Akash, Render, etc.       |
+| Full verification node | Medium (disk+bandwidth) | $2–10/mo      | Ethereum/Tenderly-style   |
 
 **Recommendation for Node 0:** Enable bandwidth services only (Honeygain + Pawns + TraffMonetizer = ~$5–20/mo) while you run the mortgage call and grant applications. Avoid high-CPU tasks on your primary workstation during crunch time.
 
@@ -98,12 +98,12 @@ If you need the $400 Georgia late fee **now** and cannot wait for DePIN:
 
 ## Troubleshooting
 
-| Issue | Fix |
-|-------|-----|
-| Port already in use | Change `ports:` mapping in `docker-compose.yml` |
-| Container exits immediately | `docker compose logs <service>` for error details |
-| Bandwidth services blocked by ISP | Check ISP TOS; use VPN if allowed |
-| Earnings not showing | Most services have a 30-day activation window; verify account status |
+| Issue                             | Fix                                                                  |
+| --------------------------------- | -------------------------------------------------------------------- |
+| Port already in use               | Change `ports:` mapping in `docker-compose.yml`                      |
+| Container exits immediately       | `docker compose logs <service>` for error details                    |
+| Bandwidth services blocked by ISP | Check ISP TOS; use VPN if allowed                                    |
+| Earnings not showing              | Most services have a 30-day activation window; verify account status |
 
 ---
 

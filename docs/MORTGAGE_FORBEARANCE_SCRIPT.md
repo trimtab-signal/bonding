@@ -44,7 +44,7 @@
 ## Scripted Responses to Common Push-Back
 
 **"We can only offer forbearance after a missed payment."**  
-→ "I understand. I am calling *ahead* of the due date to avoid a missed payment. If a missed payment is required to open the review, please confirm that in writing and state the date it will be reported."
+→ "I understand. I am calling _ahead_ of the due date to avoid a missed payment. If a missed payment is required to open the review, please confirm that in writing and state the date it will be reported."
 
 **"Forbearance will hurt your credit score."**  
 → "Please tell me exactly how this will appear on the business credit report and whether it will be reported as a status of 'forbearance' or 'late.' I need that detail before I can decide."
@@ -59,12 +59,12 @@
 
 ## Escalation Path
 
-| Step | Action | Target |
-|------|--------|--------|
-| 1 | Ask for supervisor | "Can you connect me to your loss mitigation supervisor?" |
-| 2 | Request written confirmation | "Please email me the forbearance terms within 24 hours." |
-| 3 | Formal written request | Send certified mail + email to the servicer's loss mitigation department |
-| 4 | If denied, contact | HUD-approved housing counselor (free) or legal aid |
+| Step | Action                       | Target                                                                   |
+| ---- | ---------------------------- | ------------------------------------------------------------------------ |
+| 1    | Ask for supervisor           | "Can you connect me to your loss mitigation supervisor?"                 |
+| 2    | Request written confirmation | "Please email me the forbearance terms within 24 hours."                 |
+| 3    | Formal written request       | Send certified mail + email to the servicer's loss mitigation department |
+| 4    | If denied, contact           | HUD-approved housing counselor (free) or legal aid                       |
 
 ---
 
@@ -91,6 +91,6 @@
 ## Notes
 
 - Keep tone calm, factual, unemotional.
-- Do not admit inability to pay; state *cash‑flow lag* instead.
+- Do not admit inability to pay; state _cash‑flow lag_ instead.
 - Do not agree to anything verbally that you cannot afford.
 - This script is for informational purposes; consult legal counsel before signing.

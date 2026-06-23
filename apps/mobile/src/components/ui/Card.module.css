@@ -1,6 +1,24 @@
-.card { background: var(--surface); border-radius: var(--radius); transition: transform 0.2s, box-shadow 0.2s; }
-.default { background: var(--surface); }
-.elevated { background: var(--surface2); box-shadow: 0 4px 16px rgba(0,0,0,0.3); }
-.bordered { border: 1px solid var(--border); }
-.clickable { cursor: pointer; }
-.clickable:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.3); }
+.card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+}
+.default {
+  background: var(--surface);
+}
+.elevated {
+  background: var(--surface2);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+.bordered {
+  border: 1px solid var(--border);
+}
+.clickable {
+  cursor: pointer;
+}
+.clickable:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}

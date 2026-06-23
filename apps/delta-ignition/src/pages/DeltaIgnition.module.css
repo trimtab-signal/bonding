@@ -60,8 +60,14 @@
   animation: implode 1.4s cubic-bezier(0.6, 0, 1, 1) forwards;
 }
 @keyframes implode {
-  0% { transform: scale(1); opacity: 1; }
-  100% { transform: scale(0.05); opacity: 0; }
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.05);
+    opacity: 0;
+  }
 }
 
 .deltaTetraWrap {
@@ -76,8 +82,12 @@
   animation: tetraRotate 18s linear infinite;
 }
 @keyframes tetraRotate {
-  from { transform: rotateX(-14deg) rotateY(0deg); }
-  to { transform: rotateX(-14deg) rotateY(360deg); }
+  from {
+    transform: rotateX(-14deg) rotateY(0deg);
+  }
+  to {
+    transform: rotateX(-14deg) rotateY(360deg);
+  }
 }
 
 .strideWrap {
@@ -90,8 +100,14 @@
   animation: strideZoom 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 @keyframes strideZoom {
-  from { transform: scale(1); opacity: 0; }
-  to { transform: scale(1.03); opacity: 1; }
+  from {
+    transform: scale(1);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1.03);
+    opacity: 1;
+  }
 }
 .strideDeltaSymbol {
   font-size: clamp(5rem, 14vw, 8rem);
@@ -140,8 +156,15 @@
   box-shadow: 0 8px 40px -8px var(--delta-glow);
 }
 @keyframes blueSteelPulse {
-  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 var(--delta-glow); }
-  50% { opacity: 0.85; box-shadow: 0 0 28px 4px var(--delta-glow); }
+  0%,
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 0 0 var(--delta-glow);
+  }
+  50% {
+    opacity: 0.85;
+    box-shadow: 0 0 28px 4px var(--delta-glow);
+  }
 }
 .skipBtn {
   position: absolute;
@@ -182,15 +205,26 @@
 .glare {
   position: absolute;
   inset: 0;
-  background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, 0.04) 48%, rgba(255, 255, 255, 0.08) 50%, rgba(255, 255, 255, 0.04) 52%, transparent 70%);
+  background: linear-gradient(
+    110deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.04) 48%,
+    rgba(255, 255, 255, 0.08) 50%,
+    rgba(255, 255, 255, 0.04) 52%,
+    transparent 70%
+  );
   background-size: 250% 100%;
   animation: glareSweep 4s ease-in-out infinite;
   pointer-events: none;
   z-index: 5;
 }
 @keyframes glareSweep {
-  0% { background-position: 150% 0; }
-  100% { background-position: -50% 0; }
+  0% {
+    background-position: 150% 0;
+  }
+  100% {
+    background-position: -50% 0;
+  }
 }
 
 .phaseFlash {
@@ -213,9 +247,19 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .implosionCore { animation-duration: 0.01ms; }
-  .tetrahedronInner { animation-duration: 0.01ms; }
-  .strideWrap { animation-duration: 0.01ms; }
-  .enterBtn { animation-duration: 0.01ms; }
-  .glare { animation-duration: 20s; }
+  .implosionCore {
+    animation-duration: 0.01ms;
+  }
+  .tetrahedronInner {
+    animation-duration: 0.01ms;
+  }
+  .strideWrap {
+    animation-duration: 0.01ms;
+  }
+  .enterBtn {
+    animation-duration: 0.01ms;
+  }
+  .glare {
+    animation-duration: 20s;
+  }
 }

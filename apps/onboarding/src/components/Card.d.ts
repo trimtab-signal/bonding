@@ -1,5 +1,5 @@
 interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
-    variant?: 'default' | 'elevated';
+  variant?: 'default' | 'elevated';
 }
 export declare const Card: React.FC<CardProps>;
 export {};

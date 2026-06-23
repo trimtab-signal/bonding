@@ -1,3 +1,11 @@
-.card { background: var(--bg-card); border-radius: var(--radius); padding: 2rem; }
-.default { border: 1px solid rgba(44, 36, 30, 0.06); }
-.elevated { box-shadow: var(--shadow); }
+.card {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 2rem;
+}
+.default {
+  border: 1px solid rgba(44, 36, 30, 0.06);
+}
+.elevated {
+  box-shadow: var(--shadow);
+}

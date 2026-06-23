@@ -19,12 +19,12 @@ vi.mock('../hooks/crypto.js', () => ({
     const str = `${jwk.kty}-${jwk.crv}-${jwk.x}-${jwk.y}`;
     let hash = 0;
     for (let i = 0; i < str.length; i++) {
-      hash = ((hash << 5) - hash) + str.charCodeAt(i);
+      hash = (hash << 5) - hash + str.charCodeAt(i);
       hash |= 0;
     }
     return Math.abs(hash).toString(16).padStart(16, '0');
   }),
-  importPublicKey: vi.fn(async () => ({ type: 'public' } as CryptoKey)),
+  importPublicKey: vi.fn(async () => ({ type: 'public' }) as CryptoKey),
   signData: vi.fn(async () => 'mock-signature'),
 }));
 
@@ -58,7 +58,12 @@ describe('crypto utilities (mocked)', () => {
 
   it('different JWKs produce different user IDs', async () => {
     const { generateUserId } = await import('../hooks/crypto.js');
-    const jwk2: JsonWebKey = { kty: 'EC', crv: 'P-256', x: 'different-value', y: 'different-value' };
+    const jwk2: JsonWebKey = {
+      kty: 'EC',
+      crv: 'P-256',
+      x: 'different-value',
+      y: 'different-value',
+    };
     const id1 = await generateUserId(TEST_JWK);
     const id2 = await generateUserId(jwk2);
     expect(id1).not.toBe(id2);

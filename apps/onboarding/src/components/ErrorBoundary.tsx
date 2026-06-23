@@ -1,8 +1,13 @@
 import { Component, type ReactNode } from 'react';
 import styles from './ErrorBoundary.module.css';
 
-interface Props { children: ReactNode; }
-interface State { hasError: boolean; error?: Error; }
+interface Props {
+  children: ReactNode;
+}
+interface State {
+  hasError: boolean;
+  error?: Error;
+}
 
 export class ErrorBoundary extends Component<Props, State> {
   state: State = { hasError: false };
@@ -18,7 +23,13 @@ export class ErrorBoundary extends Component<Props, State> {
           <span className={styles.icon}>🧬</span>
           <h2 className={styles.title}>Something shifted</h2>
           <p className={styles.desc}>An unexpected error occurred. The molecule needs a moment.</p>
-          <button className={styles.btn} onClick={() => { this.setState({ hasError: false }); window.location.hash = '#/'; }}>
+          <button
+            className={styles.btn}
+            onClick={() => {
+              this.setState({ hasError: false });
+              window.location.hash = '#/';
+            }}
+          >
             Relaunch
           </button>
           {this.state.error && (

@@ -39,7 +39,9 @@ app.get('/api/zones', (_req, res) => {
 // K₄ Fractal Flywheel endpoints
 app.get('/k4/graph', async (_req, res) => {
   try {
-    const remote = await fetch(`${process.env.K4_SYNC_URL || 'https://cashpilot-sync.trimtab-signal.workers.dev'}/api/k4/graph?level=0`);
+    const remote = await fetch(
+      `${process.env.K4_SYNC_URL || 'https://cashpilot-sync.trimtab-signal.workers.dev'}/api/k4/graph?level=0`,
+    );
     const data = await remote.json();
     res.json({ source: 'bonding-server', ...data });
   } catch {
@@ -49,7 +51,9 @@ app.get('/k4/graph', async (_req, res) => {
 
 app.get('/k4/ledger', async (_req, res) => {
   try {
-    const remote = await fetch(`${process.env.K4_SYNC_URL || 'https://cashpilot-sync.trimtab-signal.workers.dev'}/api/k4/ledger?level=0&feature=valence`);
+    const remote = await fetch(
+      `${process.env.K4_SYNC_URL || 'https://cashpilot-sync.trimtab-signal.workers.dev'}/api/k4/ledger?level=0&feature=valence`,
+    );
     const data = await remote.json();
     res.json(data);
   } catch {
@@ -65,13 +69,13 @@ const PORT = parseInt(process.env.PORT || '3001', 10);
 async function start() {
   try {
     await migrate();
-    console.log('[bonding] Database migrated');
+    console.warn('[bonding] Database migrated');
   } catch (e) {
     console.warn('[bonding] Migration skipped (DB may not be ready):', (e as Error).message);
   }
 
   httpServer.listen(PORT, () => {
-    console.log(`[bonding] Server running on port ${PORT}`);
+    console.warn(`[bonding] Server running on port ${PORT}`);
   });
 }
 

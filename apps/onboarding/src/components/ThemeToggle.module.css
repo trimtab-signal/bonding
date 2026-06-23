@@ -12,4 +12,6 @@
   border-radius: var(--radius-sm);
   transition: background 0.2s;
 }
-.toggle:hover { background: var(--bg-accent); }
+.toggle:hover {
+  background: var(--bg-accent);
+}

@@ -14,6 +14,7 @@ Thanks for your interest in BONDING! You're invited to join our hyperlocal pilot
 A real-world social game where humans are atoms, relationships are bonds, and solving problems together is the reaction. It's a calm technology — no streaks, no leaderboards, no surveillance.
 
 **What to expect:**
+
 1. Open the app in your mobile browser (no install needed)
 2. Set your display name — you're now an atom
 3. Check in at a zone near you
@@ -25,6 +26,7 @@ A real-world social game where humans are atoms, relationships are bonds, and so
 👉 Read the quick-start guide: [link to PILOT_GUIDE.md]
 
 **Pilot details:**
+
 - Duration: 4 weeks
 - Commitment: Use the app at least 2-3 times per week
 - Feedback: Brief survey at week 2 and week 4
@@ -81,12 +83,14 @@ You're 2 weeks into the BONDING pilot! We'd love to hear how it's going.
 [link to form]
 
 **Questions we're asking:**
+
 - How many times have you checked in?
 - Have you formed any bonds?
 - What's working well?
 - What's confusing or broken?
 
 **Known issues we're tracking:**
+
 - {issue 1}
 - {issue 2}
 
@@ -110,6 +114,7 @@ Hi {NAME},
 The 4-week pilot has wrapped. Thank you for being part of it!
 
 **Here's what we learned:**
+
 - {stat 1}: bonds formed
 - {stat 2}: check-ins logged
 - {stat 3}: reactions shared
@@ -118,11 +123,13 @@ The 4-week pilot has wrapped. Thank you for being part of it!
 [link to form]
 
 **What's next:**
+
 - We'll share pilot results with the community
 - The app remains live — keep using it!
 - We're planning expansion to more areas
 
 **Stay connected:**
+
 - GitHub: https://github.com/trimtab-signal/bonding
 - Email: pilot@bonding.p31ca.org
 

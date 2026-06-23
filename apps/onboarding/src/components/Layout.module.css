@@ -1,2 +1,9 @@
-.layout { min-height: 100vh; display: flex; flex-direction: column; }
-.main { flex: 1; padding-top: 72px; }
+.layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.main {
+  flex: 1;
+  padding-top: 72px;
+}

@@ -21,7 +21,10 @@ export class MockPool {
     this.handler = handler;
   }
 
-  async query<T extends QueryResultRow = any>(text: string, params?: any[]): Promise<QueryResult<T>> {
+  async query<T extends QueryResultRow = any>(
+    text: string,
+    params?: any[],
+  ): Promise<QueryResult<T>> {
     const result = await this.handler(text, params);
     return result as QueryResult<T>;
   }
@@ -37,7 +40,7 @@ export function matchHandler(
   rules: Array<{
     match: RegExp | string;
     handler: (text: string, params?: any[]) => QueryResult | Promise<QueryResult>;
-  }>
+  }>,
 ): QueryHandler {
   return (text: string, params?: any[]) => {
     for (const rule of rules) {

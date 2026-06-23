@@ -1,12 +1,64 @@
-.container { height: 100%; overflow-y: auto; }
-.header { text-align: center; padding: 2rem 1rem 1rem; display: flex; flex-direction: column; align-items: center; gap: 0.25rem; }
-.name { font-size: 1.3rem; font-weight: 600; }
-.id { font-size: 0.75rem; color: var(--text-dim); }
-.editBtn { background: none; border: 1px solid var(--border); color: var(--text-dim); font-size: 0.75rem; padding: 0.25rem 0.75rem; border-radius: var(--radius-sm); cursor: pointer; }
-.editBtn:hover { border-color: var(--accent); color: var(--text); }
-.statsGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; padding: 0.5rem 1rem; }
-.stat { display: flex; flex-direction: column; gap: 0.15rem; }
-.statLabel { font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.05em; }
-.statValue { font-size: 1.3rem; font-weight: 700; }
-.body { padding: 0.5rem 1rem 2rem; }
-.logItem { padding: 0.5rem 0.75rem; margin-bottom: 0.25rem; border-radius: var(--radius-sm); background: var(--surface2); font-size: 0.8rem; }
+.container {
+  height: 100%;
+  overflow-y: auto;
+}
+.header {
+  text-align: center;
+  padding: 2rem 1rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+.name {
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+.id {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+}
+.editBtn {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  font-size: 0.75rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+.editBtn:hover {
+  border-color: var(--accent);
+  color: var(--text);
+}
+.statsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+}
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+.statLabel {
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.statValue {
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+.body {
+  padding: 0.5rem 1rem 2rem;
+}
+.logItem {
+  padding: 0.5rem 0.75rem;
+  margin-bottom: 0.25rem;
+  border-radius: var(--radius-sm);
+  background: var(--surface2);
+  font-size: 0.8rem;
+}

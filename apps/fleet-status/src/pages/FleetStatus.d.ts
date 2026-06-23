@@ -1,2 +1,2 @@
-export default function FleetStatus(): import("react").JSX.Element;
+export default function FleetStatus(): import('react').JSX.Element;
 //# sourceMappingURL=FleetStatus.d.ts.map

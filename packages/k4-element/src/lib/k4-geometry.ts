@@ -17,13 +17,35 @@ export interface K4Edge {
 export type K4ValidationState = 'idle' | 'walking' | 'valid' | 'invalid';
 
 export function buildDefaultEdges(): K4Edge[] {
-  const labels: Record<string, string> = { '0-1': 'AB', '0-2': 'AC', '0-3': 'AD', '1-2': 'BC', '1-3': 'BD', '2-3': 'CD' };
-  return [{ from: 0, to: 1 }, { from: 0, to: 2 }, { from: 0, to: 3 }, { from: 1, to: 2 }, { from: 1, to: 3 }, { from: 2, to: 3 }].map((e) => ({
-    from: e.from, to: e.to, label: labels[`${e.from}-${e.to}`]!, valid: true, checked: false,
+  const labels: Record<string, string> = {
+    '0-1': 'AB',
+    '0-2': 'AC',
+    '0-3': 'AD',
+    '1-2': 'BC',
+    '1-3': 'BD',
+    '2-3': 'CD',
+  };
+  return [
+    { from: 0, to: 1 },
+    { from: 0, to: 2 },
+    { from: 0, to: 3 },
+    { from: 1, to: 2 },
+    { from: 1, to: 3 },
+    { from: 2, to: 3 },
+  ].map((e) => ({
+    from: e.from,
+    to: e.to,
+    label: labels[`${e.from}-${e.to}`]!,
+    valid: true,
+    checked: false,
   }));
 }
 
-export function texCoordinates(i: number, j: number, n: number): { u: number; v: number; w: number } {
+export function texCoordinates(
+  i: number,
+  j: number,
+  n: number,
+): { u: number; v: number; w: number } {
   const u = i / n;
   const v = j / n;
   const w = 1 - u - v;
@@ -39,5 +61,10 @@ export interface K4ValidationResult {
 
 export function validateK4(edges: K4Edge[]): K4ValidationResult {
   const invalid = edges.filter((e) => !e.valid);
-  return { valid: invalid.length === 0, validEdges: edges.length - invalid.length, totalEdges: edges.length, invalidEdges: invalid.map((e) => e.label) };
+  return {
+    valid: invalid.length === 0,
+    validEdges: edges.length - invalid.length,
+    totalEdges: edges.length,
+    invalidEdges: invalid.map((e) => e.label),
+  };
 }

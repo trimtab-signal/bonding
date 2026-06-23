@@ -9,9 +9,7 @@ function computeEnergyLevel(data: {
   const sleep = data.sleepScore ?? 0.7;
   const calcium = data.calcium ?? 0.8;
   const spoons = data.spoons ?? 0.6;
-  return Math.min(1.0, Math.max(0.0,
-    sleep * 0.3 + calcium * 0.3 + spoons * 0.4
-  ));
+  return Math.min(1.0, Math.max(0.0, sleep * 0.3 + calcium * 0.3 + spoons * 0.4));
 }
 
 describe('health energy level calculation', () => {

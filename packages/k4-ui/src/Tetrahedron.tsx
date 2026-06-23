@@ -92,38 +92,27 @@ export function Tetrahedron({
           </filter>
         </defs>
         <g filter="url(#tetraBlur)">
-        {edges.map(([a, b], idx) => {
-          const pa = projected[a];
-          const pb = projected[b];
-          if (!pa || !pb) return null;
-          return (
-            <line
-              key={idx}
-              x1={pa.x}
-              y1={pa.y}
-              x2={pb.x}
-              y2={pb.y}
-              className={styles.edgeLine}
-            />
-          );
-        })}
+          {edges.map(([a, b], idx) => {
+            const pa = projected[a];
+            const pb = projected[b];
+            if (!pa || !pb) return null;
+            return (
+              <line key={idx} x1={pa.x} y1={pa.y} x2={pb.x} y2={pb.y} className={styles.edgeLine} />
+            );
+          })}
 
-        {projected.map((p, i) => {
-          const v = vertices[i];
-          if (!p || !v) return null;
-          return (
-            <g key={i}>
-              <circle cx={p.x} cy={p.y} r="0.12" fill={v.color} className={styles.vertexNode} />
-              <text
-                x={p.x + 0.18}
-                y={p.y + 0.04}
-                className={styles.labelText}
-              >
-                {v.label}
-              </text>
-            </g>
-          );
-        })}
+          {projected.map((p, i) => {
+            const v = vertices[i];
+            if (!p || !v) return null;
+            return (
+              <g key={i}>
+                <circle cx={p.x} cy={p.y} r="0.12" fill={v.color} className={styles.vertexNode} />
+                <text x={p.x + 0.18} y={p.y + 0.04} className={styles.labelText}>
+                  {v.label}
+                </text>
+              </g>
+            );
+          })}
         </g>
       </svg>
     </div>

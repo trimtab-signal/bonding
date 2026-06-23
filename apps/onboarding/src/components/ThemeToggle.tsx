@@ -14,7 +14,11 @@ export const ThemeToggle: React.FC = () => {
   }, [dark]);
 
   return (
-    <button className={styles.toggle} onClick={() => setDark(!dark)} aria-label={dark ? 'Switch to light mode' : 'Switch to dark mode'}>
+    <button
+      className={styles.toggle}
+      onClick={() => setDark(!dark)}
+      aria-label={dark ? 'Switch to light mode' : 'Switch to dark mode'}
+    >
       {dark ? '☀️' : '🌙'}
     </button>
   );

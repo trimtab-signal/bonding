@@ -13,18 +13,20 @@
 
 The full stack is live: a cryptographically secured server, a mobile‑ready web app, an interactive demo, and an onboarding site. The system is ready for hyperlocal pilots in communities that want to strengthen social fabric.
 
-**North Star:** *"Same bowl, same room — your people first."*
+**North Star:** _"Same bowl, same room — your people first."_
 
 ---
 
 ## 2. Product Overview
 
 **What it is:**
+
 - A location‑based mobile game (PWA + Capacitor) where users check in at physical zones (Calm, Lab, Kitchen, Deep, Wild), ping nearby atoms, form bonds, and log reactions (problem_solved, resource_shared, etc.).
 - **Privacy by design:** no raw GPS is ever stored; location proofs are geohash‑only and signed with ECDSA keys; witness consensus replaces centralised trust.
 - **No engagement loops:** no streaks, no leaderboards, no variable‑ratio rewards. Success is measured by off‑platform outcomes — real friendships formed, real problems solved.
 
 **Key Features:**
+
 - 🔐 **Cryptographic Identity** — WebCrypto ECDSA P‑256 keys (no email, no password)
 - 📍 **Location Proofs** — geohash + raw GPS signed by private key, verified server‑side
 - 🤝 **Witness Consensus** — atoms can witness each other's check‑ins, building a web of trust
@@ -37,27 +39,29 @@ The full stack is live: a cryptographically secured server, a mobile‑ready web
 
 ## 3. Key Messages
 
-| Audience | Message |
-|----------|---------|
-| **Individuals** | "Finally, a reason to meet people who share your interests and complement your skills." |
-| **Communities** | "A tool to strengthen local ties, reduce loneliness, and turn passive residents into active citizens." |
-| **Urban Planners / Civic Tech** | "Hyperlocal connections that lead to real‑world help, collaboration, and trust." |
-| **Privacy‑Conscious Users** | "We don't track you. Your location stays with you. Your identity is yours alone." |
-| **Ethical Design Advocates** | "No engagement loops. No variable rewards. Just connection." |
+| Audience                        | Message                                                                                                |
+| ------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| **Individuals**                 | "Finally, a reason to meet people who share your interests and complement your skills."                |
+| **Communities**                 | "A tool to strengthen local ties, reduce loneliness, and turn passive residents into active citizens." |
+| **Urban Planners / Civic Tech** | "Hyperlocal connections that lead to real‑world help, collaboration, and trust."                       |
+| **Privacy‑Conscious Users**     | "We don't track you. Your location stays with you. Your identity is yours alone."                      |
+| **Ethical Design Advocates**    | "No engagement loops. No variable rewards. Just connection."                                           |
 
-**Tagline:** *"Humans are atoms. Relationships are bonds."*
+**Tagline:** _"Humans are atoms. Relationships are bonds."_
 
 ---
 
 ## 4. Target Audience
 
 **Primary:**
+
 - Residents of Kingsland/St. Marys, GA (pilot area)
 - People interested in deepening local connections
 - Remote workers, creatives, makers, and community builders
 - Privacy‑conscious individuals
 
 **Secondary:**
+
 - Urban planners, community organisers, local government
 - Civic tech enthusiasts, ethical design advocates
 - Academic researchers in HCI, location‑based games, and social trust
@@ -79,6 +83,7 @@ Unlike traditional social apps, BONDING uses **cryptographic identity** (WebCryp
 The game is currently available for hyperlocal pilots in the Kingsland/St. Marys area, with plans to expand. An interactive demo is live at [bonding‑meatspace.pages.dev/#/demo](https://bonding‑meatspace.pages.dev/#/demo).
 
 **Features:**
+
 - Five zones: Calm, Lab, Kitchen, Deep, Wild
 - Ping‑based bonding and reactions (problem_solved, resource_shared)
 - Privacy‑first: no accounts, no passwords, no surveillance
@@ -104,24 +109,24 @@ The game is currently available for hyperlocal pilots in the Kingsland/St. Marys
 
 ### 6.2 Screenshots
 
-| Screenshot | Path |
-|------------|------|
-| Onboarding Home | `media/onboarding-home.png` |
+| Screenshot           | Path                        |
+| -------------------- | --------------------------- |
+| Onboarding Home      | `media/onboarding-home.png` |
 | Living Molecule Demo | `media/onboarding-demo.png` |
-| Mobile Home (Map) | `media/mobile-home.png` |
-| Mobile Profile | `media/mobile-profile.png` |
-| Ping Modal | `media/mobile-ping.png` |
-| Reaction Modal | `media/mobile-reaction.png` |
+| Mobile Home (Map)    | `media/mobile-home.png`     |
+| Mobile Profile       | `media/mobile-profile.png`  |
+| Ping Modal           | `media/mobile-ping.png`     |
+| Reaction Modal       | `media/mobile-reaction.png` |
 
 ### 6.3 Social Media Cards
 
-| Platform | File | Size |
-|----------|------|------|
-| Twitter/X | `media/social-card-twitter.svg` | 1200×628 |
-| LinkedIn | `media/social-card-linkedin.svg` | 1200×627 |
+| Platform  | File                              | Size      |
+| --------- | --------------------------------- | --------- |
+| Twitter/X | `media/social-card-twitter.svg`   | 1200×628  |
+| LinkedIn  | `media/social-card-linkedin.svg`  | 1200×627  |
 | Instagram | `media/social-card-instagram.svg` | 1080×1080 |
-| Facebook | `media/social-card-facebook.svg` | 1200×630 |
-| OG Image | `media/social-card-og.svg` | 1200×630 |
+| Facebook  | `media/social-card-facebook.svg`  | 1200×630  |
+| OG Image  | `media/social-card-og.svg`        | 1200×630  |
 
 ### 6.4 Video Script
 
@@ -197,18 +202,18 @@ Interested? Sign up: pilot@bonding.p31ca.org
 **Length:** 60 seconds
 **Tone:** Warm, calm, human
 
-| Visual | Audio |
-|--------|-------|
-| Slow zoom into dark space with floating atoms | "What if your neighbourhood was a living molecule?" |
-| Atoms drifting, glowing lines forming between them | "You are an atom." |
-| One atom highlighted | "Relationships are bonds." |
-| Bond lines glow stronger | "And solving problems together is the reaction." |
-| Atoms cluster, a spark appears | |
-| Transition to mobile app UI | "BONDING is a real-world game where presence replaces profiles. Check in at a zone. Ping nearby atoms. Form bonds. Log reactions." |
-| Show zones (Calm, Lab, Kitchen, Deep, Wild) | "Five zones, each with a different mood. Your energy guides which zone fits." |
-| Show privacy badges | "Privacy is built in. No tracking. No surveillance. Just connection." |
-| Show demo molecule again, ending with tagline | "Same bowl, same room — your people first." |
-| Logo + URL | "Try the demo at bonding-meatspace.pages.dev" |
+| Visual                                             | Audio                                                                                                                              |
+| -------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| Slow zoom into dark space with floating atoms      | "What if your neighbourhood was a living molecule?"                                                                                |
+| Atoms drifting, glowing lines forming between them | "You are an atom."                                                                                                                 |
+| One atom highlighted                               | "Relationships are bonds."                                                                                                         |
+| Bond lines glow stronger                           | "And solving problems together is the reaction."                                                                                   |
+| Atoms cluster, a spark appears                     |                                                                                                                                    |
+| Transition to mobile app UI                        | "BONDING is a real-world game where presence replaces profiles. Check in at a zone. Ping nearby atoms. Form bonds. Log reactions." |
+| Show zones (Calm, Lab, Kitchen, Deep, Wild)        | "Five zones, each with a different mood. Your energy guides which zone fits."                                                      |
+| Show privacy badges                                | "Privacy is built in. No tracking. No surveillance. Just connection."                                                              |
+| Show demo molecule again, ending with tagline      | "Same bowl, same room — your people first."                                                                                        |
+| Logo + URL                                         | "Try the demo at bonding-meatspace.pages.dev"                                                                                      |
 
 ---
 
@@ -239,14 +244,14 @@ A: Yes! Code is at github.com/trimtab-signal/bonding. Contributions welcome.
 
 ## 10. Launch Timeline
 
-| Phase | Activity | Timing |
-|-------|----------|--------|
-| Pre‑launch | Internal testing, pilot recruitment | Week -2 to 0 |
-| Launch Day | Press release, social posts, demo live | Day 0 |
-| Week 1 | Community outreach, pilot kick‑off | Day 1–7 |
-| Week 2 | Collect pilot feedback, iterate | Day 8–14 |
-| Week 3 | Showcase results, invite next wave | Day 15–21 |
-| Week 4+ | Expansion, public open‑source call | Day 22+ |
+| Phase      | Activity                               | Timing       |
+| ---------- | -------------------------------------- | ------------ |
+| Pre‑launch | Internal testing, pilot recruitment    | Week -2 to 0 |
+| Launch Day | Press release, social posts, demo live | Day 0        |
+| Week 1     | Community outreach, pilot kick‑off     | Day 1–7      |
+| Week 2     | Collect pilot feedback, iterate        | Day 8–14     |
+| Week 3     | Showcase results, invite next wave     | Day 15–21    |
+| Week 4+    | Expansion, public open‑source call     | Day 22+      |
 
 ---
 
@@ -258,4 +263,4 @@ A: Yes! Code is at github.com/trimtab-signal/bonding. Contributions welcome.
 
 ---
 
-*"Same bowl, same room — your people first."*
+_"Same bowl, same room — your people first."_

@@ -28,7 +28,7 @@ export function computeEra(state: {
 }
 
 export async function updateCommunityCounter(
-  type: 'bond' | 'checkin' | 'reaction' | 'problem_solved'
+  type: 'bond' | 'checkin' | 'reaction' | 'problem_solved',
 ): Promise<number> {
   const columnMap: Record<string, string> = {
     bond: 'total_bonds',
@@ -38,7 +38,7 @@ export async function updateCommunityCounter(
   };
   const column = columnMap[type];
   await query(
-    `UPDATE community_state SET ${column} = ${column} + 1, updated_at = NOW() WHERE id = 1`
+    `UPDATE community_state SET ${column} = ${column} + 1, updated_at = NOW() WHERE id = 1`,
   );
   const state = await getCommunityState();
   const newEra = computeEra(state);

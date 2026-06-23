@@ -2,5 +2,5 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "bonding-onboarding",
   "compatibility_date": "2026-06-01",
-  "pages_build_output_dir": "apps/onboarding/dist"
+  "pages_build_output_dir": "apps/onboarding/dist",
 }

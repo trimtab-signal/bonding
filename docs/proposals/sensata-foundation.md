@@ -8,7 +8,7 @@
 **Primary sites:** MA, CA, VT, MI, ID, VA, MN  
 **Note:** Georgia is not a primary Sensata site, but applications from outside locations are considered. Emphasize national replicability and alignment with STEM Education priority.  
 **Submission:** PDF form → email to `foundation@sensata.com`  
-**Template version:** 2026-06-23 (optimized: $50K → $20K, Phase 1 only)  
+**Template version:** 2026-06-23 (optimized: $50K → $20K, Phase 1 only)
 
 ---
 
@@ -22,12 +22,12 @@ This phase delivers a nationally replicable curriculum and open-source asset lib
 
 ## 2. Mission Alignment
 
-| Sensata Foundation Priority | P31 Labs Match | Strategic Leverage |
-|-----------------------------|----------------|-------------------|
-| STEM education & workforce development | 6-month bootcamp + certification + project lab | Containerized, neuro-affirming curriculum |
-| Underserved populations | Explicitly targets neurodivergent individuals | Mitigates 85% underemployment via self-paced, localized infrastructure |
-| Programs, not general ops | Fully scoped Phase 1 pilot with measurable outcomes | Open-source assets enable national replication |
-| Community support | Camden County, GA regional focus | **Note:** Georgia is not a primary Sensata site, but our open-source methodology enables Sensata employees in any primary U.S. location to clone, deploy, and mentor this program locally. |
+| Sensata Foundation Priority            | P31 Labs Match                                      | Strategic Leverage                                                                                                                                                                         |
+| -------------------------------------- | --------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| STEM education & workforce development | 6-month bootcamp + certification + project lab      | Containerized, neuro-affirming curriculum                                                                                                                                                  |
+| Underserved populations                | Explicitly targets neurodivergent individuals       | Mitigates 85% underemployment via self-paced, localized infrastructure                                                                                                                     |
+| Programs, not general ops              | Fully scoped Phase 1 pilot with measurable outcomes | Open-source assets enable national replication                                                                                                                                             |
+| Community support                      | Camden County, GA regional focus                    | **Note:** Georgia is not a primary Sensata site, but our open-source methodology enables Sensata employees in any primary U.S. location to clone, deploy, and mentor this program locally. |
 
 ---
 
@@ -51,6 +51,7 @@ This phase delivers a nationally replicable curriculum and open-source asset lib
 **Phase 2 (Year 2 — NOT included in this request):** Paid internships with partner companies, funded by subsequent grants (e.g., Spectrum Digital Education, AWS Imagine).
 
 **Key differentiators:**
+
 - Neurodivergent-led design
 - No student debt — free to participants
 - Open-source assets — all curricula, code, and hardware designs released under open license
@@ -69,40 +70,40 @@ This phase delivers a nationally replicable curriculum and open-source asset lib
 
 ## 6. Timeline — Phase 1 Only (6 months)
 
-| Phase | Duration | Milestones |
-|-------|----------|------------|
-| Recruitment & intake | Month 1 | 12 participants selected; needs assessments completed |
-| Bootcamp | Months 2–3 | Certifications earned (Linux, Docker) |
-| Project Lab | Months 4–6 | 12 functional prototypes; public demo day |
-| **Year 2 (not in this request)** | Months 7–12+ | Paid internships; expansion to 30+ participants |
+| Phase                            | Duration     | Milestones                                            |
+| -------------------------------- | ------------ | ----------------------------------------------------- |
+| Recruitment & intake             | Month 1      | 12 participants selected; needs assessments completed |
+| Bootcamp                         | Months 2–3   | Certifications earned (Linux, Docker)                 |
+| Project Lab                      | Months 4–6   | 12 functional prototypes; public demo day             |
+| **Year 2 (not in this request)** | Months 7–12+ | Paid internships; expansion to 30+ participants       |
 
 ---
 
 ## 7. Budget ($20,000 requested)
 
-| Category | Amount |
-|----------|--------|
-| Instructor salaries (2 instructors × 15 hrs/wk × 26 wks) | $15,600 |
-| Hardware & materials (12 × Pi5 kits ~$150/ea) | $1,800 |
-| Learning platform (GitLab, monitoring) | $600 |
-| Mentorship coordination | $1,200 |
-| Evaluation & reporting | $800 |
-| Contingency (10%) | $2,000 |
-| **Total** | **$22,000** |
+| Category                                                 | Amount      |
+| -------------------------------------------------------- | ----------- |
+| Instructor salaries (2 instructors × 15 hrs/wk × 26 wks) | $15,600     |
+| Hardware & materials (12 × Pi5 kits ~$150/ea)            | $1,800      |
+| Learning platform (GitLab, monitoring)                   | $600        |
+| Mentorship coordination                                  | $1,200      |
+| Evaluation & reporting                                   | $800        |
+| Contingency (10%)                                        | $2,000      |
+| **Total**                                                | **$22,000** |
 
-*Note: $20,000 from Sensata; remaining $2,000 matched from other sources (GitHub Sponsors, Open Collective). Overhead absorbed by fiscal sponsor if needed.*
+_Note: $20,000 from Sensata; remaining $2,000 matched from other sources (GitHub Sponsors, Open Collective). Overhead absorbed by fiscal sponsor if needed._
 
 ---
 
 ## 8. Evaluation & Outcomes — Phase 1
 
-| Metric | Target |
-|--------|--------|
-| Participants completing bootcamp | ≥10 / 12 (83%) |
-| Participants completing project lab | ≥8 / 12 (67%) |
-| Public repository stars / forks | ≥100 / 20 within 6 months of launch |
-| Open-source curriculum downloads | ≥50 organizations |
-| Net promoter score from participants | ≥60 |
+| Metric                               | Target                              |
+| ------------------------------------ | ----------------------------------- |
+| Participants completing bootcamp     | ≥10 / 12 (83%)                      |
+| Participants completing project lab  | ≥8 / 12 (67%)                       |
+| Public repository stars / forks      | ≥100 / 20 within 6 months of launch |
+| Open-source curriculum downloads     | ≥50 organizations                   |
+| Net promoter score from participants | ≥60                                 |
 
 ---
 

@@ -10,9 +10,33 @@ export function HealthBanner() {
   if (!healthOptIn) {
     return (
       <Card padding="0.6rem 1rem" variant="bordered">
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '0.75rem' }}>
-          <span style={{ fontSize: 13, color: 'var(--text-dim)' }}>🌿 Enable health‑aware zone suggestions?</span>
-          <button onClick={() => setHealthOptIn(true)} className="btn-primary" style={{ padding: '4px 14px', borderRadius: 6, border: 'none', background: 'var(--accent)', color: '#fff', fontSize: 12, cursor: 'pointer', flexShrink: 0 }}>Opt In</button>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            gap: '0.75rem',
+          }}
+        >
+          <span style={{ fontSize: 13, color: 'var(--text-dim)' }}>
+            🌿 Enable health‑aware zone suggestions?
+          </span>
+          <button
+            onClick={() => setHealthOptIn(true)}
+            className="btn-primary"
+            style={{
+              padding: '4px 14px',
+              borderRadius: 6,
+              border: 'none',
+              background: 'var(--accent)',
+              color: '#fff',
+              fontSize: 12,
+              cursor: 'pointer',
+              flexShrink: 0,
+            }}
+          >
+            Opt In
+          </button>
         </div>
       </Card>
     );
@@ -33,9 +57,25 @@ export function HealthBanner() {
           <span style={{ fontSize: 13, fontWeight: 600 }}>
             {zone ? `${zone.emoji} Try ${zone.name}` : '🌿 No suggestion'}
           </span>
-          <Badge variant={suggested || 'default'} size="sm">Energy: {Math.round(energyLevel * 100)}%</Badge>
+          <Badge variant={suggested || 'default'} size="sm">
+            Energy: {Math.round(energyLevel * 100)}%
+          </Badge>
         </div>
-        <button onClick={() => setHealthOptIn(false)} style={{ padding: '3px 10px', borderRadius: 4, border: '1px solid var(--border)', background: 'transparent', color: 'var(--text-dim)', fontSize: 11, cursor: 'pointer', flexShrink: 0 }}>Hide</button>
+        <button
+          onClick={() => setHealthOptIn(false)}
+          style={{
+            padding: '3px 10px',
+            borderRadius: 4,
+            border: '1px solid var(--border)',
+            background: 'transparent',
+            color: 'var(--text-dim)',
+            fontSize: 11,
+            cursor: 'pointer',
+            flexShrink: 0,
+          }}
+        >
+          Hide
+        </button>
       </div>
     </Card>
   );

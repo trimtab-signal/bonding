@@ -11,12 +11,20 @@ export default function App() {
   const [tab, setTab] = useState<Tab>('map');
   return (
     <div className={styles.app}>
-      <main className={styles.main}>
-        {tab === 'map' ? <Home /> : <Profile />}
-      </main>
+      <main className={styles.main}>{tab === 'map' ? <Home /> : <Profile />}</main>
       <nav className={styles.nav}>
-        <button className={`${styles.tab} ${tab === 'map' ? styles.active : ''}`} onClick={() => setTab('map')}>🗺️ Map</button>
-        <button className={`${styles.tab} ${tab === 'profile' ? styles.active : ''}`} onClick={() => setTab('profile')}>🧬 Profile</button>
+        <button
+          className={`${styles.tab} ${tab === 'map' ? styles.active : ''}`}
+          onClick={() => setTab('map')}
+        >
+          🗺️ Map
+        </button>
+        <button
+          className={`${styles.tab} ${tab === 'profile' ? styles.active : ''}`}
+          onClick={() => setTab('profile')}
+        >
+          🧬 Profile
+        </button>
       </nav>
       <OnboardingModal />
       <Toaster />

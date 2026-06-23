@@ -13,8 +13,18 @@ const PAGES = [
 ];
 
 const EXTERNAL_LINKS = [
-  { id: 'phos', label: 'PHOS →', href: 'https://phos.p31ca.org', title: 'P31 Convergence Dashboard' },
-  { id: 'github', label: 'GitHub →', href: 'https://github.com/trimtab-signal/bonding', title: 'Source code' },
+  {
+    id: 'phos',
+    label: 'PHOS →',
+    href: 'https://phos.p31ca.org',
+    title: 'P31 Convergence Dashboard',
+  },
+  {
+    id: 'github',
+    label: 'GitHub →',
+    href: 'https://github.com/trimtab-signal/bonding',
+    title: 'Source code',
+  },
 ];
 
 export const Navigation: React.FC = () => {
@@ -57,7 +67,9 @@ export const Navigation: React.FC = () => {
         </div>
         <div className={styles.right}>
           <ThemeToggle />
-          <a href="#/pilot" className={styles.cta}>Join Pilot</a>
+          <a href="#/pilot" className={styles.cta}>
+            Join Pilot
+          </a>
         </div>
       </div>
     </nav>

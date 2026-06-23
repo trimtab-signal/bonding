@@ -59,8 +59,8 @@ describe('geohashEncode', () => {
   });
 
   it('nearby locations share prefix at low precision', () => {
-    const h1 = geohashEncode(51.500, -0.130, 3);
-    const h2 = geohashEncode(51.510, -0.120, 3);
+    const h1 = geohashEncode(51.5, -0.13, 3);
+    const h2 = geohashEncode(51.51, -0.12, 3);
     expect(h1[0]).toBe(h2[0]);
   });
 

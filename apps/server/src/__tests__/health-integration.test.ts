@@ -47,15 +47,17 @@ describe('health → valence integration', () => {
 
   it('adjustValence is called with the correct delta from energy', async () => {
     let capturedDelta = 0;
-    mockPool.setHandler(matchHandler([
-      {
-        match: 'UPDATE atoms SET valence',
-        handler: (_t, params) => {
-          capturedDelta = params[2] as number;
-          return { rows: [{ valence: 1.0 + capturedDelta }], rowCount: 1 };
+    mockPool.setHandler(
+      matchHandler([
+        {
+          match: 'UPDATE atoms SET valence',
+          handler: (_t, params) => {
+            capturedDelta = params[2] as number;
+            return { rows: [{ valence: 1.0 + capturedDelta }], rowCount: 1 };
+          },
         },
-      },
-    ]));
+      ]),
+    );
 
     const energy = 0.8;
     const delta = energyToDelta(energy); // = 0.03

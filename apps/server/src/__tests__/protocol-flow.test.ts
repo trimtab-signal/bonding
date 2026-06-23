@@ -35,27 +35,29 @@ describe('full protocol flow with health integration', () => {
     let capturedEnergy: number | null = null;
     let checkInInserted = false;
 
-    mockPool.setHandler(matchHandler([
-      {
-        match: 'INSERT INTO check_ins',
-        handler: (_t, params) => {
-          capturedEnergy = params[8] as number | null;
-          checkInInserted = true;
-          return { rows: [], rowCount: 1 };
+    mockPool.setHandler(
+      matchHandler([
+        {
+          match: 'INSERT INTO check_ins',
+          handler: (_t, params) => {
+            capturedEnergy = params[8] as number | null;
+            checkInInserted = true;
+            return { rows: [], rowCount: 1 };
+          },
         },
-      },
-      {
-        match: 'UPDATE atoms SET valence',
-        handler: (_t, params) => {
-          capturedDelta = params[2] as number;
-          return { rows: [{ valence: 1.0 + capturedDelta }], rowCount: 1 };
+        {
+          match: 'UPDATE atoms SET valence',
+          handler: (_t, params) => {
+            capturedDelta = params[2] as number;
+            return { rows: [{ valence: 1.0 + capturedDelta }], rowCount: 1 };
+          },
         },
-      },
-      {
-        match: /^UPDATE atoms SET (?!valence)/,
-        handler: () => ({ rows: [], rowCount: 1 }),
-      },
-    ]));
+        {
+          match: /^UPDATE atoms SET (?!valence)/,
+          handler: () => ({ rows: [], rowCount: 1 }),
+        },
+      ]),
+    );
 
     // Simulate game-handler.ts check_in logic:
     const { recordCheckIn } = await import('../services/game-loop.js');
@@ -80,26 +82,28 @@ describe('full protocol flow with health integration', () => {
     let capturedDelta = 0;
     let capturedEnergy: number | null = null;
 
-    mockPool.setHandler(matchHandler([
-      {
-        match: 'INSERT INTO check_ins',
-        handler: (_t, params) => {
-          capturedEnergy = params[8] as number | null;
-          return { rows: [], rowCount: 1 };
+    mockPool.setHandler(
+      matchHandler([
+        {
+          match: 'INSERT INTO check_ins',
+          handler: (_t, params) => {
+            capturedEnergy = params[8] as number | null;
+            return { rows: [], rowCount: 1 };
+          },
         },
-      },
-      {
-        match: 'UPDATE atoms SET valence',
-        handler: (_t, params) => {
-          capturedDelta = params[2] as number;
-          return { rows: [{ valence: 1.0 + capturedDelta }], rowCount: 1 };
+        {
+          match: 'UPDATE atoms SET valence',
+          handler: (_t, params) => {
+            capturedDelta = params[2] as number;
+            return { rows: [{ valence: 1.0 + capturedDelta }], rowCount: 1 };
+          },
         },
-      },
-      {
-        match: /^UPDATE atoms SET (?!valence)/,
-        handler: () => ({ rows: [], rowCount: 1 }),
-      },
-    ]));
+        {
+          match: /^UPDATE atoms SET (?!valence)/,
+          handler: () => ({ rows: [], rowCount: 1 }),
+        },
+      ]),
+    );
 
     const { recordCheckIn } = await import('../services/game-loop.js');
     const { adjustValence } = await import('../services/valence.js');
@@ -117,26 +121,28 @@ describe('full protocol flow with health integration', () => {
     let capturedEnergy: number | null = 999; // non-null sentinel
     let valenceAdjustmentCalled = false;
 
-    mockPool.setHandler(matchHandler([
-      {
-        match: 'INSERT INTO check_ins',
-        handler: (_t, params) => {
-          capturedEnergy = params[8] as number | null;
-          return { rows: [], rowCount: 1 };
+    mockPool.setHandler(
+      matchHandler([
+        {
+          match: 'INSERT INTO check_ins',
+          handler: (_t, params) => {
+            capturedEnergy = params[8] as number | null;
+            return { rows: [], rowCount: 1 };
+          },
         },
-      },
-      {
-        match: /UPDATE atoms SET valence/,
-        handler: () => {
-          valenceAdjustmentCalled = true;
-          return { rows: [{ valence: 1.05 }], rowCount: 1 };
+        {
+          match: /UPDATE atoms SET valence/,
+          handler: () => {
+            valenceAdjustmentCalled = true;
+            return { rows: [{ valence: 1.05 }], rowCount: 1 };
+          },
         },
-      },
-      {
-        match: /^UPDATE atoms/,
-        handler: () => ({ rows: [], rowCount: 1 }),
-      },
-    ]));
+        {
+          match: /^UPDATE atoms/,
+          handler: () => ({ rows: [], rowCount: 1 }),
+        },
+      ]),
+    );
 
     const { recordCheckIn } = await import('../services/game-loop.js');
 
@@ -153,17 +159,20 @@ describe('full protocol flow with health integration', () => {
 
     // Phase 1: Alice pings Bob
     let pingCreated = false;
-    mockPool.setHandler(matchHandler([
-      {
-        match: 'INSERT INTO pings',
-        handler: () => {
-          pingCreated = true;
-          return { rows: [], rowCount: 1 };
+    mockPool.setHandler(
+      matchHandler([
+        {
+          match: 'INSERT INTO pings',
+          handler: () => {
+            pingCreated = true;
+            return { rows: [], rowCount: 1 };
+          },
         },
-      },
-    ]));
+      ]),
+    );
 
-    const { createPing, respondToPing, getOrCreateBondId, recordCheckIn } = await import('../services/game-loop.js');
+    const { createPing, respondToPing, getOrCreateBondId, recordCheckIn } =
+      await import('../services/game-loop.js');
     const { boostCheckIn, getValence } = await import('../services/valence.js');
 
     const ping = await createPing(atomA, atomB, 'lab');
@@ -171,31 +180,42 @@ describe('full protocol flow with health integration', () => {
     expect(ping.status).toBe('pending');
 
     // Phase 2: Bob accepts
-    mockPool.setHandler(matchHandler([
-      {
-        match: 'SELECT * FROM pings',
-        handler: () => ({
-          rows: [{ id: ping.pingId, from_atom: atomA, to_atom: atomB, zone_id: 'lab', status: 'pending', created_at: new Date() }],
-          rowCount: 1,
-        }),
-      },
-      {
-        match: 'UPDATE pings SET status',
-        handler: () => ({ rows: [], rowCount: 1 }),
-      },
-      {
-        match: 'INSERT INTO bonds',
-        handler: () => ({ rows: [{ id: 'bond-alice-bob' }], rowCount: 1 }),
-      },
-      {
-        match: /^UPDATE atoms SET total_bonds/,
-        handler: () => ({ rows: [], rowCount: 2 }),
-      },
-      {
-        match: 'INSERT INTO reactions',
-        handler: () => ({ rows: [], rowCount: 1 }),
-      },
-    ]));
+    mockPool.setHandler(
+      matchHandler([
+        {
+          match: 'SELECT * FROM pings',
+          handler: () => ({
+            rows: [
+              {
+                id: ping.pingId,
+                from_atom: atomA,
+                to_atom: atomB,
+                zone_id: 'lab',
+                status: 'pending',
+                created_at: new Date(),
+              },
+            ],
+            rowCount: 1,
+          }),
+        },
+        {
+          match: 'UPDATE pings SET status',
+          handler: () => ({ rows: [], rowCount: 1 }),
+        },
+        {
+          match: 'INSERT INTO bonds',
+          handler: () => ({ rows: [{ id: 'bond-alice-bob' }], rowCount: 1 }),
+        },
+        {
+          match: /^UPDATE atoms SET total_bonds/,
+          handler: () => ({ rows: [], rowCount: 2 }),
+        },
+        {
+          match: 'INSERT INTO reactions',
+          handler: () => ({ rows: [], rowCount: 1 }),
+        },
+      ]),
+    );
 
     const acceptResult = await respondToPing(ping.pingId, true);
     expect(acceptResult.status).toBe('accepted');
@@ -205,44 +225,46 @@ describe('full protocol flow with health integration', () => {
     let bondCheckInCounted = false;
     let bondBoosted = false;
 
-    mockPool.setHandler(matchHandler([
-      {
-        match: 'INSERT INTO check_ins',
-        handler: (_t, params) => ({
-          rows: [{ id: 'ci-' + params[0] }],
-          rowCount: 1,
-        }),
-      },
-      // Specific valence UPDATE must come before general atoms UPDATE
-      {
-        match: 'UPDATE atoms SET valence',
-        handler: () => {
-          bondBoosted = true;
-          return { rows: [{ valence: 1.05 }], rowCount: 1 };
+    mockPool.setHandler(
+      matchHandler([
+        {
+          match: 'INSERT INTO check_ins',
+          handler: (_t, params) => ({
+            rows: [{ id: 'ci-' + params[0] }],
+            rowCount: 1,
+          }),
         },
-      },
-      {
-        match: /^UPDATE atoms SET/,
-        handler: () => ({ rows: [], rowCount: 1 }),
-      },
-      // getOrCreateBondId query
-      {
-        match: 'SELECT id FROM bonds',
-        handler: () => ({ rows: [{ id: bondId }], rowCount: 1 }),
-      },
-      // boostCheckIn queries: first SELECT bond, then UPDATE
-      {
-        match: 'SELECT id FROM bonds WHERE id',
-        handler: () => ({ rows: [{ id: bondId }], rowCount: 1 }),
-      },
-      {
-        match: /^UPDATE bonds SET check_in_count/,
-        handler: () => {
-          bondCheckInCounted = true;
-          return { rows: [], rowCount: 1 };
+        // Specific valence UPDATE must come before general atoms UPDATE
+        {
+          match: 'UPDATE atoms SET valence',
+          handler: () => {
+            bondBoosted = true;
+            return { rows: [{ valence: 1.05 }], rowCount: 1 };
+          },
         },
-      },
-    ]));
+        {
+          match: /^UPDATE atoms SET/,
+          handler: () => ({ rows: [], rowCount: 1 }),
+        },
+        // getOrCreateBondId query
+        {
+          match: 'SELECT id FROM bonds',
+          handler: () => ({ rows: [{ id: bondId }], rowCount: 1 }),
+        },
+        // boostCheckIn queries: first SELECT bond, then UPDATE
+        {
+          match: 'SELECT id FROM bonds WHERE id',
+          handler: () => ({ rows: [{ id: bondId }], rowCount: 1 }),
+        },
+        {
+          match: /^UPDATE bonds SET check_in_count/,
+          handler: () => {
+            bondCheckInCounted = true;
+            return { rows: [], rowCount: 1 };
+          },
+        },
+      ]),
+    );
 
     // Alice checks in
     await recordCheckIn(atomA, 'lab', '9q8yy', 0, 0, []);

@@ -1,15 +1,61 @@
-.section { padding: 4rem 1.5rem; background: var(--bg); }
-.inner { max-width: 1100px; margin: 0 auto; }
-.label {
-  display: inline-block; padding: 0.25rem 1rem; border-radius: 9999px;
-  background: var(--bg-accent); font-size: 0.75rem; font-weight: 600;
-  text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-dim); margin-bottom: 0.75rem;
+.section {
+  padding: 4rem 1.5rem;
+  background: var(--bg);
 }
-.title { font-size: 2.4rem; margin-bottom: 0.5rem; }
-.desc { font-size: 1.1rem; color: var(--text-dim); max-width: 640px; margin-bottom: 3rem; }
-.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.5rem; }
-.zone { text-align: center; padding: 1.5rem; }
-.emoji { font-size: 2.8rem; display: block; margin-bottom: 0.5rem; }
-.zone h3 { font-size: 1.1rem; margin-bottom: 0.2rem; }
-.zone p { font-size: 0.9rem; color: var(--text-dim); margin-bottom: 0.5rem; }
-.radius { font-size: 0.75rem; color: var(--text-dim); background: var(--bg-accent); padding: 0.15rem 0.8rem; border-radius: 9999px; display: inline-block; }
+.inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.label {
+  display: inline-block;
+  padding: 0.25rem 1rem;
+  border-radius: 9999px;
+  background: var(--bg-accent);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-dim);
+  margin-bottom: 0.75rem;
+}
+.title {
+  font-size: 2.4rem;
+  margin-bottom: 0.5rem;
+}
+.desc {
+  font-size: 1.1rem;
+  color: var(--text-dim);
+  max-width: 640px;
+  margin-bottom: 3rem;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.5rem;
+}
+.zone {
+  text-align: center;
+  padding: 1.5rem;
+}
+.emoji {
+  font-size: 2.8rem;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+.zone h3 {
+  font-size: 1.1rem;
+  margin-bottom: 0.2rem;
+}
+.zone p {
+  font-size: 0.9rem;
+  color: var(--text-dim);
+  margin-bottom: 0.5rem;
+}
+.radius {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  background: var(--bg-accent);
+  padding: 0.15rem 0.8rem;
+  border-radius: 9999px;
+  display: inline-block;
+}

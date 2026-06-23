@@ -1,9 +1,43 @@
-.badge { display: inline-flex; align-items: center; border-radius: 9999px; font-weight: 500; line-height: 1; padding: 0.25rem 0.6rem; text-transform: uppercase; letter-spacing: 0.03em; }
-.sm { font-size: 0.65rem; padding: 0.15rem 0.5rem; }
-.md { font-size: 0.75rem; padding: 0.25rem 0.75rem; }
-.calm { background: var(--calm); color: #fff; }
-.lab { background: var(--lab); color: #fff; }
-.kitchen { background: var(--kitchen); color: #fff; }
-.deep { background: var(--deep); color: #fff; }
-.wild { background: var(--wild); color: #fff; }
-.default { background: var(--surface2); color: var(--text-dim); border: 1px solid var(--border); }
+.badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 9999px;
+  font-weight: 500;
+  line-height: 1;
+  padding: 0.25rem 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.sm {
+  font-size: 0.65rem;
+  padding: 0.15rem 0.5rem;
+}
+.md {
+  font-size: 0.75rem;
+  padding: 0.25rem 0.75rem;
+}
+.calm {
+  background: var(--calm);
+  color: #fff;
+}
+.lab {
+  background: var(--lab);
+  color: #fff;
+}
+.kitchen {
+  background: var(--kitchen);
+  color: #fff;
+}
+.deep {
+  background: var(--deep);
+  color: #fff;
+}
+.wild {
+  background: var(--wild);
+  color: #fff;
+}
+.default {
+  background: var(--surface2);
+  color: var(--text-dim);
+  border: 1px solid var(--border);
+}

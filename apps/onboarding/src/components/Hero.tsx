@@ -11,9 +11,8 @@ export function Hero() {
           Relationships are <span className="gradient">bonds</span>.
         </h1>
         <p className="hero-subtitle">
-          A real-world social game where presence replaces profiles,
-          co-presence replaces matching, and bonds form through
-          shared time in shared space.
+          A real-world social game where presence replaces profiles, co-presence replaces matching,
+          and bonds form through shared time in shared space.
         </p>
         <p className="hero-tagline">"Same bowl, same room — your people first."</p>
         <div className="hero-buttons">
@@ -23,7 +22,12 @@ export function Hero() {
           <a href="#start" className="btn btn-secondary">
             Get Started
           </a>
-          <a href="https://github.com/anomalyco/bonding" className="btn btn-ghost" target="_blank" rel="noopener noreferrer">
+          <a
+            href="https://github.com/anomalyco/bonding"
+            className="btn btn-ghost"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             GitHub →
           </a>
         </div>

@@ -39,11 +39,11 @@ All components are 0.0–1.0. Missing values default to 0.7.
 ## Zone Suggestions
 
 | Energy Level | Suggested Zone |
-|-------------|----------------|
-| < 30%       | Calm 🌿       |
-| 30–60%      | Kitchen 🍳     |
-| 60–80%      | Lab 🔬         |
-| ≥ 80%       | Wild 🌀        |
+| ------------ | -------------- |
+| < 30%        | Calm 🌿        |
+| 30–60%       | Kitchen 🍳     |
+| 60–80%       | Lab 🔬         |
+| ≥ 80%        | Wild 🌀        |
 
 ## Opt‑In
 
@@ -55,14 +55,14 @@ The `check_ins` table has an optional `energy_level REAL` column (added by migra
 
 ## Files
 
-| File | Purpose |
-|------|---------|
-| `mobile/src/hooks/useHealth.ts` | Reads PHOS file, computes energy level |
-| `mobile/src/components/HealthBanner.tsx` | Shows zone suggestion based on energy |
-| `mobile/src/store/game-store.ts` | Stores `energyLevel` and `healthOptIn` |
-| `mobile/src/hooks/useWebSocket.ts` | Sends `energyLevel` on check‑in (if opted in) |
-| `mobile/src/pages/Home.tsx` | Renders `HealthBanner` |
-| `server/src/services/game-handler.ts` | Handles incoming energy level |
-| `server/src/services/game-loop.ts` | Stores `energy_level` in DB |
-| `server/migrations/002_add_energy_level.sql` | Adds column |
-| `shared-types/src/index.ts` | Type for optional `energyLevel` on `check_in` message |
+| File                                         | Purpose                                               |
+| -------------------------------------------- | ----------------------------------------------------- |
+| `mobile/src/hooks/useHealth.ts`              | Reads PHOS file, computes energy level                |
+| `mobile/src/components/HealthBanner.tsx`     | Shows zone suggestion based on energy                 |
+| `mobile/src/store/game-store.ts`             | Stores `energyLevel` and `healthOptIn`                |
+| `mobile/src/hooks/useWebSocket.ts`           | Sends `energyLevel` on check‑in (if opted in)         |
+| `mobile/src/pages/Home.tsx`                  | Renders `HealthBanner`                                |
+| `server/src/services/game-handler.ts`        | Handles incoming energy level                         |
+| `server/src/services/game-loop.ts`           | Stores `energy_level` in DB                           |
+| `server/migrations/002_add_energy_level.sql` | Adds column                                           |
+| `shared-types/src/index.ts`                  | Type for optional `energyLevel` on `check_in` message |

@@ -4,10 +4,10 @@
 
 There are **two separate BONDING projects** deployed to Cloudflare Pages:
 
-| Project | URL | What It Is |
-|---------|-----|------------|
-| **Chemistry Game** | https://bonding.p31ca.org | Molecule-building chemistry game (React Three Fiber, VSEPR) |
-| **Meatspace Game** | https://bonding-meatspace.pages.dev | Real-world social game onboarding site (this repo) |
+| Project            | URL                                 | What It Is                                                  |
+| ------------------ | ----------------------------------- | ----------------------------------------------------------- |
+| **Chemistry Game** | https://bonding.p31ca.org           | Molecule-building chemistry game (React Three Fiber, VSEPR) |
+| **Meatspace Game** | https://bonding-meatspace.pages.dev | Real-world social game onboarding site (this repo)          |
 
 The chemistry game is a separate codebase at `/home/p31/andromeda/software/bonding/` and is NOT part of this repo.
 
@@ -28,13 +28,13 @@ The chemistry game is a separate codebase at `/home/p31/andromeda/software/bondi
 
 ## Deployed URLs
 
-| Service | URL | Status |
-|---------|-----|--------|
-| Meatspace Onboarding | https://bonding-meatspace.pages.dev | ✅ Live |
-| Meatspace (custom domain) | https://meatspace.bonding.p31ca.org | 🟡 Provisioning |
-| Chemistry Game | https://bonding.p31ca.org | ✅ Live (separate repo) |
-| GitHub | https://github.com/trimtab-signal/bonding | ✅ Live |
-| API Server | http://localhost:3001 | Local only |
+| Service                   | URL                                       | Status                  |
+| ------------------------- | ----------------------------------------- | ----------------------- |
+| Meatspace Onboarding      | https://bonding-meatspace.pages.dev       | ✅ Live                 |
+| Meatspace (custom domain) | https://meatspace.bonding.p31ca.org       | 🟡 Provisioning         |
+| Chemistry Game            | https://bonding.p31ca.org                 | ✅ Live (separate repo) |
+| GitHub                    | https://github.com/trimtab-signal/bonding | ✅ Live                 |
+| API Server                | http://localhost:3001                     | Local only              |
 
 ## Quick Deploy
 
@@ -89,12 +89,12 @@ docker run -d -p 3001:3001 -e DATABASE_URL=postgresql://user:pass@host:5432/bond
 
 ## Environment Variables
 
-| Variable | Required | Description |
-|----------|----------|-------------|
-| `DATABASE_URL` | ✅ | PostgreSQL connection string |
-| `PORT` | ❌ | Server port (default 3001) |
-| `NODE_ENV` | ❌ | `production` or `development` |
-| `CORS_ORIGIN` | ❌ | Allowed CORS origin (default `*`) |
+| Variable       | Required | Description                       |
+| -------------- | -------- | --------------------------------- |
+| `DATABASE_URL` | ✅       | PostgreSQL connection string      |
+| `PORT`         | ❌       | Server port (default 3001)        |
+| `NODE_ENV`     | ❌       | `production` or `development`     |
+| `CORS_ORIGIN`  | ❌       | Allowed CORS origin (default `*`) |
 
 ## Run Migrations
 
@@ -118,10 +118,10 @@ The workflow triggers only when `apps/onboarding/`, `packages/shared-types/`, `p
 
 ## Troubleshooting
 
-| Problem | Solution |
-|---------|----------|
-| Site not loading | Check Cloudflare Pages deployment status |
-| 502 Bad Gateway | Server process crashed — check Render logs |
-| WebSocket disconnects | Ensure Socket.io transport includes `websocket` |
-| Database connection fails | Verify `DATABASE_URL` and IP whitelist |
-| Chemistry game missing | Deploy from `/home/p31/andromeda/software/bonding/` |
+| Problem                   | Solution                                            |
+| ------------------------- | --------------------------------------------------- |
+| Site not loading          | Check Cloudflare Pages deployment status            |
+| 502 Bad Gateway           | Server process crashed — check Render logs          |
+| WebSocket disconnects     | Ensure Socket.io transport includes `websocket`     |
+| Database connection fails | Verify `DATABASE_URL` and IP whitelist              |
+| Chemistry game missing    | Deploy from `/home/p31/andromeda/software/bonding/` |

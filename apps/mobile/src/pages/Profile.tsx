@@ -18,7 +18,7 @@ export function Profile() {
     ['Bonds', bonds.length],
     ['Type', profile?.atomType || 'friend'],
     ['Zone', profile?.zoneId || 'none'],
-    ['Activity', messages.filter(m => m.type === 'success').length],
+    ['Activity', messages.filter((m) => m.type === 'success').length],
   ];
 
   return (
@@ -26,7 +26,9 @@ export function Profile() {
       <div className={styles.header}>
         <Avatar size="lg" emoji="🧬" />
         <h2 className={styles.name}>{profile?.displayName || 'Unnamed Atom'}</h2>
-        <button className={styles.editBtn} onClick={() => setEditOpen(true)}>Edit</button>
+        <button className={styles.editBtn} onClick={() => setEditOpen(true)}>
+          Edit
+        </button>
         <p className={styles.id}>{userId?.slice(0, 12)}...</p>
       </div>
 
@@ -46,32 +48,49 @@ export function Profile() {
       <div className={styles.body}>
         {tab === 'bonds' ? (
           bonds.length === 0 ? (
-            <EmptyState title="No bonds yet" description="Check in at a zone to connect with other atoms." action={{ label: 'Go to Map', onClick: () => {} }} />
+            <EmptyState
+              title="No bonds yet"
+              description="Check in at a zone to connect with other atoms."
+              action={{ label: 'Go to Map', onClick: () => {} }}
+            />
           ) : (
-            bonds.map(bond => (
+            bonds.map((bond) => (
               <ListItem
                 key={bond.id}
                 icon={<Avatar size="sm" emoji="🔗" />}
                 title={bond.atomA === userId ? bond.atomB.slice(0, 8) : bond.atomA.slice(0, 8)}
                 subtitle={`${bond.status} · ${bond.checkInCount} check-ins`}
-                right={<Badge variant="default" size="sm">{bond.status}</Badge>}
+                right={
+                  <Badge variant="default" size="sm">
+                    {bond.status}
+                  </Badge>
+                }
               />
             ))
           )
+        ) : messages.length === 0 ? (
+          <EmptyState
+            title="No activity"
+            description="Your reactions and check-ins will appear here."
+          />
         ) : (
-          messages.length === 0 ? (
-            <EmptyState title="No activity" description="Your reactions and check-ins will appear here." />
-          ) : (
-            messages.slice().reverse().map((m, i) => (
+          messages
+            .slice()
+            .reverse()
+            .map((m, i) => (
               <div key={i} className={styles.logItem}>
                 {typeof m.data === 'string' ? m.data : JSON.stringify(m.data)}
               </div>
             ))
-          )
         )}
       </div>
 
-      <EditProfileModal open={editOpen} onClose={() => setEditOpen(false)} initialName={profile?.displayName || ''} onSave={(name) => setProfile({ ...profile, displayName: name } as any)} />
+      <EditProfileModal
+        open={editOpen}
+        onClose={() => setEditOpen(false)}
+        initialName={profile?.displayName || ''}
+        onSave={(name) => setProfile({ ...profile, displayName: name } as any)}
+      />
     </div>
   );
 }

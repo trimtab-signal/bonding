@@ -1,6 +1,6 @@
 interface FleetStatusProps {
-    onBack: () => void;
+  onBack: () => void;
 }
-export default function FleetStatus({ onBack }: FleetStatusProps): import("react").JSX.Element;
+export default function FleetStatus({ onBack }: FleetStatusProps): import('react').JSX.Element;
 export {};
 //# sourceMappingURL=FleetStatus.d.ts.map

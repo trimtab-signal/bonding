@@ -5,12 +5,12 @@
 
 ## Cycle Tracker
 
-| Layer | Status | Discovery | Synthesis | Implementation | Validation |
-|-------|--------|-----------|-----------|----------------|------------|
-| P0 — Auth Foundation | ✅ **Closed** | Complete | Complete | Complete | Complete |
-| P1 — Trust & Spatial | ✅ **Closed** | Complete | Complete | Complete | Complete |
-| P2 — Valence Economy | ✅ **Closed** | Complete | Complete | Complete | Complete |
-| P3 — Production Hardening | ⬜ Future | ⬜ | ⬜ | ⬜ | ⬜ |
+| Layer                     | Status        | Discovery | Synthesis | Implementation | Validation |
+| ------------------------- | ------------- | --------- | --------- | -------------- | ---------- |
+| P0 — Auth Foundation      | ✅ **Closed** | Complete  | Complete  | Complete       | Complete   |
+| P1 — Trust & Spatial      | ✅ **Closed** | Complete  | Complete  | Complete       | Complete   |
+| P2 — Valence Economy      | ✅ **Closed** | Complete  | Complete  | Complete       | Complete   |
+| P3 — Production Hardening | ⬜ Future     | ⬜        | ⬜        | ⬜             | ⬜         |
 
 ---
 
@@ -28,11 +28,11 @@
 
 Three distributed locations across FL/GA border:
 
-| Site | Address | Lat | Lng | Description |
-|------|---------|-----|-----|-------------|
-| JAX | 2950 Tinsley Rd, Jacksonville, FL 32218 | 30.43053 | -81.69309 | Northside residential area |
-| KNG | 101 Greentree Cir, Kingsland, GA 31548 | 30.77509 | -81.67522 | Suburban neighborhood |
-| STM | Mission Trace, St. Marys, GA 31558 | 30.78972 | -81.59179 | Apartment complex near Kings Bay |
+| Site | Address                                 | Lat      | Lng       | Description                      |
+| ---- | --------------------------------------- | -------- | --------- | -------------------------------- |
+| JAX  | 2950 Tinsley Rd, Jacksonville, FL 32218 | 30.43053 | -81.69309 | Northside residential area       |
+| KNG  | 101 Greentree Cir, Kingsland, GA 31548  | 30.77509 | -81.67522 | Suburban neighborhood            |
+| STM  | Mission Trace, St. Marys, GA 31558      | 30.78972 | -81.59179 | Apartment complex near Kings Bay |
 
 Distances: JAX↔KNG ~24mi, KNG↔STM ~8mi, JAX↔STM ~27mi.
 
@@ -43,6 +43,7 @@ Zones are defined as fixed lat/lng in `ZONES` constant. With 3 sites 8-27mi apar
 #### Options
 
 **Option A — Primary Site + Remote Nodes (Recommended for MVP)**
+
 - Designate Kingsland/St. Marys as the primary cluster (two sites ~8mi apart — close enough that zones can overlap)
 - Zone centers placed at centroid of KNG+STM: `(30.7824, -81.6335)`
 - Jacksonville site is a secondary "Wild" node for now
@@ -53,12 +54,14 @@ Zones are defined as fixed lat/lng in `ZONES` constant. With 3 sites 8-27mi apar
 - Trade-off: JAX users will be ~24mi from zone centers — they won't be in-zone unless we create a separate JAX Site
 
 **Option B — One Zone Set Per Site**
+
 - Three copies of the 5-zone set, each centered on its site
 - Add a `siteId` field to `ZoneDefinition` / filter by user proximity to site
 - Server determines nearest site on check-in
 - Complexity: matching atoms across sites, bonding across sites
 
 **Option C — User-Centered Zones**
+
 - Each user's home address is their zone center
 - 5 zone "types" are relative to the user's location (e.g., "your Calm zone is at your home, your Wild zone is 500m away")
 - Most flexible for distributed users
@@ -106,6 +109,7 @@ The P0 auth work (signed timestamp in Socket.io handshake) was designed but neve
 #### Witness Flow (Proposed)
 
 1. **Check-in** initiates witness request:
+
    ```
    Client sends check_in with signature = sign(privateKey, `${zoneId}:${geohashPrefix}:${timestamp}`)
    Server verifies signature against atom.public_key_jwk
@@ -113,6 +117,7 @@ The P0 auth work (signed timestamp in Socket.io handshake) was designed but neve
    ```
 
 2. **Witness responds**:
+
    ```
    Witness signs: sign(witnessPrivateKey, `${claimerId}:${geohashPrefix}:${timestamp}:${nonce}`)
    Server stores witness_signature alongside witness_id in check_ins
@@ -126,13 +131,13 @@ The P0 auth work (signed timestamp in Socket.io handshake) was designed but neve
 
 #### Signature Payload Format
 
-| Field | Check-in Signature | Witness Signature |
-|-------|-------------------|-------------------|
-| claimerId | (implicit via auth) | claimerId |
-| geohashPrefix | geohashPrefix | geohashPrefix |
-| timestamp | check-in timestamp | witness timestamp |
-| zoneId | zoneId | — |
-| nonce | — | random 32-byte hex (prevents replay) |
+| Field         | Check-in Signature  | Witness Signature                    |
+| ------------- | ------------------- | ------------------------------------ |
+| claimerId     | (implicit via auth) | claimerId                            |
+| geohashPrefix | geohashPrefix       | geohashPrefix                        |
+| timestamp     | check-in timestamp  | witness timestamp                    |
+| zoneId        | zoneId              | —                                    |
+| nonce         | —                   | random 32-byte hex (prevents replay) |
 
 #### Replay Window
 
@@ -147,13 +152,17 @@ The P0 auth work (signed timestamp in Socket.io handshake) was designed but neve
 ```typescript
 // Use Node's built-in Web Crypto API (available since Node 16)
 const key = await crypto.subtle.importKey(
-  'jwk', publicKeyJwk,
+  'jwk',
+  publicKeyJwk,
   { name: 'ECDSA', namedCurve: 'P-256' },
-  false, ['verify']
+  false,
+  ['verify'],
 );
 const valid = await crypto.subtle.verify(
   { name: 'ECDSA', hash: 'SHA-256' },
-  key, signatureBytes, dataBytes
+  key,
+  signatureBytes,
+  dataBytes,
 );
 ```
 
@@ -228,11 +237,11 @@ The `<->` operator triggers GiST index-assisted KNN scan (O(log N + K)).
 
 Three approaches, increasing fidelity:
 
-| Approach | Location Source | Accuracy | Effort |
-|----------|----------------|----------|--------|
-| **A: Geohash-only** | Decode geohash to centroid lat/lng | ±4.9km (precision 5) | Low |
-| **B: Client sends raw GPS** | Add `lat`/`lng` to `LocationProof` | ±5m (device GPS) | Medium |
-| **C: Hybrid** | Client signs raw GPS, server stores both | Full accuracy | Medium |
+| Approach                    | Location Source                          | Accuracy             | Effort |
+| --------------------------- | ---------------------------------------- | -------------------- | ------ |
+| **A: Geohash-only**         | Decode geohash to centroid lat/lng       | ±4.9km (precision 5) | Low    |
+| **B: Client sends raw GPS** | Add `lat`/`lng` to `LocationProof`       | ±5m (device GPS)     | Medium |
+| **C: Hybrid**               | Client signs raw GPS, server stores both | Full accuracy        | Medium |
 
 **Recommendation: Option B** — Add `lat`/`lng` as optional fields to `LocationProof`, signed by the client. Server populates `location` column from these. This gives accurate spatial queries without trusting raw GPS.
 
@@ -246,13 +255,13 @@ Three approaches, increasing fidelity:
 
 #### Options
 
-| Option | Mechanism | Reliability | Complexity |
-|--------|-----------|-------------|------------|
-| **A — setInterval** | `setInterval(() => applyDailyDecay(), 24 * 60 * 60 * 1000)` in server process | Lost on restart — resets timer | Trivial |
-| **B — Cron in process** | Use `node-cron` or similar for timezone-aware scheduling | Same as A | Low |
-| **C — External cron** | Render Cron Jobs / GitHub Actions hitting an endpoint | Survives restarts | Medium |
-| **D — pg_cron** | PostgreSQL extension: `SELECT cron.schedule(...)` | Survives everything | High (requires superuser) |
-| **E — Lazy decay** | Compute valence on read: `valence * pow(DECAY_FACTOR, daysSinceLastCheckIn)` | Always correct | Low |
+| Option                  | Mechanism                                                                     | Reliability                    | Complexity                |
+| ----------------------- | ----------------------------------------------------------------------------- | ------------------------------ | ------------------------- |
+| **A — setInterval**     | `setInterval(() => applyDailyDecay(), 24 * 60 * 60 * 1000)` in server process | Lost on restart — resets timer | Trivial                   |
+| **B — Cron in process** | Use `node-cron` or similar for timezone-aware scheduling                      | Same as A                      | Low                       |
+| **C — External cron**   | Render Cron Jobs / GitHub Actions hitting an endpoint                         | Survives restarts              | Medium                    |
+| **D — pg_cron**         | PostgreSQL extension: `SELECT cron.schedule(...)`                             | Survives everything            | High (requires superuser) |
+| **E — Lazy decay**      | Compute valence on read: `valence * pow(DECAY_FACTOR, daysSinceLastCheckIn)`  | Always correct                 | Low                       |
 
 #### Recommendation
 
@@ -269,20 +278,22 @@ Three approaches, increasing fidelity:
 #### The MVP Tradeoff
 
 With 3-5 pilot users:
+
 - **Threshold = 1**: Meaningful for 1:1 witness, but trivially bypassed by running a second device with a second key
 - **Threshold = 2**: Requires 2 other users to be physically present — almost guarantees failure in a 3-person pilot if one person checks in while others are AFK
 
 #### Recommended Graduated Approach
 
-| Phase | Min Users | Witness Threshold | Notes |
-|-------|-----------|-------------------|-------|
-| MVP Pilot | 3-5 | **1** | Accept forgery risk; focus on UX and protocol flow |
-| Beta | 6-15 | **2** | Minimum viable security — 2 independent witnesses |
-| Production | 16+ | **3** | Full Sybil resistance per design spec |
+| Phase      | Min Users | Witness Threshold | Notes                                              |
+| ---------- | --------- | ----------------- | -------------------------------------------------- |
+| MVP Pilot  | 3-5       | **1**             | Accept forgery risk; focus on UX and protocol flow |
+| Beta       | 6-15      | **2**             | Minimum viable security — 2 independent witnesses  |
+| Production | 16+       | **3**             | Full Sybil resistance per design spec              |
 
 #### Additional Mitigations (MVP)
 
 Even with threshold=1, add basic safeguards:
+
 1. **Rate limit**: max 1 check-in per 2 minutes per user
 2. **Witness must be distinct from claimer**: no self-witnessing
 3. **Witness must have a prior check-in**: can't witness with a fresh account
@@ -306,15 +317,15 @@ Critical finding: the P0 auth patches (signed timestamp in handshake, geohash si
 
 ### Options Summary for Synthesis (Node 2)
 
-| Item | Decision Needed | Recommended |
-|------|----------------|-------------|
-| P1.1 Zone topology | A (Single cluster) / B (Multi-site) / C (Per-user) | **A** — KNG/STM centroid, JAX as secondary |
-| P1.2 Witness sigs | Use Node Web Crypto or jwk-to-pem? | **Node crypto.subtle** (no deps) |
-| P1.2 Replay protection | Nonce + LRU cache? | **Yes** — 32-byte nonce, 10min TTL |
-| P1.3 Spatial accuracy | A (geohash) / B (raw GPS) / C (hybrid) | **B** — add lat/lng to LocationProof |
-| P1.4 Decay scheduling | A (setInterval) / C (cron) / E (lazy) | **E** — lazy on read |
-| P1.5 Sybil threshold | 1 or 2 for MVP? | **1** with graduated plan |
-| P0 auth gap | Apply P0 patches in P1 impl? | **Yes** — same sprint as P1.2 |
+| Item                   | Decision Needed                                    | Recommended                                |
+| ---------------------- | -------------------------------------------------- | ------------------------------------------ |
+| P1.1 Zone topology     | A (Single cluster) / B (Multi-site) / C (Per-user) | **A** — KNG/STM centroid, JAX as secondary |
+| P1.2 Witness sigs      | Use Node Web Crypto or jwk-to-pem?                 | **Node crypto.subtle** (no deps)           |
+| P1.2 Replay protection | Nonce + LRU cache?                                 | **Yes** — 32-byte nonce, 10min TTL         |
+| P1.3 Spatial accuracy  | A (geohash) / B (raw GPS) / C (hybrid)             | **B** — add lat/lng to LocationProof       |
+| P1.4 Decay scheduling  | A (setInterval) / C (cron) / E (lazy)              | **E** — lazy on read                       |
+| P1.5 Sybil threshold   | 1 or 2 for MVP?                                    | **1** with graduated plan                  |
+| P0 auth gap            | Apply P0 patches in P1 impl?                       | **Yes** — same sprint as P1.2              |
 
 ---
 

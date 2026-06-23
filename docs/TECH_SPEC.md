@@ -26,6 +26,7 @@
 ## Data Model
 
 ### `atoms`
+
 - `id` (TEXT, PK) — public key fingerprint (SHA‑256 of JWK)
 - `public_key_jwk` (JSONB) — for signature verification
 - `display_name`, `bio`, `skills` (TEXT[]), `interests` (TEXT[])
@@ -35,6 +36,7 @@
 - `last_seen`, `created_at`
 
 ### `bonds`
+
 - `id` (TEXT, PK)
 - `atom_a`, `atom_b` (FK → atoms)
 - `status` (`pending`, `active`, `decayed`)
@@ -43,6 +45,7 @@
 - `formed_at`, `last_interaction_at`
 
 ### `check_ins`
+
 - `id` (TEXT, PK)
 - `atom_id` (FK → atoms)
 - `bond_id` (FK → bonds, optional)
@@ -52,6 +55,7 @@
 - `location` (GEOGRAPHY(POINT, 4326)) — not stored in MVP
 
 ### `pings`
+
 - `id` (TEXT, PK)
 - `from_atom`, `to_atom` (FK → atoms)
 - `zone_id`
@@ -59,6 +63,7 @@
 - `created_at`, `responded_at`
 
 ### `reactions`
+
 - `id` (TEXT, PK)
 - `type` (`bond_formed`, `check_in`, `witnessed`, `problem_solved`, `resource_shared`, `era_advanced`)
 - `atoms` (TEXT[])
@@ -73,13 +78,13 @@
 
 ### REST
 
-| Method | Path | Description |
-|--------|------|-------------|
-| `POST` | `/api/register` | Create or update atom profile |
-| `GET` | `/api/atoms/:id` | Get public atom info |
-| `GET` | `/api/atoms` | List all atoms (public directory) |
-| `GET` | `/api/zones` | List zone definitions |
-| `GET` | `/health` | Service health check |
+| Method | Path             | Description                       |
+| ------ | ---------------- | --------------------------------- |
+| `POST` | `/api/register`  | Create or update atom profile     |
+| `GET`  | `/api/atoms/:id` | Get public atom info              |
+| `GET`  | `/api/atoms`     | List all atoms (public directory) |
+| `GET`  | `/api/zones`     | List zone definitions             |
+| `GET`  | `/health`        | Service health check              |
 
 ### WebSocket (Socket.io)
 
@@ -93,7 +98,13 @@ type ClientMessage =
   | { type: 'accept_ping'; pingId: string }
   | { type: 'reject_ping'; pingId: string }
   | { type: 'check_in'; zoneId: ZoneId; locationProof: LocationProof }
-  | { type: 'update_profile'; displayName?: string; bio?: string; skills?: string[]; interests?: string[] }
+  | {
+      type: 'update_profile';
+      displayName?: string;
+      bio?: string;
+      skills?: string[];
+      interests?: string[];
+    }
   | { type: 'request_witness'; targetUserId: string; locationProofHash: string }
   | { type: 'provide_witness'; requestId: string; signature: string }
   | { type: 'submit_reaction'; bondId: string; reactionType: ReactionType; description: string }
