@@ -23,6 +23,20 @@ export const Home: React.FC = () => (
       </div>
     </section>
 
+    <section className={styles.deltaPortal}>
+      <div className={styles.deltaPortalInner}>
+        <div className={styles.deltaTag}>K₄ · ISO·STATIC</div>
+        <h2 className={styles.deltaTitle}>Delta Ignition</h2>
+        <p className={styles.deltaDesc}>
+          A 12-second transformation. Wye collapses. Delta locks in.
+          You are the signal.
+        </p>
+        <a href="#/delta-ignition" className={styles.deltaCta}>
+          Run the Sequence →
+        </a>
+      </div>
+    </section>
+
     <section className={styles.features}>
       <div className={styles.featuresInner}>
         <h2 className={styles.sectionTitle}>How it feels</h2>

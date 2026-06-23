@@ -8,10 +8,16 @@ import { Join } from './pages/Join';
 import { Demo } from './pages/Demo';
 import { Press } from './pages/Press';
 import { Pilot } from './pages/Pilot';
+import { DeltaIgnition } from './pages/DeltaIgnition';
+import { TrimTabs } from './pages/TrimTabs';
+import { FleetStatus } from './components/FleetStatus';
 import styles from './App.module.css';
 
 function getPage(path: string) {
   switch (path) {
+    case '/delta-ignition': return <DeltaIgnition />;
+    case '/trim-tabs': return <TrimTabs />;
+    case '/fleet': return <FleetStatus />;
     case '/how-it-works': return <HowItWorks />;
     case '/zones': return <Zones />;
     case '/about': return <About />;

@@ -1,6 +1,5 @@
 import { Layout } from '../components/Layout';
 import { Card } from '../components/Card';
-import { Button } from '../components/Button';
 import styles from './Press.module.css';
 
 const ASSETS = [

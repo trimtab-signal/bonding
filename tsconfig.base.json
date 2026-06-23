@@ -13,6 +13,7 @@
     "declarationMap": true,
     "sourceMap": true,
     "isolatedModules": true,
+    "jsx": "react-jsx",
     "noUncheckedIndexedAccess": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,

@@ -1,0 +1,228 @@
+.container {
+  min-height: 100vh;
+  height: 100vh;
+  background: #08080c;
+  color: #f1f1f6;
+  overflow: hidden;
+  position: relative;
+  font-family: 'SF Mono', 'Fira Code', 'Courier New', monospace;
+  --delta-blue: #4f8fff;
+  --delta-purple: #9b6dff;
+  --wye-red: #e0405a;
+  --wye-glow: rgba(224, 64, 90, 0.35);
+  --delta-glow: rgba(79, 143, 255, 0.4);
+}
+
+.bg {
+  position: absolute;
+  inset: 0;
+  transition: background 1.2s ease;
+}
+.bgWye {
+  background: radial-gradient(ellipse at center, #1c080c 0%, #08080c 70%);
+}
+.bgImplosion {
+  background: radial-gradient(ellipse at center, #0c0508 0%, #08080c 70%);
+}
+.bgDelta {
+  background: radial-gradient(ellipse at center, #080c1c 0%, #08080c 70%);
+}
+.bgComplete {
+  background: radial-gradient(ellipse at center, #0a0a14 0%, #08080c 70%);
+}
+
+.layer {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+.layerInteractive {
+  pointer-events: auto;
+}
+
+/* Wye diagram */
+.wyeWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+/* Implosion */
+.implosionCore {
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: var(--wye-glow);
+  filter: blur(48px);
+  animation: implode 1.4s cubic-bezier(0.6, 0, 1, 1) forwards;
+}
+@keyframes implode {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(0.05); opacity: 0; }
+}
+
+/* Delta stage */
+.deltaTetraWrap {
+  width: min(420px, 85vw);
+  height: min(420px, 85vw);
+  perspective: 900px;
+}
+.tetrahedronInner {
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  animation: tetraRotate 18s linear infinite;
+}
+@keyframes tetraRotate {
+  from { transform: rotateX(-14deg) rotateY(0deg); }
+  to { transform: rotateX(-14deg) rotateY(360deg); }
+}
+
+/* The Stride / Blue Steel */
+.strideWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 0.75rem;
+  animation: strideZoom 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+@keyframes strideZoom {
+  from { transform: scale(1); opacity: 0; }
+  to { transform: scale(1.03); opacity: 1; }
+}
+.strideDeltaSymbol {
+  font-size: clamp(5rem, 14vw, 8rem);
+  line-height: 1;
+  font-weight: 800;
+  background: linear-gradient(160deg, var(--delta-blue) 20%, var(--delta-purple) 80%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.strideTitle {
+  font-size: clamp(1.4rem, 3.5vw, 2.2rem);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #e5e5f0;
+}
+.strideSubtitle {
+  font-size: clamp(0.9rem, 1.6vw, 1.1rem);
+  color: #8585a0;
+  letter-spacing: 0.08em;
+}
+.strideDivider {
+  color: #3a3a55;
+  margin: 0 0.5rem;
+}
+.enterBtn {
+  margin-top: 2.5rem;
+  padding: 1rem 2.8rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-family: inherit;
+  color: #fff;
+  background: linear-gradient(135deg, var(--delta-blue), var(--delta-purple));
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.35s ease;
+  box-shadow: 0 0 0 0 var(--delta-glow);
+  animation: blueSteelPulse 0.86s ease-in-out infinite;
+}
+.enterBtn:hover {
+  transform: translateY(-3px) scale(1.04);
+  box-shadow: 0 8px 40px -8px var(--delta-glow);
+}
+@keyframes blueSteelPulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 var(--delta-glow); }
+  50% { opacity: 0.85; box-shadow: 0 0 28px 4px var(--delta-glow); }
+}
+.skipBtn {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.5rem;
+  background: transparent;
+  border: 1px solid #2a2a40;
+  color: #6e6e90;
+  font-family: inherit;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  padding: 0.4rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+  z-index: 10;
+}
+.skipBtn:hover {
+  border-color: var(--delta-blue);
+  color: var(--delta-blue);
+}
+
+/* Progress */
+.progressTrack {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: #14141f;
+  z-index: 10;
+}
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--wye-red), var(--delta-blue), var(--delta-purple));
+  transition: width 0.15s linear;
+}
+
+/* Glare sweep */
+.glare {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, 0.04) 48%, rgba(255, 255, 255, 0.08) 50%, rgba(255, 255, 255, 0.04) 52%, transparent 70%);
+  background-size: 250% 100%;
+  animation: glareSweep 4s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 5;
+}
+@keyframes glareSweep {
+  0% { background-position: 150% 0; }
+  100% { background-position: -50% 0; }
+}
+
+/* Phase flash text */
+.phaseFlash {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: clamp(1rem, 2.2vw, 1.4rem);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-align: center;
+  color: #c8c8e0;
+  z-index: 8;
+  text-shadow: 0 0 30px rgba(79, 143, 255, 0.4);
+}
+.phaseFlashRed {
+  color: #f06070;
+  text-shadow: 0 0 30px var(--wye-glow);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .implosionCore { animation-duration: 0.01ms; }
+  .tetrahedronInner { animation-duration: 0.01ms; }
+  .strideWrap { animation-duration: 0.01ms; }
+  .enterBtn { animation-duration: 0.01ms; }
+  .glare { animation-duration: 20s; }
+}

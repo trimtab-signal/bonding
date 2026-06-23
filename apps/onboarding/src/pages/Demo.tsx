@@ -77,15 +77,15 @@ export const Demo: React.FC = () => {
   const wasDragRef = useRef(false);
 
   const [zoneIndex, setZoneIndex] = useState(0);
-  const [stats, setStats] = useState({ atoms: 8, bonds: 0, reactions: 0 });
-  const [dragging, setDragging] = useState(false);
+  const [_stats, setStats] = useState({ atoms: 8, bonds: 0, reactions: 0 });
+  const [_dragging, setDragging] = useState(false);
 
   const [tutorialStep, setTutorialStep] = useState<number>(() => {
     try { return localStorage.getItem('bonding_demo_tutorial_done') === 'true' ? -1 : 0; }
     catch { return 0; }
   });
 
-  const zone = ZONES[zoneIndex];
+  const zone = (ZONES[zoneIndex] ?? ZONES[0])!;
   const totalSteps = TUTORIAL_STEPS.length;
   const step = tutorialStep >= 0 && tutorialStep < totalSteps ? TUTORIAL_STEPS[tutorialStep] : null;
 
@@ -113,9 +113,9 @@ export const Demo: React.FC = () => {
         vy: (Math.random() - 0.5) * 1.2,
         radius: 28 + Math.random() * 12,
         baseRadius: 28 + Math.random() * 12,
-        emoji: EMOJIS[i % EMOJIS.length],
-        color: COLORS[i % COLORS.length],
-        label: ['You', 'Friend', 'Mate', 'Buddy', 'Peer', 'Ally', 'Sibling', 'Companion'][i % 8],
+        emoji: EMOJIS[i % EMOJIS.length]!,
+        color: COLORS[i % COLORS.length]!,
+        label: ['You', 'Friend', 'Mate', 'Buddy', 'Peer', 'Ally', 'Sibling', 'Companion'][i % 8]!,
         phase: Math.random() * Math.PI * 2,
       });
     }
@@ -201,7 +201,7 @@ export const Demo: React.FC = () => {
       const newBonds: Bond[] = [];
       for (let i = 0; i < newAtoms.length; i++) {
         for (let j = i + 1; j < newAtoms.length; j++) {
-          const a = newAtoms[i], b = newAtoms[j];
+          const a = newAtoms[i]!, b = newAtoms[j]!;
           const d = Math.hypot(a.x - b.x, a.y - b.y);
           const existing = existingBonds.find(bd =>
             (bd.a === i && bd.b === j) || (bd.a === j && bd.b === i));
@@ -223,7 +223,7 @@ export const Demo: React.FC = () => {
       // Bond attraction
       for (const bond of newBonds) {
         if (bond.strength < 0.2) continue;
-        const a = newAtoms[bond.a], b = newAtoms[bond.b];
+        const a = newAtoms[bond.a]!, b = newAtoms[bond.b]!;
         const d = Math.hypot(a.x - b.x, a.y - b.y);
         if (d > 20) {
           const pull = bond.strength * 0.004 * speed;
@@ -255,8 +255,7 @@ export const Demo: React.FC = () => {
       // Bonds
       for (const bond of newBonds) {
         if (bond.strength < 0.02) continue;
-        const a = newAtoms[bond.a], b = newAtoms[bond.b];
-        if (!a || !b) continue;
+        const a = newAtoms[bond.a]!, b = newAtoms[bond.b]!;
 
         const shimmer = Math.sin(t * 2 + bond.phase) * 0.15 + 0.85;
         const alpha = bond.strength * 0.7 * shimmer;
@@ -356,7 +355,7 @@ export const Demo: React.FC = () => {
 
     const atoms = atomsRef.current;
     for (let i = atoms.length - 1; i >= 0; i--) {
-      const a = atoms[i];
+      const a = atoms[i]!;
       if (Math.hypot(mx - a.x, my - a.y) < a.radius + 8) {
         dragRef.current = { index: i, offX: mx - a.x, offY: my - a.y };
         setDragging(true);
@@ -375,6 +374,7 @@ export const Demo: React.FC = () => {
       if (!wasDragRef.current) wasDragRef.current = true;
       const atoms = [...atomsRef.current];
       const atom = atoms[dragRef.current.index];
+      if (!atom) return;
       const cw = containerRef.current?.clientWidth || 800;
       const ch = containerRef.current?.clientHeight || 600;
       atom.x = Math.max(atom.radius + 10, Math.min(cw - atom.radius - 10, mx - dragRef.current.offX));
@@ -407,9 +407,9 @@ export const Demo: React.FC = () => {
       vy: (Math.random() - 0.5) * 1.2,
       radius: 28 + Math.random() * 12,
       baseRadius: 28 + Math.random() * 12,
-      emoji: EMOJIS[atoms.length % EMOJIS.length],
-      color: COLORS[atoms.length % COLORS.length],
-      label: ['You', 'Friend', 'Mate', 'Buddy', 'Peer', 'Ally', 'Sibling', 'Companion'][atoms.length % 8],
+      emoji: EMOJIS[atoms.length % EMOJIS.length]!,
+      color: COLORS[atoms.length % COLORS.length]!,
+      label: ['You', 'Friend', 'Mate', 'Buddy', 'Peer', 'Ally', 'Sibling', 'Companion'][atoms.length % 8]!,
       phase: Math.random() * Math.PI * 2,
     }];
   }, [tutorialStep, goToStep]);

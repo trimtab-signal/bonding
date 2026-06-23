@@ -1,0 +1,40 @@
+.tetrahedron {
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+.svgCanvas {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.edgeLine {
+  stroke: #4a4a6a;
+  stroke-width: 0.028;
+  stroke-dasharray: 0.06 0.06;
+  animation: edgePulse 2.2s ease-in-out infinite;
+}
+@keyframes edgePulse {
+  0%, 100% { opacity: 0.35; }
+  50% { opacity: 0.9; }
+}
+.vertexNode {
+  animation: vertexPulse 1.8s ease-in-out infinite;
+}
+@keyframes vertexPulse {
+  0%, 100% { r: 0.14; }
+  50% { r: 0.18; }
+}
+.labelText {
+  font-family: 'SF Mono', 'Fira Code', 'Courier New', monospace;
+  font-size: 0.14px;
+  fill: #8888aa;
+  opacity: 0.8;
+  transition: opacity 0.3s;
+}
+.labelText:hover {
+  opacity: 1;
+}
