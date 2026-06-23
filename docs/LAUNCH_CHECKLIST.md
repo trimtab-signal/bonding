@@ -33,6 +33,43 @@
 
 ## Launch Day (Day 0)
 
+### Delta Ignition / Onboarding Module
+
+#### IIFE Bundle
+- [ ] `pnpm run build:onboarding-module` produces `dist/delta-ignition.iife.js` (zero TS/Vite errors)
+- [ ] Bundle exposes `window.initDeltaIgnition(config)` with methods: `start()`, `resume()`, `skipTo(plane)`, `getState()`
+- [ ] CSS module styles embedded in `dist/delta-ignition.css` (no Tailwind dependency)
+
+#### k4-element Package
+- [ ] `packages/k4-element/` compiles with `tsc --noEmit` (zero errors)
+- [ ] `Kerberos4Element` renders SVG K₄ graph with vertices, edges, validation states
+- [ ] `K4ValidationButton` runs 10-command walk sequence, sets valid/invalid/validating state
+- [ ] `k4-geometry.ts` exports: `buildDefaultEdges`, `validateK4`, `K4ValidationResult`, `texCoordinates`
+- [ ] CSS module types declared in `src/types.d.ts`
+
+#### Adapter Pipeline
+- [ ] `k4-bridge.ts`: `getK4NetworkStatus`, `pushK4Entry`, `validateWyeDelta`
+- [ ] `meatspace-sync.ts`: `syncGroundTruth`, `syncMedicalFloor`
+- [ ] `phos-proxy.ts`: `triggerPhosSession`
+- [ ] Each adapter fires on phase transitions (magnum-walk → trim-tabs → fleet-status)
+- [ ] Adapter errors are silent-fail (no UI breakage)
+
+#### Persistence / State Machine
+- [ ] `localStorage` key `di_state_v1` saves after each plane transition
+- [ ] Resume mode (`resume: true`) restores last saved phase on reload
+- [ ] Complete/exit clears session from `localStorage`
+
+#### Embedding Tests
+- [ ] Vanilla HTML test page mounts via `<script src="dist/delta-ignition.iife.js">`
+- [ ] React shell integration test passes (mount to container div)
+- [ ] Cloudflare Worker embed test (global API reachable in worker context)
+
+#### Commit & Deploy
+- [ ] Namespace severance committed: `@bonding/*` → `@meatspace/*`
+- [ ] Root package `p31-meatspace-bonding` committed
+- [ ] Commit message: "feat(redirect): bonding.p31ca.org → delta-ignition.p31ca.org; deploy 3 new planes; k4-element package; onboarding-module IIFE bundle"
+- [ ] All 4 Pages projects (bonding-meatspace, delta-ignition, trim-sequence, fleet-status) verified HTTP 200
+
 ### Morning
 - [ ] Final build deployed to Cloudflare Pages
 - [ ] Server monitoring active

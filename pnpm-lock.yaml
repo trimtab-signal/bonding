@@ -178,6 +178,37 @@ importers:
         specifier: ^6.2.0
         version: 6.4.3(@types/node@22.19.21)(tsx@4.22.4)
 
+  apps/onboarding-module:
+    dependencies:
+      '@meatspace/k4-ui':
+        specifier: workspace:*
+        version: link:../../packages/k4-ui
+      framer-motion:
+        specifier: ^11.18.2
+        version: 11.18.2(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+      react:
+        specifier: ^19.0.0
+        version: 19.2.7
+      react-dom:
+        specifier: ^19.0.0
+        version: 19.2.7(react@19.2.7)
+    devDependencies:
+      '@types/react':
+        specifier: ^19.0.0
+        version: 19.2.17
+      '@types/react-dom':
+        specifier: ^19.0.0
+        version: 19.2.3(@types/react@19.2.17)
+      '@vitejs/plugin-react':
+        specifier: ^4.4.0
+        version: 4.7.0(vite@6.4.3(@types/node@22.19.21)(tsx@4.22.4))
+      typescript:
+        specifier: ^5.7.0
+        version: 5.9.3
+      vite:
+        specifier: ^6.2.0
+        version: 6.4.3(@types/node@22.19.21)(tsx@4.22.4)
+
   apps/server:
     dependencies:
       '@meatspace/shared-types':
@@ -254,6 +285,25 @@ importers:
       vite:
         specifier: ^6.2.0
         version: 6.4.3(@types/node@22.19.21)(tsx@4.22.4)
+
+  packages/k4-element:
+    dependencies:
+      react:
+        specifier: ^19.0.0
+        version: 19.2.7
+      react-dom:
+        specifier: ^19.0.0
+        version: 19.2.7(react@19.2.7)
+    devDependencies:
+      '@types/react':
+        specifier: ^19.0.0
+        version: 19.2.17
+      '@types/react-dom':
+        specifier: ^19.0.0
+        version: 19.2.3(@types/react@19.2.17)
+      typescript:
+        specifier: ^5.7.0
+        version: 5.9.3
 
   packages/k4-ui:
     dependencies:
