@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import maplibregl from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
-import { ZONES, type ZoneId } from '@bonding/shared-types';
+import { ZONES, type ZoneId } from '@meatspace/shared-types';
 
 // Default location (can be overridden by user's actual GPS)
 const DEFAULT_CENTER: [number, number] = [-122.4194, 37.7749]; // SF

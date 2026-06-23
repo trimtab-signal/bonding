@@ -11,7 +11,7 @@ import { useWebSocket } from '../hooks/useWebSocket';
 import { useHealth } from '../hooks/useHealth';
 import { useGameStore } from '../store/game-store';
 import { useToastStore } from '../store/toast-slice';
-import type { ZoneId } from '@bonding/shared-types';
+import type { ZoneId } from '@meatspace/shared-types';
 import styles from './Home.module.css';
 
 export function Home() {

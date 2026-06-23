@@ -1,5 +1,5 @@
 import { useGameStore } from '../store/game-store';
-import { ZONES, type ZoneId } from '@bonding/shared-types';
+import { ZONES, type ZoneId } from '@meatspace/shared-types';
 import { Card, Badge } from './ui';
 
 export function HealthBanner() {

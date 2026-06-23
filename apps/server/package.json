@@ -1,5 +1,5 @@
 {
-  "name": "@bonding/server",
+  "name": "@meatspace/server",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -12,7 +12,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@bonding/shared-types": "workspace:*",
+    "@meatspace/shared-types": "workspace:*",
     "cors": "^2.8.5",
     "dotenv": "^16.4.0",
     "express": "^4.21.0",

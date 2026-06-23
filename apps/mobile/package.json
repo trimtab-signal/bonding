@@ -1,5 +1,5 @@
 {
-  "name": "@bonding/mobile",
+  "name": "@meatspace/mobile",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -17,7 +17,7 @@
     "release": "npm run build && npm run icons && npm run cap:sync"
   },
   "dependencies": {
-    "@bonding/shared-types": "workspace:*",
+    "@meatspace/shared-types": "workspace:*",
     "maplibre-gl": "^4.7.0",
     "react": "^18.3.0",
     "react-dom": "^18.3.0",

@@ -4,9 +4,9 @@ COPY package.json pnpm-workspace.yaml pnpm-lock.yaml tsconfig.base.json ./
 COPY packages/shared-types ./packages/shared-types
 COPY apps/server ./apps/server
 RUN corepack enable && pnpm install --frozen-lockfile
-RUN pnpm --filter @bonding/shared-types build
-RUN pnpm --filter @bonding/server build
-RUN pnpm --filter @bonding/server deploy --prod --legacy /app/deploy
+RUN pnpm --filter @meatspace/shared-types build
+RUN pnpm --filter @meatspace/server build
+RUN pnpm --filter @meatspace/server deploy --prod --legacy /app/deploy
 
 FROM node:22-alpine
 WORKDIR /app

@@ -41,19 +41,19 @@ Wait for PostgreSQL to become ready (check logs with `docker logs bonding-db`).
 ### 5. Build shared types
 
 ```bash
-pnpm --filter @bonding/shared-types build
+pnpm --filter @meatspace/shared-types build
 ```
 
 ### 6. Run migrations
 
 ```bash
-pnpm --filter @bonding/server db:migrate
+pnpm --filter @meatspace/server db:migrate
 ```
 
 ### 7. (Optional) Seed test data
 
 ```bash
-pnpm --filter @bonding/server db:seed
+pnpm --filter @meatspace/server db:seed
 ```
 
 This adds four test atoms and one bond.

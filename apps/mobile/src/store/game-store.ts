@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import type { AtomPublic, Bond, ZoneId } from '@bonding/shared-types';
+import type { AtomPublic, Bond, ZoneId } from '@meatspace/shared-types';
 
 export interface PendingPing {
   pingId: string;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, ListItem, Avatar, Badge, Button } from './ui';
 import styles from './NearbySheet.module.css';
-import type { AtomPublic } from '@bonding/shared-types';
+import type { AtomPublic } from '@meatspace/shared-types';
 
 interface NearbySheetProps {
   atoms: AtomPublic[];

@@ -115,9 +115,9 @@ pnpm install
 docker compose up -d
 
 # 3. Build shared types & run migrations
-pnpm --filter @bonding/shared-types build
-pnpm --filter @bonding/server db:migrate
-pnpm --filter @bonding/server db:seed
+pnpm --filter @meatspace/shared-types build
+pnpm --filter @meatspace/server db:migrate
+pnpm --filter @meatspace/server db:seed
 
 # 4. Start server (terminal 1)
 pnpm dev:server

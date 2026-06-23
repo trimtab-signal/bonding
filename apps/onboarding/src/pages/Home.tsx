@@ -31,7 +31,7 @@ export const Home: React.FC = () => (
           A 12-second transformation. Wye collapses. Delta locks in.
           You are the signal.
         </p>
-        <a href="#/delta-ignition" className={styles.deltaCta}>
+        <a href="https://delta-ignition.p31ca.org" className={styles.deltaCta}>
           Run the Sequence →
         </a>
       </div>

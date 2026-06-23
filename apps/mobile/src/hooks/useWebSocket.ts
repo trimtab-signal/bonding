@@ -2,8 +2,8 @@ import { useRef, useCallback } from 'react';
 import { io, Socket } from 'socket.io-client';
 import { useGameStore } from '../store/game-store.js';
 import { generateKeyPair, exportPublicKeyJwk, exportPrivateKeyJwk, importPrivateKey, signData, generateUserId } from './crypto.js';
-import { geohashEncode } from '@bonding/shared-types';
-import type { ClientMessage, ServerMessage } from '@bonding/shared-types';
+import { geohashEncode } from '@meatspace/shared-types';
+import type { ClientMessage, ServerMessage } from '@meatspace/shared-types';
 
 interface UseWebSocketReturn {
   connect: () => Promise<void>;
@@ -88,7 +88,7 @@ export function useWebSocket(): UseWebSocketReturn {
   }, []);
 
   const ping = useCallback((targetUserId: string, zoneId: string) => {
-    send({ type: 'ping', targetUserId, zoneId: zoneId as import('@bonding/shared-types').ZoneId });
+    send({ type: 'ping', targetUserId, zoneId: zoneId as import('@meatspace/shared-types').ZoneId });
   }, [send]);
 
   const checkIn = useCallback(async (zoneId: string) => {
@@ -117,14 +117,14 @@ export function useWebSocket(): UseWebSocketReturn {
       signature,
     };
     const msg: ClientMessage = state.healthOptIn && state.energyLevel !== null
-      ? { type: 'check_in', zoneId: zoneId as import('@bonding/shared-types').ZoneId, locationProof, energyLevel: state.energyLevel }
-      : { type: 'check_in', zoneId: zoneId as import('@bonding/shared-types').ZoneId, locationProof };
+      ? { type: 'check_in', zoneId: zoneId as import('@meatspace/shared-types').ZoneId, locationProof, energyLevel: state.energyLevel }
+      : { type: 'check_in', zoneId: zoneId as import('@meatspace/shared-types').ZoneId, locationProof };
     send(msg);
   }, [send]);
 
   const setZone = useCallback((zoneId: string | null) => {
-    send({ type: 'set_zone', zoneId: zoneId as import('@bonding/shared-types').ZoneId | null });
-    setCurrentZone(zoneId as import('@bonding/shared-types').ZoneId | null);
+    send({ type: 'set_zone', zoneId: zoneId as import('@meatspace/shared-types').ZoneId | null });
+    setCurrentZone(zoneId as import('@meatspace/shared-types').ZoneId | null);
   }, [send]);
 
   function handleServerMessage(msg: ServerMessage) {

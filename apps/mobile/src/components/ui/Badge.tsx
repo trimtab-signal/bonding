@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './Badge.module.css';
-import type { ZoneId } from '@bonding/shared-types';
+import type { ZoneId } from '@meatspace/shared-types';
 
 export interface BadgeProps {
   variant?: ZoneId | 'default';

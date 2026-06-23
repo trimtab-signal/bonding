@@ -7,7 +7,7 @@ import authRoutes from './routes/auth.js';
 import stateRoutes from './routes/state.js';
 import { registerGameHandlers } from './services/game-handler.js';
 import { migrate } from './db/pool.js';
-import { ZONES } from '@bonding/shared-types';
+import { ZONES } from '@meatspace/shared-types';
 
 const app = express();
 const httpServer = createServer(app);

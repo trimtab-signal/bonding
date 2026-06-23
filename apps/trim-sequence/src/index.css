@@ -1,0 +1,9 @@
+:root {
+  --bg: #08080c;
+  --text: #e2e2f0;
+  --text-dim: #7a7a9a;
+  font-family: 'SF Mono', 'Fira Code', 'Courier New', monospace;
+  background: var(--bg);
+  color: var(--text);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }

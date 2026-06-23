@@ -5,8 +5,8 @@ import { boostCheckIn, penalizeRejection, adjustValence, distributeDividends, ge
 import { hashStatement, recordWitness, isNonceValid } from '../services/witness.js';
 import { verifySignature, generateNonce } from '../services/crypto.js';
 import { updateCommunityCounter, getCurrentEra } from '../services/era.js';
-import type { ClientMessage, ServerMessage } from '@bonding/shared-types';
-import { ZONES } from '@bonding/shared-types';
+import type { ClientMessage, ServerMessage } from '@meatspace/shared-types';
+import { ZONES } from '@meatspace/shared-types';
 import { v4 as uuid } from 'uuid';
 
 interface AuthenticatedSocket extends Socket {

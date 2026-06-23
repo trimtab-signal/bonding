@@ -17,8 +17,8 @@ bonding/
 
 1. **Install dependencies**: `pnpm install`
 2. **Start database**: `docker compose up -d`
-3. **Run migrations**: `pnpm --filter @bonding/server db:migrate`
-4. **Build shared types**: `pnpm --filter @bonding/shared-types build`
+3. **Run migrations**: `pnpm --filter @meatspace/server db:migrate`
+4. **Build shared types**: `pnpm --filter @meatspace/shared-types build`
 5. **Run both server and mobile** (two terminals):
    - Terminal 1: `pnpm dev:server`
    - Terminal 2: `pnpm dev:mobile`
