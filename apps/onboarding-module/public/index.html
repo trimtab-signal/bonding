@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Delta Ignition · Sovereign IIFE</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧬</text></svg>"
+    />
+    <link rel="stylesheet" href="/onboarding-module.css" />
+    <style>
+      body {
+        margin: 0;
+        background: #0a0e14;
+        font-family: 'SF Mono', 'Fira Code', monospace;
+        color: #c9d1d9;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+      #root {
+        width: 100%;
+        max-width: 900px;
+        padding: 20px;
+      }
+      .loading {
+        text-align: center;
+        color: #6e7681;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root">
+      <div class="loading">⟳ initializing Delta Ignition …</div>
+    </div>
+    <script src="/delta-ignition.iife.js"></script>
+    <script>
+      if (typeof window.initDeltaIgnition === 'function') {
+        window.initDeltaIgnition({
+          mode: 'full',
+          container: '#root',
+          onPhaseComplete: (phase) => console.log('[Delta] phase:', phase),
+        });
+      } else {
+        console.error('Delta Ignition IIFE not loaded.');
+      }
+    </script>
+  </body>
+</html>

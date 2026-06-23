@@ -5,14 +5,22 @@ export default defineConfig({
   plugins: [react()],
   build: {
     outDir: 'dist',
+    emptyOutDir: true,
+    copyPublicDir: true,
     lib: {
-      entry: ['src/index.ts'],
+      entry: 'src/main.tsx',
       name: 'DeltaIgnition',
-      fileName: 'delta-ignition',
+      fileName: () => 'delta-ignition.iife.js',
       formats: ['iife'],
     },
     rollupOptions: {
-      external: [],
+      external: ['react', 'react-dom'],
+      output: {
+        globals: {
+          react: 'React',
+          'react-dom': 'ReactDOM',
+        },
+      },
     },
   },
 });
