@@ -11,6 +11,10 @@ const BOOST_PER_CHECKIN = 0.05;
 // Penalty for rejected pings
 const PENALTY_REJECTED_PING = 0.02;
 
+export async function applyDailyDecay(): Promise<void> {
+  await query(`UPDATE atoms SET valence = GREATEST($1, valence * $2) WHERE valence > 0`, [VALENCE_MIN, DECAY_FACTOR]);
+}
+
 export async function getValence(atomId: string): Promise<number> {
   const result = await query(
     `SELECT valence, last_seen FROM atoms WHERE id = $1`,
@@ -27,11 +31,36 @@ export async function getValence(atomId: string): Promise<number> {
   return Math.max(0, decayed);
 }
 
+const K4_SYNC_URL = process.env.K4_SYNC_URL || 'https://cashpilot-sync.trimtab-signal.workers.dev';
+const K4_SYNC_TOKEN = process.env.SYNC_TOKEN || '';
+
+async function pushK4ValenceEntry(atomId: string, delta: number, source: string): Promise<void> {
+  try {
+    const headers: Record<string, string> = { 'Content-Type': 'application/json' };
+    if (K4_SYNC_TOKEN) headers['Authorization'] = `Bearer ${K4_SYNC_TOKEN}`;
+    await fetch(`${K4_SYNC_URL}/api/k4/push`, {
+      method: 'POST',
+      headers,
+      body: JSON.stringify({
+        level: 0,
+        vertex: 'EARN',
+        edge: 'EARN→AGGREGATE',
+        amount_usd: Math.abs(delta),
+        feature: 'valence',
+        source: `valence:${source}`,
+        node_id: atomId,
+        timestamp: new Date().toISOString(),
+      }),
+    });
+  } catch { /* non-blocking */ }
+}
+
 export async function adjustValence(atomId: string, delta: number): Promise<number> {
   const result = await query(
     `UPDATE atoms SET valence = GREATEST($1, LEAST($2, valence + $3)) WHERE id = $4 RETURNING valence`,
     [VALENCE_MIN, VALENCE_MAX, delta, atomId]
   );
+  pushK4ValenceEntry(atomId, delta, 'adjust');
   return result.rows[0]!.valence;
 }
 

@@ -13,6 +13,8 @@ services:
         value: 3001
       - key: NODE_ENV
         value: production
+      - key: K4_SYNC_URL
+        value: https://cashpilot-sync.trimtab-signal.workers.dev
     healthCheckPath: /health
 
   - type: web

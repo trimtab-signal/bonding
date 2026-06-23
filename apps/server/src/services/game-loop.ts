@@ -1,6 +1,30 @@
 import { query, transaction } from '../db/pool.js';
 import { v4 as uuid } from 'uuid';
 
+const K4_SYNC_URL = process.env.K4_SYNC_URL || 'https://cashpilot-sync.trimtab-signal.workers.dev';
+const K4_SYNC_TOKEN = process.env.SYNC_TOKEN || '';
+
+async function pushK4ValenceEntry(feature: string, value: number, source: string, atomId: string): Promise<void> {
+  try {
+    const headers: Record<string, string> = { 'Content-Type': 'application/json' };
+    if (K4_SYNC_TOKEN) headers['Authorization'] = `Bearer ${K4_SYNC_TOKEN}`;
+    await fetch(`${K4_SYNC_URL}/api/k4/push`, {
+      method: 'POST',
+      headers,
+      body: JSON.stringify({
+        level: 0,
+        vertex: 'EARN',
+        edge: 'EARN→AGGREGATE',
+        amount_usd: value,
+        feature,
+        source: `bonding:${source}`,
+        node_id: atomId,
+        timestamp: new Date().toISOString(),
+      }),
+    });
+  } catch { /* non-blocking */ }
+}
+
 export interface PingResult {
   pingId: string;
   fromUserId: string;
@@ -58,6 +82,9 @@ export async function respondToPing(pingId: string, accept: boolean): Promise<{ 
       [uuid(), [atomA, atomB], bondId, p.zone_id]
     );
 
+    pushK4ValenceEntry('valence', 0.05, 'bond_formed', atomA);
+    pushK4ValenceEntry('valence', 0.05, 'bond_formed', atomB);
+
     return { bondId, status: 'accepted' };
   });
 }
@@ -71,6 +98,9 @@ export async function recordCheckIn(atomId: string, zoneId: string, geohashPrefi
   );
   await query(`UPDATE atoms SET total_check_ins = total_check_ins + 1, last_seen = NOW(), current_zone = $2 WHERE id = $1`,
     [atomId, zoneId]);
+
+  pushK4ValenceEntry('valence', 0.02, 'check_in', atomId);
+
   return id;
 }
 
