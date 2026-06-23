@@ -20,61 +20,90 @@ jobs:
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
-
       - uses: pnpm/action-setup@v4
-
       - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: pnpm
-
       - run: pnpm install --frozen-lockfile
-
       - name: Build shared types
         run: pnpm build:shared
-
       - name: Type check
         run: pnpm typecheck
-
       - name: Lint
         run: pnpm lint || echo "Lint warnings (non-blocking)"
-
       - name: Unit tests
         run: pnpm test
-
-      - name: Build mobile app
-        run: pnpm build:mobile
-
-      - name: Build onboarding site
-        run: pnpm build:onboarding
-
+      - name: Build all planes
+        run: pnpm build:planes
+      - name: Build onboarding module
+        run: pnpm build:onboarding-module
+      - name: Build Storybook
+        run: pnpm build:storybook
+      - name: Build Architecture Map
+        run: pnpm --filter @meatspace/architecture-map build
       - name: Check bundle sizes
         run: |
-          echo "--- Mobile bundle ---"
-          du -sh apps/mobile/dist/
-          echo "--- Onboarding bundle ---"
+          echo "--- Delta Ignition ---"
+          du -sh apps/delta-ignition/dist/
+          echo "--- Trim Sequence ---"
+          du -sh apps/trim-sequence/dist/
+          echo "--- Fleet Status ---"
+          du -sh apps/fleet-status/dist/
+          echo "--- Onboarding ---"
           du -sh apps/onboarding/dist/
+          echo "--- Onboarding Module ---"
+          du -sh apps/onboarding-module/dist/
+          echo "--- Architecture Map ---"
+          du -sh apps/architecture-map/dist/
+          echo "--- Storybook ---"
+          du -sh storybook-static/
 
-  deploy-onboarding:
+  deploy-all:
     if: github.ref == 'refs/heads/master'
     needs: quality
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
-
       - uses: pnpm/action-setup@v4
-
       - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: pnpm
-
       - run: pnpm install --frozen-lockfile
-
-      - run: pnpm build:shared && pnpm build:onboarding
-
-      - uses: cloudflare/wrangler-action@v3
+      - name: Deploy delta-ignition
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CF_API_TOKEN }}
+          command: pages deploy apps/delta-ignition/dist --project-name delta-ignition --branch master
+      - name: Deploy trim-sequence
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CF_API_TOKEN }}
+          command: pages deploy apps/trim-sequence/dist --project-name trim-sequence --branch master
+      - name: Deploy fleet-status
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CF_API_TOKEN }}
+          command: pages deploy apps/fleet-status/dist --project-name fleet-status --branch master
+      - name: Deploy onboarding
+        uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CF_API_TOKEN }}
           command: pages deploy apps/onboarding/dist --project-name bonding-meatspace --branch master
+      - name: Deploy onboarding-module
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CF_API_TOKEN }}
+          command: pages deploy apps/onboarding-module/dist --project-name onboarding-module --branch master
+      - name: Deploy storybook
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CF_API_TOKEN }}
+          command: pages deploy storybook-static --project-name storybook --branch master
+      - name: Deploy architecture-map
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CF_API_TOKEN }}
+          command: pages deploy apps/architecture-map/dist --project-name architecture-map --branch master

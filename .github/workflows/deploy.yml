@@ -1,4 +1,4 @@
-name: Deploy — Onboarding Site + Mobile App
+name: Deploy — All Planes + Storybook + Architecture Map
 
 on:
   push:
@@ -7,17 +7,17 @@ on:
       - 'apps/**'
       - 'packages/**'
       - 'pnpm-lock.yaml'
-      - '.github/workflows/deploy.yml'
-      - '.github/workflows/ci.yml'
+      - '.github/workflows/**'
+      - 'scripts/**'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  onboard:
+  deploy-all:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
@@ -26,43 +26,39 @@ jobs:
           node-version: 20
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - run: pnpm build:shared && pnpm build:onboarding
-      - uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CF_API_TOKEN }}
-          command: pages deploy apps/onboarding/dist --project-name bonding-meatspace --branch master
+      - run: pnpm build:shared
+      - name: Deploy delta-ignition
+        run: pnpm deploy:delta-ignition
+      - name: Deploy trim-sequence
+        run: pnpm deploy:trim-sequence
+      - name: Deploy fleet-status
+        run: pnpm deploy:fleet-status
+      - name: Deploy onboarding
+        run: pnpm deploy:onboarding
+      - name: Deploy onboarding-module
+        run: pnpm deploy:onboarding-module
+      - name: Deploy storybook
+        run: pnpm deploy:storybook
+      - name: Deploy architecture-map
+        run: pnpm deploy:architecture-map
 
-  mobile:
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: pnpm
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm build:shared && pnpm build:mobile
-      - uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CF_API_TOKEN }}
-          command: pages deploy apps/mobile/dist --project-name bonding-mobile --branch master
-
-  phos-link-check:
+  graph-update:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
-      - run: |
-          echo "Verifying cross-project links..."
-          if grep -q "phos.p31ca.org" apps/onboarding/src/**/*.{tsx,ts} 2>/dev/null; then
-            echo "✅ PHOS link found in onboarding"
-          else
-            echo "⚠️ No PHOS link found in onboarding"
-          fi
-          if grep -q "github.com/trimtab-signal/bonding" README.md 2>/dev/null; then
-            echo "✅ GitHub link found in README"
-          else
-            echo "⚠️ No GitHub link in README"
-          fi
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm graph
+      - name: Commit graph update
+        run: |
+          git config --global user.name "P31 Architect Bot"
+          git config --global user.email "bot@p31ca.org"
+          git add docs/graph-data.json
+          git diff --cached --quiet && exit 0
+          git commit -m "chore: auto-update architecture constellation graph [skip ci]"
+          git push
